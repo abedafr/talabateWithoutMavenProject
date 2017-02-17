@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PlateViewDlg" widgetVar="PlateViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPlateTitle}">
+            <h:form id="PlateViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{plateController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPlateLabel_qte}"/>
+                        <h:outputText value="#{plateController.selected.qte}" title="#{bundle.ViewPlateTitle_qte}"/>
+                        <h:outputText value="#{bundle.ViewPlateLabel_nom}"/>
+                        <h:outputText value="#{plateController.selected.nom}" title="#{bundle.ViewPlateTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewPlateLabel_prix}"/>
+                        <h:outputText value="#{plateController.selected.prix}" title="#{bundle.ViewPlateTitle_prix}"/>
+                        <h:outputText value="#{bundle.ViewPlateLabel_cuisine}"/>
+                        <h:outputText value="#{plateController.selected.cuisine}" title="#{bundle.ViewPlateTitle_cuisine}"/>
+                        <h:outputText value="#{bundle.ViewPlateLabel_id}"/>
+                        <h:outputText value="#{plateController.selected.id}" title="#{bundle.ViewPlateTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PlateViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

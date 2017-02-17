@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/ingredient/List.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/home/Home.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/service/RestaurantFacade.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/restaurant/List.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/Ingredient.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/quartier/List.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/IngredientPlat.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/cuisine/List.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/Ville.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/ingredient/Edit.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/Quartier.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/Cuisine.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/Menu.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/Plate.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/controller/HomeController.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/Client.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/CommandeItem.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/Commande.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/restaurant/Create.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/menu/List.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/Restaurant.java</file>
+        </group>
+    </open-files>
+</project-private>
