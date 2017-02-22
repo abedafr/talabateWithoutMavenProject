@@ -6,6 +6,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,7 @@ public class Commande implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double total;
+    private  LocalDateTime dateCmd = LocalDateTime.now();
 
     @OneToMany(mappedBy = "commande")
     private List<CommandeItem> commandeItems;
@@ -39,6 +41,14 @@ public class Commande implements Serializable {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public LocalDateTime getDateCmd() {
+        return dateCmd;
+    }
+
+    public void setDateCmd(LocalDateTime dateCmd) {
+        this.dateCmd = dateCmd;
     }
 
     public List<CommandeItem> getCommandeItems() {

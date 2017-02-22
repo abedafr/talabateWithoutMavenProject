@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -21,17 +22,31 @@ import javax.persistence.OneToOne;
 @Entity
 public class Menu implements Serializable {
 
+
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @OneToMany(mappedBy = "menu")
+    private List<Plate> plates;
+    
     @ManyToMany
     private List<Cuisine> cuisines;
 
     @OneToOne
     private Restaurant restaurant;
 
+    public List<Plate> getPlates() {
+        return plates;
+    }
+
+    public void setPlates(List<Plate> plates) {
+        this.plates = plates;
+    }
+
+    
     public List<Cuisine> getCuisines() {
         return cuisines;
     }

@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+
 @Named("cuisineController")
 @SessionScoped
 public class CuisineController implements Serializable {
 
-    @EJB
-    private service.CuisineFacade ejbFacade;
+
+    @EJB private service.CuisineFacade ejbFacade;
     private List<Cuisine> items = null;
     private Cuisine selected;
 
@@ -32,6 +33,9 @@ public class CuisineController implements Serializable {
     }
 
     public Cuisine getSelected() {
+        if (selected == null) {
+            selected = new Cuisine();
+        }
         return selected;
     }
 
@@ -121,7 +125,7 @@ public class CuisineController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Cuisine.class)
+    @FacesConverter(forClass=Cuisine.class)
     public static class CuisineControllerConverter implements Converter {
 
         @Override
@@ -129,7 +133,7 @@ public class CuisineController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CuisineController controller = (CuisineController) facesContext.getApplication().getELResolver().
+            CuisineController controller = (CuisineController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "cuisineController");
             return controller.getCuisine(getKey(value));
         }

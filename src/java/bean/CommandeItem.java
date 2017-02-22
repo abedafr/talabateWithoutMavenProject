@@ -11,8 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -21,52 +22,22 @@ import javax.persistence.ManyToOne;
 @Entity
 public class CommandeItem implements Serializable {
 
+    
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Double totalItem;
-
-    @ManyToMany(mappedBy = "commandeItems")
-    private List<IngredientPlat> ingredientPlats;
-
+    private Double prixTotalItem;
+    private int qte;
+    
     @ManyToOne
     private Commande commande;
 
-    @ManyToOne
+    @OneToOne
     private Plate plate;
-
-    public List<IngredientPlat> getIngredientPlats() {
-        return ingredientPlats;
-    }
-
-    public void setIngredientPlats(List<IngredientPlat> ingredientPlats) {
-        this.ingredientPlats = ingredientPlats;
-    }
-
-    public Plate getPlate() {
-        return plate;
-    }
-
-    public Double getTotalItem() {
-        return totalItem;
-    }
-
-    public void setTotalItem(Double totalItem) {
-        this.totalItem = totalItem;
-    }
-
-    public void setPlate(Plate plate) {
-        this.plate = plate;
-    }
-
-    public Commande getCommande() {
-        return commande;
-    }
-
-    public void setCommande(Commande commande) {
-        this.commande = commande;
-    }
+    
+    @OneToMany(mappedBy = "commandeItem")
+    private List<SupplementSelected> supplementSelecteds;
 
     public Long getId() {
         return id;
@@ -76,6 +47,47 @@ public class CommandeItem implements Serializable {
         this.id = id;
     }
 
+    public Double getPrixTotalItem() {
+        return prixTotalItem;
+    }
+
+    public void setPrixTotalItem(Double prixTotalItem) {
+        this.prixTotalItem = prixTotalItem;
+    }
+
+    public int getQte() {
+        return qte;
+    }
+
+    public void setQte(int qte) {
+        this.qte = qte;
+    }
+
+    public Plate getPlate() {
+        return plate;
+    }
+
+    public void setPlate(Plate plate) {
+        this.plate = plate;
+    }
+
+    public List<SupplementSelected> getSupplementSelecteds() {
+        return supplementSelecteds;
+    }
+
+    public void setSupplementSelecteds(List<SupplementSelected> supplementSelecteds) {
+        this.supplementSelecteds = supplementSelecteds;
+    }
+
+    public Commande getCommande() {
+        return commande;
+    }
+
+    public void setCommande(Commande commande) {
+        this.commande = commande;
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -98,7 +110,7 @@ public class CommandeItem implements Serializable {
 
     @Override
     public String toString() {
-        return "CmdItem " + id;
+        return "bean.CommandeItem[ id=" + id + " ]";
     }
 
 }

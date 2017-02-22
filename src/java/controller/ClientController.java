@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+
 @Named("clientController")
 @SessionScoped
 public class ClientController implements Serializable {
 
-    @EJB
-    private service.ClientFacade ejbFacade;
+
+    @EJB private service.ClientFacade ejbFacade;
     private List<Client> items = null;
     private Client selected;
 
@@ -32,6 +33,9 @@ public class ClientController implements Serializable {
     }
 
     public Client getSelected() {
+        if (selected == null) {
+            selected = new Client();
+        }
         return selected;
     }
 
@@ -121,7 +125,7 @@ public class ClientController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Client.class)
+    @FacesConverter(forClass=Client.class)
     public static class ClientControllerConverter implements Converter {
 
         @Override
@@ -129,7 +133,7 @@ public class ClientController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ClientController controller = (ClientController) facesContext.getApplication().getELResolver().
+            ClientController controller = (ClientController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "clientController");
             return controller.getClient(getKey(value));
         }

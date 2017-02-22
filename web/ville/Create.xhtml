@@ -11,9 +11,10 @@
         <p:dialog id="VilleCreateDlg" widgetVar="VilleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVilleTitle}">
             <h:form id="VilleCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{villeController.selected != null}">
+                    <p:panelGrid columns="2">
                         <p:outputLabel value="#{bundle.CreateVilleLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{villeController.selected.nom}" title="#{bundle.CreateVilleTitle_nom}" />
+                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{villeController.create}" value="#{bundle.Save}" update="display,:VilleListForm:datalist,:growl" oncomplete="handleSubmit(args,'VilleCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VilleCreateDialog.hide()"/>

@@ -14,8 +14,8 @@
                     <p:panelGrid columns="2" rendered="#{commandeController.selected != null}">
                         <p:outputLabel value="#{bundle.EditCommandeLabel_total}" for="total" />
                         <p:inputText id="total" value="#{commandeController.selected.total}" title="#{bundle.EditCommandeTitle_total}" />
-                        <p:outputLabel value="#{bundle.EditCommandeLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{commandeController.selected.id}" title="#{bundle.EditCommandeTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditCommandeLabel_dateCmd}" for="dateCmd" />
+                        <p:inputText id="dateCmd" value="#{commandeController.selected.dateCmd}" title="#{bundle.EditCommandeTitle_dateCmd}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{commandeController.update}" value="#{bundle.Save}" update="display,:CommandeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CommandeEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CommandeEditDialog.hide()"/>

@@ -1,15 +1,15 @@
-<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Start Page</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h1>Hello World!</h1>
         <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+        <h:link outcome="/home/Home" value="Show Home Page"/>
         <br />
         <h:link outcome="/client/List" value="Show All Client Items"/>
         <br />
@@ -19,10 +19,6 @@
         <br />
         <h:link outcome="/cuisine/List" value="Show All Cuisine Items"/>
         <br />
-        <h:link outcome="/ingredient/List" value="Show All Ingredient Items"/>
-        <br />
-        <h:link outcome="/ingredientPlat/List" value="Show All IngredientPlat Items"/>
-        <br />
         <h:link outcome="/menu/List" value="Show All Menu Items"/>
         <br />
         <h:link outcome="/plate/List" value="Show All Plate Items"/>
@@ -31,9 +27,13 @@
         <br />
         <h:link outcome="/restaurant/List" value="Show All Restaurant Items"/>
         <br />
-        <h:link outcome="/ville/List" value="Show All Ville Items"/>
+        <h:link outcome="/supplement/List" value="Show All Supplement Items"/>
         <br />
-        <h:link outcome="/ingredient/List" value="Show All Ingredient Items"/>
+        <h:link outcome="/supplementPlat/List" value="Show All SupplementPlat Items"/>
+        <br />
+        <h:link outcome="/supplementSelected/List" value="Show All SupplementSelected Items"/>
+        <br />
+        <h:link outcome="/ville/List" value="Show All Ville Items"/>
     </h:body>
 
 
@@ -47,5 +47,45 @@
 
 
 
-</html>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

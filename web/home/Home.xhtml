@@ -10,24 +10,26 @@
     <h:body>
         <f:view>
             <h:form>
+                
                 <p:selectOneMenu id="ville" value="#{homeController.ville}" >
                     <f:selectItem itemValue="null" itemLabel="--SELECT--"/>
                     <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
                                    var="villeItem"
-                                   itemValue="#{villeItem}" actionListener="#{homeController.findByVille(villeItem)}" />
+                                   itemValue="#{villeItem}" />
+                    <p:ajax process="ville" listener="#{homeController.findByVille()}" update="quartier"></p:ajax>
                 </p:selectOneMenu>
-
+                
                 <p:selectOneMenu id="quartier" value="#{homeController.quartier}" >
                     <f:selectItem itemValue="null" itemLabel="--SELECT--"/>
-                    <f:selectItems value="#{villeItem!=null?homeController.findByVille(villeItem):null}"
+                    <f:selectItems value="#{homeController.ville.quartiers}"
                                    var="quartierItem"
                                    itemValue="#{quartierItem}"/>
                 </p:selectOneMenu>
-                <p:selectOneMenu id="restaurant" value="#{quartierItem!=null?homeController.restaurant:null}" >
+                <p:selectOneMenu id="cuisine" value="#{homeController.cuisine}" >
                     <f:selectItem itemValue="null" itemLabel="--SELECT--"/>
-                    <f:selectItems value="#{homeController.findByQuartier(quartierItem)}"
-                                   var="restaurantItem"
-                                   itemValue="#{restaurantItem}"/>
+                    <f:selectItems value="#{homeController.cuisines}"
+                                   var="cuisineItem"
+                                   itemValue="#{cuisineItem}"/>
                 </p:selectOneMenu>
 
                 <p:commandButton action="#{homeController.search()}" value="Search" ></p:commandButton>

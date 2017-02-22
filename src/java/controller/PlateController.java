@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+
 @Named("plateController")
 @SessionScoped
 public class PlateController implements Serializable {
 
-    @EJB
-    private service.PlateFacade ejbFacade;
+
+    @EJB private service.PlateFacade ejbFacade;
     private List<Plate> items = null;
     private Plate selected;
 
@@ -32,6 +33,9 @@ public class PlateController implements Serializable {
     }
 
     public Plate getSelected() {
+        if (selected == null) {
+            selected = new Plate();
+        }
         return selected;
     }
 
@@ -121,7 +125,7 @@ public class PlateController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Plate.class)
+    @FacesConverter(forClass=Plate.class)
     public static class PlateControllerConverter implements Converter {
 
         @Override
@@ -129,7 +133,7 @@ public class PlateController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            PlateController controller = (PlateController) facesContext.getApplication().getELResolver().
+            PlateController controller = (PlateController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "plateController");
             return controller.getPlate(getKey(value));
         }

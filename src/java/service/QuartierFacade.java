@@ -30,8 +30,12 @@ public class QuartierFacade extends AbstractFacade<Quartier> {
     public QuartierFacade() {
         super(Quartier.class);
     }
-
-    public List<Quartier> findByVille(Ville ville) {
-        return em.createQuery("SELECT q FROM Quartier q WHERE q.ville.id=" + ville.getId()).getResultList();
+    
+    public List<Quartier> findQuartierByVille(Ville ville) {
+        if (ville != null) {
+            return em.createQuery("SELECT q FROM Quartier q WHERE q.ville.id ='" + ville.getId() + "'").getResultList();
+        }
+        return null;
     }
+    
 }

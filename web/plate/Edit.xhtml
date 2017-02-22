@@ -12,8 +12,19 @@
             <h:form id="PlateEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{plateController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditPlateLabel_qte}" for="qte" />
-                        <p:inputText id="qte" value="#{plateController.selected.qte}" title="#{bundle.EditPlateTitle_qte}" />
+                        <p:outputLabel value="#{bundle.EditPlateLabel_commandeItem}" for="commandeItem" />
+                        <p:selectOneMenu id="commandeItem" value="#{plateController.selected.commandeItem}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{commandeItemController.itemsAvailableSelectOne}"
+                                           var="commandeItemItem"
+                                           itemValue="#{commandeItemItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePlateLabel_menu}" for="menu" />
+                        <p:selectOneMenu id="menu" value="#{plateController.selected.menu}" >
+                            <f:selectItems value="#{menuController.itemsAvailableSelectOne}"
+                                           var="menuItem"
+                                           itemValue="#{menuItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditPlateLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{plateController.selected.nom}" title="#{bundle.EditPlateTitle_nom}" />
                         <p:outputLabel value="#{bundle.EditPlateLabel_prix}" for="prix" />

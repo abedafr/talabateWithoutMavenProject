@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+
 @Named("menuController")
 @SessionScoped
 public class MenuController implements Serializable {
 
-    @EJB
-    private service.MenuFacade ejbFacade;
+
+    @EJB private service.MenuFacade ejbFacade;
     private List<Menu> items = null;
     private Menu selected;
 
@@ -32,6 +33,9 @@ public class MenuController implements Serializable {
     }
 
     public Menu getSelected() {
+        if (selected == null) {
+            selected = new Menu();
+        }
         return selected;
     }
 
@@ -121,7 +125,7 @@ public class MenuController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Menu.class)
+    @FacesConverter(forClass=Menu.class)
     public static class MenuControllerConverter implements Converter {
 
         @Override
@@ -129,7 +133,7 @@ public class MenuController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            MenuController controller = (MenuController) facesContext.getApplication().getELResolver().
+            MenuController controller = (MenuController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "menuController");
             return controller.getMenu(getKey(value));
         }

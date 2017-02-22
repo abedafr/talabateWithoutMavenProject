@@ -29,9 +29,9 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPlateTitle_qte}"/>
+                                <h:outputText value="#{bundle.ListPlateTitle_commandeItem}"/>
                             </f:facet>
-                            <h:outputText value="#{item.qte}"/>
+                            <h:outputText value="#{item.commandeItem}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -50,6 +50,12 @@
                                 <h:outputText value="#{bundle.ListPlateTitle_cuisine}"/>
                             </f:facet>
                             <h:outputText value="#{item.cuisine}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlateTitle_menu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.menu}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

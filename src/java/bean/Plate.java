@@ -11,9 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -22,31 +22,53 @@ import javax.persistence.OneToMany;
 @Entity
 public class Plate implements Serializable {
 
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
     private Double prix;
-    private int qte;
 
     @OneToMany(mappedBy = "plate")
-    private List<IngredientPlat> ingredientPlats;
-
+    private List<SupplementPlat> supplementPlats;
+    
+    @OneToOne(mappedBy = "plate")
+    private CommandeItem commandeItem;
+    
+    @ManyToOne
+    private Menu menu;
+    
     @ManyToOne
     private Cuisine cuisine;
 
-    @OneToMany(mappedBy = "plate")
-    private List<CommandeItem> commandeItems;
-
-    public int getQte() {
-        return qte;
+    public List<SupplementPlat> getSupplementPlats() {
+        return supplementPlats;
     }
 
-    public void setQte(int qte) {
-        this.qte = qte;
+    public void setSupplementPlats(List<SupplementPlat> supplementPlats) {
+        this.supplementPlats = supplementPlats;
     }
 
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    
+    public CommandeItem getCommandeItem() {
+        return commandeItem;
+    }
+
+    public void setCommandeItem(CommandeItem commandeItem) {
+        this.commandeItem = commandeItem;
+    }
+
+    
+    
     public String getNom() {
         return nom;
     }
@@ -63,13 +85,6 @@ public class Plate implements Serializable {
         this.prix = prix;
     }
 
-    public List<IngredientPlat> getIngredientPlats() {
-        return ingredientPlats;
-    }
-
-    public void setIngredientPlats(List<IngredientPlat> ingredientPlats) {
-        this.ingredientPlats = ingredientPlats;
-    }
 
     public Cuisine getCuisine() {
         return cuisine;
@@ -79,13 +94,6 @@ public class Plate implements Serializable {
         this.cuisine = cuisine;
     }
 
-    public List<CommandeItem> getCommandeItems() {
-        return commandeItems;
-    }
-
-    public void setCommandeItems(List<CommandeItem> commandeItems) {
-        this.commandeItems = commandeItems;
-    }
 
     public Long getId() {
         return id;

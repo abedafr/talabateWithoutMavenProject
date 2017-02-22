@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+
 @Named("villeController")
 @SessionScoped
 public class VilleController implements Serializable {
 
-    @EJB
-    private service.VilleFacade ejbFacade;
+
+    @EJB private service.VilleFacade ejbFacade;
     private List<Ville> items = null;
     private Ville selected;
 
@@ -32,6 +33,9 @@ public class VilleController implements Serializable {
     }
 
     public Ville getSelected() {
+        if (selected == null) {
+            selected = new Ville();
+        }
         return selected;
     }
 
@@ -121,7 +125,7 @@ public class VilleController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Ville.class)
+    @FacesConverter(forClass=Ville.class)
     public static class VilleControllerConverter implements Converter {
 
         @Override
@@ -129,7 +133,7 @@ public class VilleController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            VilleController controller = (VilleController) facesContext.getApplication().getELResolver().
+            VilleController controller = (VilleController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "villeController");
             return controller.getVille(getKey(value));
         }

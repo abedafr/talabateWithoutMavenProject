@@ -87,7 +87,7 @@ public class Cuisine implements Serializable {
 
     @Override
     public String toString() {
-        return "Cuisine " + nom + " ]";
+        return "Cuisine " + nom;
     }
 
 }

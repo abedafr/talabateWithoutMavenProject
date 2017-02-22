@@ -12,8 +12,8 @@
             <h:form id="VilleEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{villeController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditVilleLabel_nom}" for="nom" />
-                        <p:inputText id="nom" value="#{villeController.selected.nom}" title="#{bundle.EditVilleTitle_nom}" />
+                        <p:outputLabel value="#{bundle.CreateVilleLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{villeController.selected.nom}" title="#{bundle.CreateVilleTitle_nom}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{villeController.update}" value="#{bundle.Save}" update="display,:VilleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VilleEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VilleEditDialog.hide()"/>

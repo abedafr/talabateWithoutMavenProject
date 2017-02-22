@@ -12,6 +12,10 @@
             <h:form id="CommandeItemCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{commandeItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCommandeItemLabel_prixTotalItem}" for="prixTotalItem" />
+                        <p:inputText id="prixTotalItem" value="#{commandeItemController.selected.prixTotalItem}" title="#{bundle.CreateCommandeItemTitle_prixTotalItem}" />
+                        <p:outputLabel value="#{bundle.CreateCommandeItemLabel_qte}" for="qte" />
+                        <p:inputText id="qte" value="#{commandeItemController.selected.qte}" title="#{bundle.CreateCommandeItemTitle_qte}" />
                         <p:outputLabel value="#{bundle.CreateCommandeItemLabel_plate}" for="plate" />
                         <p:selectOneMenu id="plate" value="#{commandeItemController.selected.plate}" >
                             <f:selectItems value="#{plateController.itemsAvailableSelectOne}"
@@ -24,8 +28,6 @@
                                            var="commandeItem"
                                            itemValue="#{commandeItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateCommandeItemLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{commandeItemController.selected.id}" title="#{bundle.CreateCommandeItemTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{commandeItemController.create}" value="#{bundle.Save}" update="display,:CommandeItemListForm:datalist,:growl" oncomplete="handleSubmit(args,'CommandeItemCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CommandeItemCreateDialog.hide()"/>
