@@ -12,14 +12,16 @@
             <h:form id="PlateViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{plateController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPlateLabel_qte}"/>
-                        <h:outputText value="#{plateController.selected.qte}" title="#{bundle.ViewPlateTitle_qte}"/>
+                        <h:outputText value="#{bundle.ViewPlateLabel_commandeItem}"/>
+                        <h:outputText value="#{plateController.selected.commandeItem}" title="#{bundle.ViewPlateTitle_commandeItem}"/>
                         <h:outputText value="#{bundle.ViewPlateLabel_nom}"/>
                         <h:outputText value="#{plateController.selected.nom}" title="#{bundle.ViewPlateTitle_nom}"/>
                         <h:outputText value="#{bundle.ViewPlateLabel_prix}"/>
                         <h:outputText value="#{plateController.selected.prix}" title="#{bundle.ViewPlateTitle_prix}"/>
                         <h:outputText value="#{bundle.ViewPlateLabel_cuisine}"/>
                         <h:outputText value="#{plateController.selected.cuisine}" title="#{bundle.ViewPlateTitle_cuisine}"/>
+                        <h:outputText value="#{bundle.ViewPlateLabel_menu}"/>
+                        <h:outputText value="#{plateController.selected.menu}" title="#{bundle.ViewPlateTitle_menu}"/>
                         <h:outputText value="#{bundle.ViewPlateLabel_id}"/>
                         <h:outputText value="#{plateController.selected.id}" title="#{bundle.ViewPlateTitle_id}"/>
                     </p:panelGrid>

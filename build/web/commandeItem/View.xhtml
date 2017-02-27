@@ -12,12 +12,16 @@
             <h:form id="CommandeItemViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{commandeItemController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCommandeItemLabel_id}"/>
+                        <h:outputText value="#{commandeItemController.selected.id}" title="#{bundle.ViewCommandeItemTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCommandeItemLabel_prixTotalItem}"/>
+                        <h:outputText value="#{commandeItemController.selected.prixTotalItem}" title="#{bundle.ViewCommandeItemTitle_prixTotalItem}"/>
+                        <h:outputText value="#{bundle.ViewCommandeItemLabel_qte}"/>
+                        <h:outputText value="#{commandeItemController.selected.qte}" title="#{bundle.ViewCommandeItemTitle_qte}"/>
                         <h:outputText value="#{bundle.ViewCommandeItemLabel_plate}"/>
                         <h:outputText value="#{commandeItemController.selected.plate}" title="#{bundle.ViewCommandeItemTitle_plate}"/>
                         <h:outputText value="#{bundle.ViewCommandeItemLabel_commande}"/>
                         <h:outputText value="#{commandeItemController.selected.commande}" title="#{bundle.ViewCommandeItemTitle_commande}"/>
-                        <h:outputText value="#{bundle.ViewCommandeItemLabel_id}"/>
-                        <h:outputText value="#{commandeItemController.selected.id}" title="#{bundle.ViewCommandeItemTitle_id}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="CommandeItemViewDialog.hide()"/>
                 </h:panelGroup>

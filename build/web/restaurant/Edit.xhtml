@@ -12,6 +12,13 @@
             <h:form id="RestaurantEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{restaurantController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRestaurantLabel_menu}" for="menu" />
+                        <p:selectOneMenu id="menu" value="#{restaurantController.selected.menu}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{menuController.itemsAvailableSelectOne}"
+                                           var="menuItem"
+                                           itemValue="#{menuItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditRestaurantLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{restaurantController.selected.nom}" title="#{bundle.EditRestaurantTitle_nom}" />
                         <p:outputLabel value="#{bundle.EditRestaurantLabel_quartier}" for="quartier" />

@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <div width="60%">
+                <h:form id="PlateViewForm">
+                    <h1><h:outputText value="List"/></h1>
+                    <p:dataTable  value="#{viewMenuController.items}" var="item">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Prix"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prix}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cuisine"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cuisine}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Action"/>
+                            </f:facet>
+                            <p:commandButton value="Ajouter au Panier" actionListener="#{viewMenuController.addCart(item)}" update=":CommandeItemCreateForm"></p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </div>
+            <div>
+
+
+                <h:form id="CommandeItemCreateForm">
+                    <h1><h:outputText value="Panier"/></h1>
+                    <p:commandButton value="Vider La Liste" actionListener="#{viewMenuController.vider()}" update="CommandeItemList"></p:commandButton>
+                                     <p:dataTable id="CommandeItemList" value="#{viewMenuController.commandeItems}" var="item">
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="PrixTotalItem"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prixTotalItem}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Qte"/>
+                            </f:facet>
+                            <h:outputText value="#{item.qte}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Plate"/>
+                            </f:facet>
+                            <h:outputText value="#{item.plate.nom}"/>
+                        </p:column>
+                        
+                    </p:dataTable>
+                </h:form>
+
+                
+            </div>
+        </f:view>
+
+    </h:body>
+</html>
+

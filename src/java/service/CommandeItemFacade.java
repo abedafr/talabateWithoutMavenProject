@@ -6,6 +6,7 @@
 package service;
 
 import bean.CommandeItem;
+import bean.Plate;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +30,8 @@ public class CommandeItemFacade extends AbstractFacade<CommandeItem> {
         super(CommandeItem.class);
     }
     
+    public CommandeItem addCmdItem(Plate plate){
+        CommandeItem commandeItem = new CommandeItem(plate.getPrix(), 1, plate);
+        return commandeItem;
+    }
 }

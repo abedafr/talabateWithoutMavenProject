@@ -108,6 +108,18 @@ public class CommandeItem implements Serializable {
         return true;
     }
 
+    public CommandeItem() {
+    }
+    
+
+    public CommandeItem(Double prixTotalItem, int qte, Plate plate) {
+        this.prixTotalItem = prixTotalItem;
+        this.qte = qte;
+        this.plate = plate;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "bean.CommandeItem[ id=" + id + " ]";

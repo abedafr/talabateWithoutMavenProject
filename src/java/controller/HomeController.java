@@ -57,7 +57,7 @@ public class HomeController implements Serializable {
     public String search() {
         if (quartier != null) {
             List<Restaurant> results = restaurantFacade.mainSearch(quartier, cuisine);
-            System.out.println(results);
+            System.out.println("RasultRestau Controller = " + results);
             Session.setAttribut(results, "ResultHomeSearch");
             return "/results/Results";
         } else {

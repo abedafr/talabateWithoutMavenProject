@@ -29,4 +29,6 @@ public class CuisineFacade extends AbstractFacade<Cuisine> {
         super(Cuisine.class);
     }
     
+    
+    
 }

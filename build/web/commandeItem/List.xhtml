@@ -29,6 +29,24 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCommandeItemTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCommandeItemTitle_prixTotalItem}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prixTotalItem}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCommandeItemTitle_qte}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.qte}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCommandeItemTitle_plate}"/>
                             </f:facet>
                             <h:outputText value="#{item.plate}"/>
@@ -38,12 +56,6 @@
                                 <h:outputText value="#{bundle.ListCommandeItemTitle_commande}"/>
                             </f:facet>
                             <h:outputText value="#{item.commande}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCommandeItemTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{commandeItemController.prepareCreate}" update=":CommandeItemCreateForm" oncomplete="PF('CommandeItemCreateDialog').show()"/>

@@ -21,4 +21,9 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+<!--    <ejb-local-ref>
+        <ejb-ref-name>restaurantFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <ejb-link>#RestaurantFacade</ejb-link>
+    </ejb-local-ref>-->
 </web-app>

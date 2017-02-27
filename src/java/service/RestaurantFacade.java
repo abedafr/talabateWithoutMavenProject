@@ -6,10 +6,12 @@
 package service;
 
 import bean.Cuisine;
+import bean.Menu;
 import bean.Quartier;
 import bean.Restaurant;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,39 +31,38 @@ public class RestaurantFacade extends AbstractFacade<Restaurant> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    @EJB
+    private MenuFacade menuFacade;
 
     public RestaurantFacade() {
         super(Restaurant.class);
     }
 
-    public List<Restaurant> findByCuisine(Long id) {
-      //  if (cuisine != null) {
-            return em.createQuery("SELECT r FROM Restaurant r WHERE r.menu.cuisines.id=" + id).getResultList();
-//        }
-//        return null;
-    }
 
     public List<Restaurant> mainSearch(Quartier quartier, Cuisine cuisine) {
         String req = "SELECT r FROM Restaurant r WHERE 1=1";
         req += SearchUtil.addConstraint("r", "quartier.id", "=", quartier.getId());
         if (cuisine != null) {
-            List<Restaurant> resultByQrt = em.createQuery(req).getResultList();
+            List<Long> resMenus = em.createNativeQuery("SELECT mc.menu_id FROM menu_cuisine mc WHERE cuisines_id=" + cuisine.getId()).getResultList();
+            System.out.println("List MenuIds by req = " + resMenus);
             List<Restaurant> resultRestaurants = new ArrayList<>();
-            List<Cuisine> cuisines;
+            List<Menu> menus = new ArrayList<>();
 
-            for (Restaurant restaurant : resultByQrt) {
-                cuisines = restaurant.getMenu().getCuisines();
-                for (Cuisine cuisineRech : cuisines) {
-                    if (cuisineRech.equals(cuisine)) {
-                        resultRestaurants.add(restaurant);
-                    }
-                }
+            for (Long menuId : resMenus) {
+                menus.add(menuFacade.find(menuId));
             }
-            System.out.println(resultRestaurants);
+            System.out.println(" ResultMenu Facade = " + menus);
+            for (Menu menu : menus) {
+                resultRestaurants.add(menu.getRestaurant());
+            }
+            System.out.println(" ResultRestau Facade = " + resultRestaurants);
             return resultRestaurants;
         } else {
             System.out.println(em.createQuery(req).getResultList());
             return em.createQuery(req).getResultList();
         }
     }
+
+    
+    
 }

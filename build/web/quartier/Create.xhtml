@@ -11,7 +11,7 @@
         <p:dialog id="QuartierCreateDlg" widgetVar="QuartierCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateQuartierTitle}">
             <h:form id="QuartierCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{quartierController.selected != null}">
+                    <p:panelGrid columns="2" >
                         <p:outputLabel value="#{bundle.CreateQuartierLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{quartierController.selected.nom}" title="#{bundle.CreateQuartierTitle_nom}" />
                         <p:outputLabel value="#{bundle.CreateQuartierLabel_ville}" for="ville" />

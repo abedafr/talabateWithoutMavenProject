@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2017 at 09:41 AM
+-- Generation Time: Feb 28, 2017 at 12:03 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -79,6 +79,13 @@ CREATE TABLE IF NOT EXISTS `commandeitem` (
   KEY `FK_COMMANDEITEM_COMMANDE_ID` (`COMMANDE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `commandeitem`
+--
+
+INSERT INTO `commandeitem` (`ID`, `PRIXTOTALITEM`, `QTE`, `COMMANDE_ID`, `PLATE_ID`) VALUES
+(1, 150, 1, NULL, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -114,6 +121,16 @@ CREATE TABLE IF NOT EXISTS `cuisine_menu` (
   PRIMARY KEY (`Cuisine_ID`,`menus_ID`),
   KEY `FK_CUISINE_MENU_menus_ID` (`menus_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cuisine_menu`
+--
+
+INSERT INTO `cuisine_menu` (`Cuisine_ID`, `menus_ID`) VALUES
+(2, 1),
+(4, 2),
+(5, 2),
+(5, 4);
 
 -- --------------------------------------------------------
 
@@ -152,6 +169,16 @@ CREATE TABLE IF NOT EXISTS `menu_cuisine` (
   KEY `FK_MENU_CUISINE_cuisines_ID` (`cuisines_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `menu_cuisine`
+--
+
+INSERT INTO `menu_cuisine` (`Menu_ID`, `cuisines_ID`) VALUES
+(1, 2),
+(2, 4),
+(2, 5),
+(4, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -166,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `plate` (
   `MENU_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_PLATE_CUISINE_ID` (`CUISINE_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `plate`
@@ -179,7 +206,8 @@ INSERT INTO `plate` (`ID`, `NOM`, `PRIX`, `CUISINE_ID`, `MENU_ID`) VALUES
 (4, 'Sushi', 150, 4, 2),
 (5, 'Tako Yaki', 125, 4, 2),
 (6, 'Yakisoba', 170, 4, 2),
-(7, 'Tajine poulet', 40, 5, 4);
+(7, 'Tajine poulet', 40, 5, 4),
+(8, 'Tajine Viande', 40, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -254,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `sequence` (
 --
 
 INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '0');
+('SEQ_GEN', '50');
 
 -- --------------------------------------------------------
 
@@ -341,8 +369,8 @@ ALTER TABLE `commandeitem`
 -- Constraints for table `cuisine_menu`
 --
 ALTER TABLE `cuisine_menu`
-  ADD CONSTRAINT `FK_CUISINE_MENU_menus_ID` FOREIGN KEY (`menus_ID`) REFERENCES `menu` (`ID`),
-  ADD CONSTRAINT `FK_CUISINE_MENU_Cuisine_ID` FOREIGN KEY (`Cuisine_ID`) REFERENCES `cuisine` (`ID`);
+  ADD CONSTRAINT `FK_CUISINE_MENU_Cuisine_ID` FOREIGN KEY (`Cuisine_ID`) REFERENCES `cuisine` (`ID`),
+  ADD CONSTRAINT `FK_CUISINE_MENU_menus_ID` FOREIGN KEY (`menus_ID`) REFERENCES `menu` (`ID`);
 
 --
 -- Constraints for table `menu`
@@ -386,8 +414,8 @@ ALTER TABLE `supplementplat`
 -- Constraints for table `supplementselected`
 --
 ALTER TABLE `supplementselected`
-  ADD CONSTRAINT `FK_SUPPLEMENTSELECTED_SUPPLEMENTPLAT_ID` FOREIGN KEY (`SUPPLEMENTPLAT_ID`) REFERENCES `supplementplat` (`ID`),
-  ADD CONSTRAINT `FK_SUPPLEMENTSELECTED_COMMANDEITEM_ID` FOREIGN KEY (`COMMANDEITEM_ID`) REFERENCES `commandeitem` (`ID`);
+  ADD CONSTRAINT `FK_SUPPLEMENTSELECTED_COMMANDEITEM_ID` FOREIGN KEY (`COMMANDEITEM_ID`) REFERENCES `commandeitem` (`ID`),
+  ADD CONSTRAINT `FK_SUPPLEMENTSELECTED_SUPPLEMENTPLAT_ID` FOREIGN KEY (`SUPPLEMENTPLAT_ID`) REFERENCES `supplementplat` (`ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

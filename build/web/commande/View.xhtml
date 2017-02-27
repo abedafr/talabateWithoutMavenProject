@@ -14,6 +14,8 @@
                     <p:panelGrid columns="2" rendered="#{commandeController.selected != null}">
                         <h:outputText value="#{bundle.ViewCommandeLabel_total}"/>
                         <h:outputText value="#{commandeController.selected.total}" title="#{bundle.ViewCommandeTitle_total}"/>
+                        <h:outputText value="#{bundle.ViewCommandeLabel_dateCmd}"/>
+                        <h:outputText value="#{commandeController.selected.dateCmd}" title="#{bundle.ViewCommandeTitle_dateCmd}"/>
                         <h:outputText value="#{bundle.ViewCommandeLabel_id}"/>
                         <h:outputText value="#{commandeController.selected.id}" title="#{bundle.ViewCommandeTitle_id}"/>
                     </p:panelGrid>

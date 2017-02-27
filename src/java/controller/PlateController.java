@@ -1,5 +1,7 @@
 package controller;
 
+import bean.Cuisine;
+import bean.Menu;
 import bean.Plate;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
@@ -18,14 +20,19 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-
+import service.CuisineFacade;
+import service.MenuFacade;
 
 @Named("plateController")
 @SessionScoped
 public class PlateController implements Serializable {
 
-
-    @EJB private service.PlateFacade ejbFacade;
+    @EJB
+    private service.PlateFacade ejbFacade;
+    @EJB
+    private MenuFacade menuFacade;
+    @EJB
+    private CuisineFacade cuisineFacade;
     private List<Plate> items = null;
     private Plate selected;
 
@@ -90,6 +97,16 @@ public class PlateController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
+                    Cuisine cuisine = selected.getCuisine();
+                    Menu menu = selected.getMenu();
+                    if (!cuisine.getMenus().contains(menu)) {
+                        cuisine.getMenus().add(menu);
+                    }
+                    if (!menu.getCuisines().contains(cuisine)) {
+                        menu.getCuisines().add(cuisine);
+                    }
+                    cuisineFacade.edit(cuisine);
+                    menuFacade.edit(menu);
                     getFacade().edit(selected);
                 } else {
                     getFacade().remove(selected);
@@ -125,7 +142,7 @@ public class PlateController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Plate.class)
+    @FacesConverter(forClass = Plate.class)
     public static class PlateControllerConverter implements Converter {
 
         @Override
@@ -133,7 +150,7 @@ public class PlateController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            PlateController controller = (PlateController)facesContext.getApplication().getELResolver().
+            PlateController controller = (PlateController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "plateController");
             return controller.getPlate(getKey(value));
         }

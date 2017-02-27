@@ -23,13 +23,18 @@ public class ResultsController implements Serializable {
 
     private List<Quartier> quartiers;
     private List<Restaurant> items;
+    
+    public String viewMenu(Restaurant restaurant){
+        Session.setAttribut(restaurant.getMenu(), "ViewMenu");
+        return "/results/ViewMenu";
+    }
 
     public List<Restaurant> getItems() {
+        items = (List<Restaurant>) Session.getAttribut("ResultHomeSearch");
         return items;
     }
 
     public void setItems(List<Restaurant> items) {
-        items=(List<Restaurant>) Session.getAttribut("ResultHomeSearch");
         this.items = items;
     }
 
@@ -40,15 +45,11 @@ public class ResultsController implements Serializable {
     public void setQuartiers(List<Quartier> quartiers) {
         this.quartiers = quartiers;
     }
-    
-    
-    
+
     /**
      * Creates a new instance of ResultsController
      */
     public ResultsController() {
     }
-    
-    
-    
+
 }
