@@ -37,10 +37,12 @@ public class ViewMenuController implements Serializable {
         int pos = -1;
         List<CommandeItem> cmdItems = getCommandeItems();
         for (CommandeItem item : cmdItems) {
+            pos++;
             if (item.getPlate().equals(plate)) {
                 res = 1;
-                pos = cmdItems.indexOf(item);
+//                pos = cmdItems.indexOf(item);
                 System.out.println("position for = " + pos);
+                break;
             }
         }
         if (res == 0) {

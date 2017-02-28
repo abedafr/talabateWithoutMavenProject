@@ -4,11 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/service/CommandeItemFacade.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/service/RestaurantFacade.java</file>
             <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/home/Home.xhtml</file>
             <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/controller/HomeController.java</file>
             <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/controller/ResultsController.java</file>
             <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/results/Results.xhtml</file>
             <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/controller/ViewMenuController.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/controller/PlateController.java</file>
             <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/results/ViewMenu.xhtml</file>
         </group>
     </open-files>

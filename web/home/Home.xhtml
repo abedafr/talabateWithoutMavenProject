@@ -12,32 +12,30 @@
             <h:form>
                 <center>
 
-                    <h1><h:outputText value="WELCOME TO OUR WEBSITE"/></h1>
-                    <h3><a href="#selectDiv" data-toggle="collapse"><h:outputText value="WELCOME TO OUR WEBSITE"/></a></h3>
-                    <div id="selectDiv" class="collapse">
-                        <p:selectOneMenu id="ville" value="#{homeController.ville}" >
-                            <f:selectItem itemValue="null" itemLabel="--SELECT--"/>
-                            <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
-                                           var="villeItem"
-                                           itemValue="#{villeItem}" />
-                            <p:ajax process="ville" listener="#{homeController.findByVille()}" update="quartier"></p:ajax>
-                        </p:selectOneMenu>
+                    <h1><h:outputText  value="WELCOME TO OUR WEBSITE"/></h1>
+                    <h3><h:outputText value="Select Your Command :"/></h3>
+                    <p:selectOneMenu id="ville" value="#{homeController.ville}" >
+                        <f:selectItem itemValue="null" itemLabel="--SELECT--"/>
+                        <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                       var="villeItem"
+                                       itemValue="#{villeItem}" />
+                        <p:ajax process="ville" listener="#{homeController.findByVille()}" update="quartier"></p:ajax>
+                    </p:selectOneMenu>
 
-                        <p:selectOneMenu id="quartier" value="#{homeController.quartier}" >
-                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-                            <f:selectItems value="#{homeController.ville.quartiers}"
-                                           var="quartierItem"
-                                           itemValue="#{quartierItem}"/>
-                        </p:selectOneMenu>
-                        <p:selectOneMenu id="cuisine" value="#{homeController.cuisine}" >
-                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-                            <f:selectItems value="#{homeController.cuisines}"
-                                           var="cuisineItem"
-                                           itemValue="#{cuisineItem}"/>
-                        </p:selectOneMenu>
+                    <p:selectOneMenu id="quartier" value="#{homeController.quartier}" >
+                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                        <f:selectItems value="#{homeController.ville.quartiers}"
+                                       var="quartierItem"
+                                       itemValue="#{quartierItem}"/>
+                    </p:selectOneMenu>
+                    <p:selectOneMenu id="cuisine" value="#{homeController.cuisine}" >
+                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                        <f:selectItems value="#{homeController.cuisines}"
+                                       var="cuisineItem"
+                                       itemValue="#{cuisineItem}"/>
+                    </p:selectOneMenu>
 
-                        <p:commandButton action="#{homeController.search()}" value="Search" ></p:commandButton>
-                    </div>
+                    <p:commandButton action="#{homeController.search()}" value="Search" ></p:commandButton>
                 </center>
             </h:form>
         </f:view>
