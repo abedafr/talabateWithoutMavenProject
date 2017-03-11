@@ -97,16 +97,7 @@ public class PlateController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    Cuisine cuisine = selected.getCuisine();
-                    Menu menu = selected.getMenu();
-                    if (!cuisine.getMenus().contains(menu)) {
-                        cuisine.getMenus().add(menu);
-                    }
-                    if (!menu.getCuisines().contains(cuisine)) {
-                        menu.getCuisines().add(cuisine);
-                    }
-                    cuisineFacade.edit(cuisine);
-                    menuFacade.edit(menu);
+                    selected = getFacade().addPlateMenuCuisine(selected);
                     getFacade().edit(selected);
                 } else {
                     getFacade().remove(selected);

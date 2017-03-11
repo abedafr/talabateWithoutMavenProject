@@ -22,6 +22,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Commande implements Serializable {
 
+    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +35,8 @@ public class Commande implements Serializable {
     private List<CommandeItem> commandeItems;
 
     @ManyToMany(mappedBy = "commandes")
-    private List<Client> clients;
-
+    private List<User> users;
+    
     public Double getTotal() {
         return total;
     }
@@ -59,13 +61,14 @@ public class Commande implements Serializable {
         this.commandeItems = commandeItems;
     }
 
-    public List<Client> getClients() {
-        return clients;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setClients(List<Client> clients) {
-        this.clients = clients;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
+    
 
     public Long getId() {
         return id;

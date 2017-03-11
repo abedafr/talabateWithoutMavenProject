@@ -1,17 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Start Page</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     </h:head>
     <h:body>
+        <ui:define name="content">                        
+            <h1 class="page-header "> <i class="fa fa-tachometer"></i> Dashboard</h1>
+        </ui:define>
         <h1>Hello World!</h1>
         <br />
         <h:link outcome="/home/Home" value="Show Home Page"/>
-        <br />
-        <h:link outcome="/client/List" value="Show All Client Items"/>
         <br />
         <h:link outcome="/commande/List" value="Show All Commande Items"/>
         <br />
@@ -34,7 +36,10 @@
         <h:link outcome="/supplementSelected/List" value="Show All SupplementSelected Items"/>
         <br />
         <h:link outcome="/ville/List" value="Show All Ville Items"/>
+        <br />
+        <h:link outcome="/user/List" value="Show All User Items"/>
     </h:body>
+
 
 
 

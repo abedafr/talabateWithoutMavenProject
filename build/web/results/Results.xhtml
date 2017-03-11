@@ -3,47 +3,79 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <f:view>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+    <!--    <h:head>
+            <title>Results</title>
+            
+            <f:facet name="first">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+     
+                
+            </f:facet>
+     
+            <f:facet name="middle">
+                <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+                
+                <h:outputStylesheet name="css/dashboard.css" />
+                
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+                
+                <h:outputScript name="bootstrap/js/bootstrap.js" />
+            </f:facet>
+            
+            <f:facet name="last">
+                <h:outputStylesheet name="css/font-awesome.css" />
+            </f:facet>
+        </h:head>
+        <h:body>-->
+<!--    <ui:composition template="/default/main.xhtml">
+        <ui:define name="content">-->
 
 
-            <h:form>
-                <h1><h:outputText value="View Restaurants"/></h1>
-                <p:dataTable value="#{resultsController.items}" var="item">
-                    
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nom"/>
-                        </f:facet>
-                        <h:outputText value="#{item.nom}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Quartier"/>
-                        </f:facet>
-                        <h:outputText value="#{item.quartier}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Id"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Menu"/>
-                        </f:facet>
-                        <h:outputText value="#{item.menu}"/><br></br>
-                        <p:commandButton action="#{resultsController.viewMenu(item)}" value="View Menu" ></p:commandButton>
-                    </p:column>
-                </p:dataTable>
-            </h:form>
-        </f:view>
 
-    </h:body>
+            <!--<f:view>-->
+
+
+            <h:form class="">
+                    <h1><h:outputText value="View Restaurants"/></h1>
+                    <h:dataTable value="#{resultsController.items}" var="item" class="table-bordered table table-striped">
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Quartier"/>
+                            </f:facet>
+                            <h:outputText value="#{item.quartier}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Menu"/>
+                            </f:facet>
+                            <!--<h:outputText value="#{item.menu}"/><br></br>-->
+                            <p:commandButton action="#{resultsController.viewMenu(item)}" value="View Menu" class="btn btn-info" ></p:commandButton>
+                        </p:column>
+                    </h:dataTable>
+                </h:form>
+            <!--</f:view>-->
+
+<!--        </ui:define>
+
+    </ui:composition>-->
+    <!--</h:body>-->
 </html>
 

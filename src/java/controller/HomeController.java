@@ -9,6 +9,7 @@ import bean.Cuisine;
 import bean.Quartier;
 import bean.Restaurant;
 import bean.Ville;
+import controller.util.JsfUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -18,14 +19,20 @@ import service.CuisineFacade;
 import service.QuartierFacade;
 import service.RestaurantFacade;
 import service.VilleFacade;
-import util.Session;
+import controller.util.Session;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJBException;
+import javax.faces.view.ViewScoped;
 
 /**
  *
  * @author Abed
  */
 @Named(value = "homeController")
-@SessionScoped
+@ViewScoped
 public class HomeController implements Serializable {
 
     /**
@@ -55,12 +62,33 @@ public class HomeController implements Serializable {
     }
 
     public String search() {
-        if (quartier != null) {
+//        if (quartier != null) {
+        try {
             List<Restaurant> results = restaurantFacade.mainSearch(quartier, cuisine);
             System.out.println("RasultRestau Controller = " + results);
-            Session.setAttribut(results, "ResultHomeSearch");
+            Session.setAttribute(results, "ResultHomeSearch");
             return "/results/Results";
-        } else {
+//        }else {
+        } catch (EJBException ex) {
+            String msg = "";
+            Throwable cause = ex.getCause();
+            if (cause != null) {
+                msg = cause.getLocalizedMessage();
+            }
+            if (msg.length() > 0) {
+                JsfUtil.addErrorMessage(msg);
+            } else {
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            }
+            return null;
+        } catch (NullPointerException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
 
@@ -110,6 +138,9 @@ public class HomeController implements Serializable {
     }
 
     public void setQuartiers(List<Quartier> quartiers) {
+        if (quartiers == null) {
+            quartiers = new ArrayList<>();
+        }
         this.quartiers = quartiers;
     }
 

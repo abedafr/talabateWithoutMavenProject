@@ -11,21 +11,22 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
-import util.Session;
+import controller.util.Session;
+import javax.faces.view.ViewScoped;
 
 /**
  *
  * @author Abed
  */
 @Named(value = "resultsController")
-@SessionScoped
+@ViewScoped
 public class ResultsController implements Serializable {
 
     private List<Quartier> quartiers;
     private List<Restaurant> items;
     
     public String viewMenu(Restaurant restaurant){
-        Session.setAttribut(restaurant.getMenu(), "ViewMenu");
+        Session.setAttribute(restaurant.getMenu(), "ViewMenu");
         return "/results/ViewMenu";
     }
 

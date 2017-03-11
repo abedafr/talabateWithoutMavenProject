@@ -89,7 +89,12 @@ public class SupplementPlatController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                    if (persistAction == PersistAction.CREATE) {
+                        selected.setId(getFacade().generateId("SupplementPlat", "id"));
+                        getFacade().create(selected);
+                    } else {
+                        getFacade().edit(selected);
+                    }
                 } else {
                     getFacade().remove(selected);
                 }

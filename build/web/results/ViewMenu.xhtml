@@ -3,79 +3,129 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <f:view>
-
-
-            <div width="60%">
-                <h:form id="PlateViewForm">
-                    <h1><h:outputText value="List"/></h1>
-                    <p:dataTable  value="#{viewMenuController.items}" var="item">
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nom"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nom}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Prix"/>
-                            </f:facet>
-                            <h:outputText value="#{item.prix}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Cuisine"/>
-                            </f:facet>
-                            <h:outputText value="#{item.cuisine}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Action"/>
-                            </f:facet>
-                            <p:commandButton value="Ajouter au Panier" actionListener="#{viewMenuController.addCart(item)}" update=":CommandeItemCreateForm"></p:commandButton>
-                        </p:column>
-                    </p:dataTable>
-                </h:form>
-            </div>
-            <div>
-
-
-                <h:form id="CommandeItemCreateForm">
-                    <h1><h:outputText value="Panier"/></h1>
-                    <p:commandButton value="Vider La Liste" actionListener="#{viewMenuController.vider()}" update="CommandeItemList"></p:commandButton>
-                                     <p:dataTable id="CommandeItemList" value="#{viewMenuController.commandeItems}" var="item">
-                        
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="PrixTotalItem"/>
-                            </f:facet>
-                            <h:outputText value="#{item.prixTotalItem}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Qte"/>
-                            </f:facet>
-                            <h:outputText value="#{item.qte}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Plate"/>
-                            </f:facet>
-                            <h:outputText value="#{item.plate.nom}"/>
-                        </p:column>
-                        
-                    </p:dataTable>
-                </h:form>
-
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+    <!--    <h:head>
+            <f:facet name="first">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+     
+                <title>View Menu</title>
+            </f:facet>
+     
+            <f:facet name="middle">
+                <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
                 
-            </div>
-        </f:view>
+                <h:outputStylesheet name="css/dashboard.css" />
+                
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+                
+                <h:outputScript name="bootstrap/js/bootstrap.js" />
+            </f:facet>
+            
+            <f:facet name="last">
+                <h:outputStylesheet name="css/font-awesome.css" />
+            </f:facet>
+        </h:head>
+        <h:body>-->
 
-    </h:body>
+<!--    <ui:composition template="/default/main.xhtml">
+        <ui:define name="content">-->
+
+            <f:view class="container">
+                <div class="row">
+
+
+                    <div class="col-lg-6" style="width: 53%; float: left; ">
+                        <h:form id="PlateViewForm" class="form-group form-inline">
+                            <h1><h:outputText value="List"/></h1>
+                            <h:dataTable  value="#{viewMenuController.items}" var="item" class="table table-responsive">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nom" class=""/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nom}"/><br></br>
+                                    <h:outputText value="(#{item.cuisine.nom})"/>
+
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Prix"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.prix}"/>
+                                </p:column>
+                                <!--                            <p:column>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Cuisine"/>
+                                                                </f:facet>
+                                                                <h:outputText value="#{item.cuisine}"/>
+                                                            </p:column>-->
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Action"/>
+                                    </f:facet>
+                                    <p:commandButton rendered="#{item.costume==true}" class="btn btn-primary" value="Voir supplements" actionListener="#{viewMenuController.prepareSuplement()}" update=":CommandeItemCreateForm" oncomplete="PF('SupplementSelectDialog').show()"></p:commandButton>
+                                    <p:commandButton rendered="#{item.costume==false}" class="btn btn-primary" value="Ajouter au Panier" actionListener="#{viewMenuController.addCart(item)}" update=":CommandeItemCreateForm"></p:commandButton>
+                                </p:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <div class="col-lg-3  col-md-3" style="float: left; width: 40%;" >
+
+
+                        <h:form id="CommandeItemCreateForm" class="form-group form-inline ">
+                            <h1><h:outputText value="Panier"/></h1>
+                            <p:commandButton  value="Vider La Liste" actionListener="#{viewMenuController.vider()}" update="CommandeItemList" class="form-control btn btn-danger "></p:commandButton>
+                            <p:commandButton  value="Confimer commande"  update="CommandeItemList" class="form-control btn btn-success"></p:commandButton>
+                            <h:dataTable id="CommandeItemList"  value="#{viewMenuController.commandeItems}" var="item" class="table table-striped " >
+                                <p:column>
+                                    <div  class="list-inline">
+                                        <h:outputText value="#{item.plate.nom}"/>
+                                        <div style="float: right;">
+                                            <center>
+                                                <p:commandButton action="#{viewMenuController.delete(item)}"  value="Delete" update=":CommandeItemCreateForm:CommandeItemList" class="btn btn-danger"></p:commandButton>
+                                                <h4>
+                                                    <h:outputText value="#{item.prixTotalItem} MAD" />
+                                                </h4>
+                                            </center>
+                                        </div>
+                                        <br></br>
+                                        <div class="btn-group">
+                                            <p:commandButton action="#{viewMenuController.minus(item)}"  value="-" update=":CommandeItemCreateForm:CommandeItemList" class="btn btn-default btn-group-sm "></p:commandButton>
+                                            <p:commandButton disabled="true" value="  #{item.qte}  " class="btn btn-info btn-group-sm "/>
+                                            <p:commandButton action="#{viewMenuController.plus(item)}"  value="+" update=":CommandeItemCreateForm:CommandeItemList" class="btn btn-default btn-group-sm"></p:commandButton>
+                                        </div>
+                                    </div>
+                                </p:column>
+
+                                <!--                            <p:column style="">
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="Qte"/>
+                                                                </f:facet>
+                                                                <p:commandButton action="{viewMenuController.minus(item)}" ajax="true" value="-" update=":CommandeItemCreateForm:CommandeItemList" class="btn btn-default btn-group "></p:commandButton>
+                                                                <h:outputText value="  {item.qte}  " />
+                                                                <p:commandButton action="{viewMenuController.plus(item)}" ajax="true" value="+" update=":CommandeItemCreateForm:CommandeItemList" class="btn btn-default btn-group"></p:commandButton>
+                                
+                                                            </p:column>
+                                                            <p:column style="">
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="PrixTotalItem"/>
+                                                                </f:facet>
+                                                                
+                                                            </p:column>-->
+
+                            </h:dataTable>
+                        </h:form>
+
+
+                    </div>
+                </div>
+            </f:view>
+            <ui:include src="SupplementSelect.xhtml"/>
+
+        <!--</ui:define></ui:composition>-->
+    <!--</h:body>-->
 </html>
 

@@ -63,6 +63,12 @@
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlateTitle_costume}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.costume}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{plateController.prepareCreate}" update=":PlateCreateForm" oncomplete="PF('PlateCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PlateViewForm" oncomplete="PF('PlateViewDialog').show()" disabled="#{empty plateController.selected}"/>

@@ -15,7 +15,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import util.SearchUtil;
+import controller.util.SearchUtil;
 
 /**
  *

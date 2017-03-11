@@ -22,7 +22,7 @@ public class SupplementSelected implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
     private SupplementPlat supplementPlat;
@@ -75,7 +75,7 @@ public class SupplementSelected implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.SupplementSelected[ id=" + id + " ]";
+        return id + " ]";
     }
     
 }

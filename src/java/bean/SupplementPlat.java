@@ -21,16 +21,16 @@ public class SupplementPlat implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double prix;
-    
+
     @ManyToOne
     private Supplement supplement;
-    
+
     @ManyToOne
     private Plate plate;
-    
+
     public Long getId() {
         return id;
     }
@@ -85,7 +85,8 @@ public class SupplementPlat implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.SupplementPlat[ id=" + id + " ]";
+        Double price = prix + supplement.getDefaultPrice();
+        return supplement.getNom() + "(" + price + ")";
     }
-    
+
 }

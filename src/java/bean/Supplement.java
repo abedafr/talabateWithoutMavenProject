@@ -20,19 +20,16 @@ import javax.persistence.OneToMany;
 @Entity
 public class Supplement implements Serializable {
 
-
-
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
     private Double defaultPrice;
-    
+
     @OneToMany(mappedBy = "supplement")
     private List<SupplementPlat> supplementPlats;
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -87,7 +84,7 @@ public class Supplement implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Supplement[ id=" + id + " ]";
+        return nom + " (" + defaultPrice + ")";
     }
-    
+
 }

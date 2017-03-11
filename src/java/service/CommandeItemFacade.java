@@ -34,4 +34,22 @@ public class CommandeItemFacade extends AbstractFacade<CommandeItem> {
         CommandeItem commandeItem = new CommandeItem(plate.getPrix(), 1, plate);
         return commandeItem;
     }
+    
+    public void clone(CommandeItem commandeItemSource, CommandeItem commandeItemDestination){
+//        commandeItemDestination=commandeItemSource;
+        commandeItemDestination.setCommande(commandeItemSource.getCommande());
+        commandeItemDestination.setId(commandeItemSource.getId());
+        commandeItemDestination.setPlate(commandeItemSource.getPlate());
+        commandeItemDestination.setPrixTotalItem(commandeItemSource.getPrixTotalItem());
+        commandeItemDestination.setQte(commandeItemSource.getQte());
+        commandeItemDestination.setSupplementSelecteds(commandeItemSource.getSupplementSelecteds());
+        
+    }
+    
+    public CommandeItem clone(CommandeItem commandeItem){
+        CommandeItem cloned = new CommandeItem();
+        clone(commandeItem, cloned);
+        return cloned;
+    }
+    
 }

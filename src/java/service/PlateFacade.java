@@ -5,7 +5,10 @@
  */
 package service;
 
+import bean.Cuisine;
+import bean.Menu;
 import bean.Plate;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,8 +28,27 @@ public class PlateFacade extends AbstractFacade<Plate> {
         return em;
     }
 
+    @EJB
+    private CuisineFacade cuisineFacade;
+    @EJB
+    private MenuFacade menuFacade;
+
     public PlateFacade() {
         super(Plate.class);
     }
-    
+
+    public Plate addPlateMenuCuisine(Plate plate) {
+        Cuisine cuisine = plate.getCuisine();
+        Menu menu = plate.getMenu();
+        if (!cuisine.getMenus().contains(menu)) {
+            cuisine.getMenus().add(menu);
+        }
+        if (!menu.getCuisines().contains(cuisine)) {
+            menu.getCuisines().add(cuisine);
+        }
+        cuisineFacade.edit(cuisine);
+        menuFacade.edit(menu);
+        return plate;
+
+    }
 }

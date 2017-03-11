@@ -25,6 +25,11 @@
                                            var="menuItem"
                                            itemValue="#{menuItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePlateLabel_costume}" for="costume" />
+                        <p:selectOneMenu id="costume" value="#{plateController.selected.costume}" >
+                            <f:selectItem itemLabel="True" itemValue="#{true}"/>
+                            <f:selectItem itemLabel="False" itemValue="#{false}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditPlateLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{plateController.selected.nom}" title="#{bundle.EditPlateTitle_nom}" />
                         <p:outputLabel value="#{bundle.EditPlateLabel_prix}" for="prix" />

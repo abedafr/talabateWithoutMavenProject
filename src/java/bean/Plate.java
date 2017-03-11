@@ -29,6 +29,7 @@ public class Plate implements Serializable {
     private Long id;
     private String nom;
     private Double prix;
+    private boolean costume;
 
     @OneToMany(mappedBy = "plate")
     private List<SupplementPlat> supplementPlats;
@@ -65,6 +66,14 @@ public class Plate implements Serializable {
 
     public void setCommandeItem(CommandeItem commandeItem) {
         this.commandeItem = commandeItem;
+    }
+
+    public boolean isCostume() {
+        return costume;
+    }
+
+    public void setCostume(boolean costume) {
+        this.costume = costume;
     }
 
     
