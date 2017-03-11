@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2017 at 12:03 AM
+-- Generation Time: Mar 11, 2017 at 11:48 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -23,30 +23,12 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `client`
+-- Table structure for table `adress`
 --
 
-CREATE TABLE IF NOT EXISTS `client` (
-  `EMAIL` varchar(255) NOT NULL,
-  `ADRESSE` varchar(255) DEFAULT NULL,
-  `GENDER` varchar(255) DEFAULT NULL,
-  `NOM` varchar(255) DEFAULT NULL,
-  `PASSWORD` varchar(255) DEFAULT NULL,
-  `PRENOM` varchar(255) DEFAULT NULL,
-  `TELEPHONE` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`EMAIL`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `client_commande`
---
-
-CREATE TABLE IF NOT EXISTS `client_commande` (
-  `commandes_ID` bigint(20) NOT NULL,
-  `clients_EMAIL` varchar(255) NOT NULL,
-  PRIMARY KEY (`commandes_ID`,`clients_EMAIL`)
+CREATE TABLE IF NOT EXISTS `adress` (
+  `ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -78,13 +60,6 @@ CREATE TABLE IF NOT EXISTS `commandeitem` (
   KEY `FK_COMMANDEITEM_PLATE_ID` (`PLATE_ID`),
   KEY `FK_COMMANDEITEM_COMMANDE_ID` (`COMMANDE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `commandeitem`
---
-
-INSERT INTO `commandeitem` (`ID`, `PRIXTOTALITEM`, `QTE`, `COMMANDE_ID`, `PLATE_ID`) VALUES
-(1, 150, 1, NULL, 4);
 
 -- --------------------------------------------------------
 
@@ -128,8 +103,11 @@ CREATE TABLE IF NOT EXISTS `cuisine_menu` (
 
 INSERT INTO `cuisine_menu` (`Cuisine_ID`, `menus_ID`) VALUES
 (2, 1),
+(5, 1),
+(1, 2),
 (4, 2),
 (5, 2),
+(5, 3),
 (5, 4);
 
 -- --------------------------------------------------------
@@ -174,9 +152,12 @@ CREATE TABLE IF NOT EXISTS `menu_cuisine` (
 --
 
 INSERT INTO `menu_cuisine` (`Menu_ID`, `cuisines_ID`) VALUES
+(2, 1),
 (1, 2),
 (2, 4),
+(1, 5),
 (2, 5),
+(3, 5),
 (4, 5);
 
 -- --------------------------------------------------------
@@ -191,23 +172,34 @@ CREATE TABLE IF NOT EXISTS `plate` (
   `PRIX` double DEFAULT NULL,
   `CUISINE_ID` bigint(20) DEFAULT NULL,
   `MENU_ID` bigint(20) DEFAULT NULL,
+  `COSTUME` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_PLATE_CUISINE_ID` (`CUISINE_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `plate`
 --
 
-INSERT INTO `plate` (`ID`, `NOM`, `PRIX`, `CUISINE_ID`, `MENU_ID`) VALUES
-(1, 'Cheese Burger', 30, 2, 1),
-(2, 'Hamburger', 25, 2, 1),
-(3, 'Couscous', 30, 5, 2),
-(4, 'Sushi', 150, 4, 2),
-(5, 'Tako Yaki', 125, 4, 2),
-(6, 'Yakisoba', 170, 4, 2),
-(7, 'Tajine poulet', 40, 5, 4),
-(8, 'Tajine Viande', 40, 5, 4);
+INSERT INTO `plate` (`ID`, `NOM`, `PRIX`, `CUISINE_ID`, `MENU_ID`, `COSTUME`) VALUES
+(1, 'Cheese Burger', 30, 2, 1, 0),
+(2, 'Hamburger', 25, 2, 1, 1),
+(3, 'Couscous', 30, 5, 3, 0),
+(4, 'Sushi', 150, 4, 2, 0),
+(5, 'Tako Yaki', 125, 4, 2, 0),
+(6, 'Yakisoba', 170, 4, 2, 0),
+(7, 'Tajine poulet', 40, 5, 4, 0),
+(8, 'Tajine Viande', 40, 5, 4, 0),
+(9, 'Suki Yaki', 100, 4, 2, 0),
+(10, 'Chawarma', 20, 1, 2, 0),
+(11, 'Ramen', 30, 4, 2, 0),
+(12, 'Japanese Curry', 80, 4, 2, 0),
+(13, 'Sashimi', 160, 4, 2, 0),
+(14, 'Onigiri', 20, 4, 2, 0),
+(15, 'Chahan', 70, 4, 2, 0),
+(16, 'Udon', 30, 4, 2, 0),
+(17, 'Omuraisu', 30, 4, 2, 0),
+(18, 'Bocadios', 10, 5, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -282,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `sequence` (
 --
 
 INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '50');
+('SEQ_GEN', '150');
 
 -- --------------------------------------------------------
 
@@ -296,6 +288,16 @@ CREATE TABLE IF NOT EXISTS `supplement` (
   `NOM` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `supplement`
+--
+
+INSERT INTO `supplement` (`ID`, `DEFAULTPRICE`, `NOM`) VALUES
+(1, 3, 'Frites'),
+(2, 2, 'Olives'),
+(3, 1, 'Mayonnaise'),
+(4, 1, 'Ketchup');
 
 -- --------------------------------------------------------
 
@@ -313,6 +315,13 @@ CREATE TABLE IF NOT EXISTS `supplementplat` (
   KEY `FK_SUPPLEMENTPLAT_PLATE_ID` (`PLATE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `supplementplat`
+--
+
+INSERT INTO `supplementplat` (`ID`, `PRIX`, `PLATE_ID`, `SUPPLEMENT_ID`) VALUES
+(1, 1.5, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -326,6 +335,41 @@ CREATE TABLE IF NOT EXISTS `supplementselected` (
   PRIMARY KEY (`ID`),
   KEY `FK_SUPPLEMENTSELECTED_COMMANDEITEM_ID` (`COMMANDEITEM_ID`),
   KEY `FK_SUPPLEMENTSELECTED_SUPPLEMENTPLAT_ID` (`SUPPLEMENTPLAT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `LOGIN` varchar(255) NOT NULL,
+  `ADMIIN` tinyint(1) DEFAULT '0',
+  `ADRESS` varchar(255) DEFAULT NULL,
+  `BLOCKED` int(11) DEFAULT NULL,
+  `EMAIL` varchar(255) DEFAULT NULL,
+  `MDPCHANGED` tinyint(1) DEFAULT '0',
+  `NBRCNX` int(11) DEFAULT NULL,
+  `NOM` varchar(255) DEFAULT NULL,
+  `PASSWORD` varchar(255) DEFAULT NULL,
+  `PRENOM` varchar(255) DEFAULT NULL,
+  `TEL` varchar(255) DEFAULT NULL,
+  `TENTATIVEREST` int(11) DEFAULT NULL,
+  PRIMARY KEY (`LOGIN`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_commande`
+--
+
+CREATE TABLE IF NOT EXISTS `user_commande` (
+  `commandes_ID` bigint(20) NOT NULL,
+  `users_LOGIN` varchar(255) NOT NULL,
+  PRIMARY KEY (`commandes_ID`,`users_LOGIN`),
+  KEY `FK_USER_COMMANDE_users_LOGIN` (`users_LOGIN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -351,12 +395,6 @@ INSERT INTO `ville` (`ID`, `NOM`) VALUES
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `client_commande`
---
-ALTER TABLE `client_commande`
-  ADD CONSTRAINT `FK_CLIENT_COMMANDE_commandes_ID` FOREIGN KEY (`commandes_ID`) REFERENCES `commande` (`ID`);
 
 --
 -- Constraints for table `commandeitem`
@@ -416,6 +454,13 @@ ALTER TABLE `supplementplat`
 ALTER TABLE `supplementselected`
   ADD CONSTRAINT `FK_SUPPLEMENTSELECTED_COMMANDEITEM_ID` FOREIGN KEY (`COMMANDEITEM_ID`) REFERENCES `commandeitem` (`ID`),
   ADD CONSTRAINT `FK_SUPPLEMENTSELECTED_SUPPLEMENTPLAT_ID` FOREIGN KEY (`SUPPLEMENTPLAT_ID`) REFERENCES `supplementplat` (`ID`);
+
+--
+-- Constraints for table `user_commande`
+--
+ALTER TABLE `user_commande`
+  ADD CONSTRAINT `FK_USER_COMMANDE_commandes_ID` FOREIGN KEY (`commandes_ID`) REFERENCES `commande` (`ID`),
+  ADD CONSTRAINT `FK_USER_COMMANDE_users_LOGIN` FOREIGN KEY (`users_LOGIN`) REFERENCES `user` (`LOGIN`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
