@@ -27,9 +27,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `adress` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 -- --------------------------------------------------------
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `commande` (
 --
 
 CREATE TABLE IF NOT EXISTS `commandeitem` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PRIXTOTALITEM` double DEFAULT NULL,
   `QTE` int(11) DEFAULT NULL,
   `COMMANDE_ID` bigint(20) DEFAULT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `commandeitem` (
   PRIMARY KEY (`ID`),
   KEY `FK_COMMANDEITEM_PLATE_ID` (`PLATE_ID`),
   KEY `FK_COMMANDEITEM_COMMANDE_ID` (`COMMANDE_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 -- --------------------------------------------------------
 
@@ -283,11 +283,11 @@ INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `supplement` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DEFAULTPRICE` double DEFAULT NULL,
   `NOM` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=5;
 
 --
 -- Dumping data for table `supplement`
@@ -306,14 +306,14 @@ INSERT INTO `supplement` (`ID`, `DEFAULTPRICE`, `NOM`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `supplementplat` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PRIX` double DEFAULT NULL,
   `PLATE_ID` bigint(20) DEFAULT NULL,
   `SUPPLEMENT_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_SUPPLEMENTPLAT_SUPPLEMENT_ID` (`SUPPLEMENT_ID`),
   KEY `FK_SUPPLEMENTPLAT_PLATE_ID` (`PLATE_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=2;
 
 --
 -- Dumping data for table `supplementplat`
@@ -329,13 +329,13 @@ INSERT INTO `supplementplat` (`ID`, `PRIX`, `PLATE_ID`, `SUPPLEMENT_ID`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `supplementselected` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `COMMANDEITEM_ID` bigint(20) DEFAULT NULL,
   `SUPPLEMENTPLAT_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_SUPPLEMENTSELECTED_COMMANDEITEM_ID` (`COMMANDEITEM_ID`),
   KEY `FK_SUPPLEMENTSELECTED_SUPPLEMENTPLAT_ID` (`SUPPLEMENTPLAT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 -- --------------------------------------------------------
 
