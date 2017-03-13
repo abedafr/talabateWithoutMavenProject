@@ -22,7 +22,7 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateSupplementPlatLabel_plate}" for="plate" />
                         <p:selectOneMenu id="plate" value="#{supplementPlatController.selected.plate}" >
-                            <f:selectItems value="#{plateController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{supplementPlatController.costumePlates()}"
                                            var="plateItem"
                                            itemValue="#{plateItem}"/>
                         </p:selectOneMenu>

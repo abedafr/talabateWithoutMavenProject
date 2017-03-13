@@ -26,6 +26,7 @@ public class ResultsController implements Serializable {
     private List<Restaurant> items;
     
     public String viewMenu(Restaurant restaurant){
+        Session.setAttribute(null, "ResultHomeSearch");
         Session.setAttribute(restaurant.getMenu(), "ViewMenu");
         return "/results/ViewMenu";
     }

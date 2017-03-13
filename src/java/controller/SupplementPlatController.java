@@ -1,5 +1,6 @@
 package controller;
 
+import bean.Plate;
 import bean.SupplementPlat;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
@@ -23,6 +24,8 @@ import javax.faces.convert.FacesConverter;
 @SessionScoped
 public class SupplementPlatController implements Serializable {
 
+    @EJB
+    private service.PlateFacade plateFacade;
     @EJB
     private service.SupplementPlatFacade ejbFacade;
     private List<SupplementPlat> items = null;
@@ -89,12 +92,7 @@ public class SupplementPlatController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    if (persistAction == PersistAction.CREATE) {
-                        selected.setId(getFacade().generateId("SupplementPlat", "id"));
-                        getFacade().create(selected);
-                    } else {
-                        getFacade().edit(selected);
-                    }
+                    getFacade().edit(selected);
                 } else {
                     getFacade().remove(selected);
                 }
@@ -115,6 +113,10 @@ public class SupplementPlatController implements Serializable {
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
+    }
+
+    public List<Plate> costumePlates() {
+        return plateFacade.findCostumePlates();
     }
 
     public SupplementPlat getSupplementPlat(java.lang.Long id) {

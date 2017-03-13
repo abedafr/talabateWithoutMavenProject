@@ -22,20 +22,20 @@ import javax.persistence.OneToOne;
 @Entity
 public class CommandeItem implements Serializable {
 
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Double prixTotalItem;
+    @OneToMany
+    private List<SupplementPlat> supplementPlats;
     private int qte;
-    
+
     @ManyToOne
     private Commande commande;
-
     @OneToOne
     private Plate plate;
-    
+
     @OneToMany(mappedBy = "commandeItem")
     private List<SupplementSelected> supplementSelecteds;
 
@@ -86,7 +86,15 @@ public class CommandeItem implements Serializable {
     public void setCommande(Commande commande) {
         this.commande = commande;
     }
-    
+
+    public List<SupplementPlat> getSupplementPlats() {
+        return supplementPlats;
+    }
+
+    public void setSupplementPlats(List<SupplementPlat> supplementPlats) {
+        this.supplementPlats = supplementPlats;
+    }
+
     
     @Override
     public int hashCode() {
@@ -110,7 +118,6 @@ public class CommandeItem implements Serializable {
 
     public CommandeItem() {
     }
-    
 
     public CommandeItem(Double prixTotalItem, int qte, Plate plate) {
         this.prixTotalItem = prixTotalItem;
@@ -118,8 +125,6 @@ public class CommandeItem implements Serializable {
         this.plate = plate;
     }
 
-    
-    
     @Override
     public String toString() {
         return "bean.CommandeItem[ id=" + id + " ]";

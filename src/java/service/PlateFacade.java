@@ -8,6 +8,7 @@ package service;
 import bean.Cuisine;
 import bean.Menu;
 import bean.Plate;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,6 +50,9 @@ public class PlateFacade extends AbstractFacade<Plate> {
         cuisineFacade.edit(cuisine);
         menuFacade.edit(menu);
         return plate;
-
+    }
+    
+    public List<Plate> findCostumePlates(){
+        return em.createQuery("SELECT p FROM Plate p WHERE p.costume=TRUE").getResultList();
     }
 }

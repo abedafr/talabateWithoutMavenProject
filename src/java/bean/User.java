@@ -6,6 +6,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,7 +31,8 @@ public class User implements Serializable {
     private String prenom;
     private String email;
     private String tel;
-    private String adress;
+    private String gender;
+    private LocalDate dateNaissance;
     private int blocked;
     private int nbrCnx;
     private boolean mdpChanged;
@@ -60,12 +62,12 @@ public class User implements Serializable {
         this.adresss = adresss;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getGender() {
+        return gender;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public List<Commande> getCommandes() {
@@ -150,6 +152,15 @@ public class User implements Serializable {
         this.blocked = blocked;
     }
 
+    public LocalDate getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(LocalDate dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    
     public int getNbrCnx() {
         return nbrCnx;
     }

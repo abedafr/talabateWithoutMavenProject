@@ -3,22 +3,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition>
         <p:dialog id="SulpmSelectDlg" widgetVar="SupplementSelectDialog" modal="true" resizable="false" appendTo="@(body)" header="Select Supplement">
             <h:form id="SupplementSelectForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="4" >
-                        <h:outputText value="select your supplement:"/>
-                        
-                        
-                        
-                        
-                    </p:panelGrid>
+
+                    <h:outputText value="select your supplement:"/>
+                    <p:selectManyCheckbox id="supplementPlat" value="#{viewMenuController.commandeItem.supplementPlats}" layout="grid" columns="3">
+                        <f:selectItems value="#{viewMenuController.supplementPlats}" var="item" itemLabel="#{item}" itemValue="#{item}" />
+                    </p:selectManyCheckbox>
+                    <p:commandButton actionListener="#{viewMenuController.saveSupplement()}" value="#{bundle.Save}" update="display,:CommandeItemCreateForm:CommandeItemList" oncomplete="handleSubmit(args,'SupplementSelectDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SupplementSelectDialog.hide()"/>
+
+
+
                 </h:panelGroup>
             </h:form>
         </p:dialog>
     </ui:composition>
-    
+
 </html>
 

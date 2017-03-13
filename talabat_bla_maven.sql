@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2017 at 11:48 PM
+-- Generation Time: Mar 13, 2017 at 06:18 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `adress` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,20 @@ CREATE TABLE IF NOT EXISTS `commandeitem` (
   PRIMARY KEY (`ID`),
   KEY `FK_COMMANDEITEM_PLATE_ID` (`PLATE_ID`),
   KEY `FK_COMMANDEITEM_COMMANDE_ID` (`COMMANDE_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `commandeitem_supplementplat`
+--
+
+CREATE TABLE IF NOT EXISTS `commandeitem_supplementplat` (
+  `CommandeItem_ID` bigint(20) NOT NULL,
+  `supplementPlats_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CommandeItem_ID`,`supplementPlats_ID`),
+  KEY `FK_COMMANDEITEM_SUPPLEMENTPLAT_supplementPlats_ID` (`supplementPlats_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -287,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `supplement` (
   `DEFAULTPRICE` double DEFAULT NULL,
   `NOM` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=5;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `supplement`
@@ -313,14 +326,15 @@ CREATE TABLE IF NOT EXISTS `supplementplat` (
   PRIMARY KEY (`ID`),
   KEY `FK_SUPPLEMENTPLAT_SUPPLEMENT_ID` (`SUPPLEMENT_ID`),
   KEY `FK_SUPPLEMENTPLAT_PLATE_ID` (`PLATE_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=2;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `supplementplat`
 --
 
 INSERT INTO `supplementplat` (`ID`, `PRIX`, `PLATE_ID`, `SUPPLEMENT_ID`) VALUES
-(1, 1.5, 2, 1);
+(1, 1.5, 2, 1),
+(2, 0.5, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -335,7 +349,7 @@ CREATE TABLE IF NOT EXISTS `supplementselected` (
   PRIMARY KEY (`ID`),
   KEY `FK_SUPPLEMENTSELECTED_COMMANDEITEM_ID` (`COMMANDEITEM_ID`),
   KEY `FK_SUPPLEMENTSELECTED_SUPPLEMENTPLAT_ID` (`SUPPLEMENTPLAT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -346,7 +360,7 @@ CREATE TABLE IF NOT EXISTS `supplementselected` (
 CREATE TABLE IF NOT EXISTS `user` (
   `LOGIN` varchar(255) NOT NULL,
   `ADMIIN` tinyint(1) DEFAULT '0',
-  `ADRESS` varchar(255) DEFAULT NULL,
+  `GENDER` varchar(255) DEFAULT NULL,
   `BLOCKED` int(11) DEFAULT NULL,
   `EMAIL` varchar(255) DEFAULT NULL,
   `MDPCHANGED` tinyint(1) DEFAULT '0',
@@ -356,6 +370,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `PRENOM` varchar(255) DEFAULT NULL,
   `TEL` varchar(255) DEFAULT NULL,
   `TENTATIVEREST` int(11) DEFAULT NULL,
+  `DATENAISSANCE` longblob,
   PRIMARY KEY (`LOGIN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -402,6 +417,13 @@ INSERT INTO `ville` (`ID`, `NOM`) VALUES
 ALTER TABLE `commandeitem`
   ADD CONSTRAINT `FK_COMMANDEITEM_COMMANDE_ID` FOREIGN KEY (`COMMANDE_ID`) REFERENCES `commande` (`ID`),
   ADD CONSTRAINT `FK_COMMANDEITEM_PLATE_ID` FOREIGN KEY (`PLATE_ID`) REFERENCES `plate` (`ID`);
+
+--
+-- Constraints for table `commandeitem_supplementplat`
+--
+ALTER TABLE `commandeitem_supplementplat`
+  ADD CONSTRAINT `FK_COMMANDEITEM_SUPPLEMENTPLAT_supplementPlats_ID` FOREIGN KEY (`supplementPlats_ID`) REFERENCES `supplementplat` (`ID`),
+  ADD CONSTRAINT `FK_COMMANDEITEM_SUPPLEMENTPLAT_CommandeItem_ID` FOREIGN KEY (`CommandeItem_ID`) REFERENCES `commandeitem` (`ID`);
 
 --
 -- Constraints for table `cuisine_menu`
