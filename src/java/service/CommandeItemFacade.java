@@ -7,6 +7,9 @@ package service;
 
 import bean.CommandeItem;
 import bean.Plate;
+import bean.SupplementPlat;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,10 +33,20 @@ public class CommandeItemFacade extends AbstractFacade<CommandeItem> {
         super(CommandeItem.class);
     }
     
-    public CommandeItem addCmdItem(Plate plate){
-        CommandeItem commandeItem = new CommandeItem(plate.getPrix(), 1, plate);
+    @EJB
+    private SupplementPlatFacade supplementPlatFacade;
+    
+    public CommandeItem addCmdItem(Plate plate, List<SupplementPlat> supplementPlats){
+        CommandeItem commandeItem;
+        if(plate.isCostume()){
+        commandeItem = new CommandeItem(plate.getPrix()+supplementPlatFacade.CalculePrixSupplementPlat(supplementPlats), 1, plate);
+        commandeItem.setTotalSupplements(supplementPlatFacade.CalculePrixSupplementPlat(supplementPlats));
+        }else{
+        commandeItem = new CommandeItem(plate.getPrix(), 1, plate);
+        }
         return commandeItem;
     }
+    
     
     public void clone(CommandeItem commandeItemSource, CommandeItem commandeItemDestination){
 //        commandeItemDestination=commandeItemSource;

@@ -4,22 +4,16 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
     <ui:composition>
-        <p:dialog id="SulpmSelectDlg" widgetVar="SupplementSelectDialog" modal="true" resizable="false" appendTo="@(body)" header="Select Supplement">
-            <h:form id="SupplementSelectForm">
-                <h:panelGroup id="display">
-
-                    <h:outputText value="select your supplement:"/>
-                    <p:selectManyCheckbox id="supplementPlat" value="#{viewMenuController.commandeItem.supplementPlats}" layout="grid" columns="3">
-                        <f:selectItems value="#{viewMenuController.supplementPlats}" var="item" itemLabel="#{item}" itemValue="#{item}" />
-                    </p:selectManyCheckbox>
-                    <p:commandButton actionListener="#{viewMenuController.saveSupplement()}" value="#{bundle.Save}" update="display,:CommandeItemCreateForm:CommandeItemList" oncomplete="handleSubmit(args,'SupplementSelectDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SupplementSelectDialog.hide()"/>
-
-
-
-                </h:panelGroup>
+        <p:dialog  id="SulpmSelectDlg" widgetVar="SupplementSelectDialog" modal="true" resizable="false" appendTo="@(body)" header="Select Supplement">
+            <h:form id="SupplementSelectForm" class="form-group">
+                <h:outputText value="select your supplement:" class="form-control"/>
+                <h:selectManyCheckbox id="supplementPlat" value="#{viewMenuController.commandeItem.supplementPlats}" class="form-control">
+                    <f:selectItems value="#{viewMenuController.supplementPlats}" var="item" itemLabel="#{item}" itemValue="#{item}" />
+                </h:selectManyCheckbox>
+                <b:commandButton class="btn btn-success" actionListener="#{viewMenuController.saveSupplement()}" value="#{bundle.Save}" update=":SupplementSelectForm, :CommandeItemCreateForm:CommandeItemList" oncomplete="handleSubmit(args,'SupplementSelectDialog');"/>
             </h:form>
         </p:dialog>
     </ui:composition>

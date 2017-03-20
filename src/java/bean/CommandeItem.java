@@ -27,6 +27,8 @@ public class CommandeItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Double prixTotalItem;
+    private Double totalSupplements;
+    
     @OneToMany
     private List<SupplementPlat> supplementPlats;
     private int qte;
@@ -45,6 +47,14 @@ public class CommandeItem implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Double getTotalSupplements() {
+        return totalSupplements;
+    }
+
+    public void setTotalSupplements(Double totalSupplements) {
+        this.totalSupplements = totalSupplements;
     }
 
     public Double getPrixTotalItem() {

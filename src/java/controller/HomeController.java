@@ -32,7 +32,7 @@ import javax.faces.view.ViewScoped;
  * @author Abed
  */
 @Named(value = "homeController")
-@ViewScoped
+@SessionScoped
 public class HomeController implements Serializable {
 
     /**
@@ -57,41 +57,45 @@ public class HomeController implements Serializable {
     private RestaurantFacade restaurantFacade;
 
     public void findByVille() {
-        quartiers = quartierFacade.findQuartierByVille(ville);
-        ville.setQuartiers(quartiers);
+        if (ville != null) {
+            quartiers = quartierFacade.findQuartierByVille(ville);
+            ville.setQuartiers(quartiers);
+        }
     }
 
     public String search() {
-//        if (quartier != null) {
-        try {
-            List<Restaurant> results = restaurantFacade.mainSearch(quartier, cuisine);
-            System.out.println("RasultRestau Controller = " + results);
-            Session.setAttribute(results, "ResultHomeSearch");
-            return "/results/Results";
+        if (quartier != null) {
+            try {
+                List<Restaurant> results = restaurantFacade.mainSearch(quartier, cuisine);
+                System.out.println("RasultRestau Controller = " + results);
+                Session.setAttribute(results, "ResultHomeSearch");
+                return "/results/Results";
 //        }else {
-        } catch (EJBException ex) {
-            String msg = "";
-            Throwable cause = ex.getCause();
-            if (cause != null) {
-                msg = cause.getLocalizedMessage();
-            }
-            if (msg.length() > 0) {
-                JsfUtil.addErrorMessage(msg);
-            } else {
+            } catch (EJBException ex) {
+                String msg = "";
+                Throwable cause = ex.getCause();
+                if (cause != null) {
+                    msg = cause.getLocalizedMessage();
+                }
+                if (msg.length() > 0) {
+                    JsfUtil.addErrorMessage(msg);
+                } else {
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                }
+                return null;
+            } catch (NullPointerException ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                return null;
+
+            } catch (Exception ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                return null;
             }
-            return null;
-        } catch (NullPointerException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
-
-        } catch (Exception ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
         }
-
+        JsfUtil.addErrorMessage("Please Select Ville & Quartier...");
+        return null;
     }
 
     public List<Cuisine> getCuisines() {

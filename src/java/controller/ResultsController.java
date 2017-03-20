@@ -19,7 +19,7 @@ import javax.faces.view.ViewScoped;
  * @author Abed
  */
 @Named(value = "resultsController")
-@ViewScoped
+@SessionScoped
 public class ResultsController implements Serializable {
 
     private List<Quartier> quartiers;

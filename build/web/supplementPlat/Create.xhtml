@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{supplementPlatController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateSupplementPlatLabel_prix}" for="prix" />
-                        <p:inputText id="prix" value="#{supplementPlatController.selected.prix}" title="#{bundle.CreateSupplementPlatTitle_prix}" />
+                        <p:inputText id="prix" value="#{supplementPlatController.selected.addition}" title="#{bundle.CreateSupplementPlatTitle_prix}" />
                         <p:outputLabel value="#{bundle.CreateSupplementPlatLabel_supplement}" for="supplement" />
                         <p:selectOneMenu id="supplement" value="#{supplementPlatController.selected.supplement}" >
                             <f:selectItems value="#{supplementController.itemsAvailableSelectOne}"

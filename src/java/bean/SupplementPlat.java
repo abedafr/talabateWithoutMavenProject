@@ -23,7 +23,8 @@ public class SupplementPlat implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double prix;
+    private Double addition;
+    private Double newPrice;
 
     @ManyToOne
     private Supplement supplement;
@@ -39,12 +40,21 @@ public class SupplementPlat implements Serializable {
         this.id = id;
     }
 
-    public Double getPrix() {
-        return prix;
+    public Double getNewPrice() {
+        newPrice = supplement.getDefaultPrice() + addition;
+        return newPrice;
     }
 
-    public void setPrix(Double prix) {
-        this.prix = prix;
+    public void setNewPrice(Double newPrice) {
+        this.newPrice = newPrice;
+    }
+
+    public Double getAddition() {
+        return addition;
+    }
+
+    public void setAddition(Double addition) {
+        this.addition = addition;
     }
 
     public Supplement getSupplement() {
@@ -85,8 +95,8 @@ public class SupplementPlat implements Serializable {
 
     @Override
     public String toString() {
-        Double price = prix + supplement.getDefaultPrice();
-        return supplement.getNom() + "(" + price + ")";
+       
+        return supplement.getNom() + "(" + getNewPrice() + ")";
     }
 
 }

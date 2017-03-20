@@ -38,4 +38,14 @@ public class SupplementPlatFacade extends AbstractFacade<SupplementPlat> {
         return null;
     }
 
+    public Double CalculePrixSupplementPlat(List<SupplementPlat> supplementPlats) {
+        Double prix = 0D;
+        if (supplementPlats == null || supplementPlats.isEmpty()) {
+            return 0D;
+        }
+        for (SupplementPlat supplementPlat : supplementPlats) {
+            prix += supplementPlat.getNewPrice();
+        }
+        return prix;
+    }
 }
