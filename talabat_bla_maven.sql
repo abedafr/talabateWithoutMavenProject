@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2017 at 06:18 PM
+-- Generation Time: Mar 21, 2017 at 09:50 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `commandeitem` (
   `QTE` int(11) DEFAULT NULL,
   `COMMANDE_ID` bigint(20) DEFAULT NULL,
   `PLATE_ID` bigint(20) DEFAULT NULL,
+  `TOTALSUPPLEMENTS` double DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_COMMANDEITEM_PLATE_ID` (`PLATE_ID`),
   KEY `FK_COMMANDEITEM_COMMANDE_ID` (`COMMANDE_ID`)
@@ -134,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `RESTAURANT_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_MENU_RESTAURANT_ID` (`RESTAURANT_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `menu`
@@ -142,6 +143,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
 
 INSERT INTO `menu` (`ID`, `RESTAURANT_ID`) VALUES
 (1, 1),
+(6, 1),
 (2, 2),
 (3, 3),
 (4, 4),
@@ -320,9 +322,10 @@ INSERT INTO `supplement` (`ID`, `DEFAULTPRICE`, `NOM`) VALUES
 
 CREATE TABLE IF NOT EXISTS `supplementplat` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `PRIX` double DEFAULT NULL,
+  `ADDITION` double DEFAULT NULL,
   `PLATE_ID` bigint(20) DEFAULT NULL,
   `SUPPLEMENT_ID` bigint(20) DEFAULT NULL,
+  `NEWPRICE` double DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_SUPPLEMENTPLAT_SUPPLEMENT_ID` (`SUPPLEMENT_ID`),
   KEY `FK_SUPPLEMENTPLAT_PLATE_ID` (`PLATE_ID`)
@@ -332,9 +335,9 @@ CREATE TABLE IF NOT EXISTS `supplementplat` (
 -- Dumping data for table `supplementplat`
 --
 
-INSERT INTO `supplementplat` (`ID`, `PRIX`, `PLATE_ID`, `SUPPLEMENT_ID`) VALUES
-(1, 1.5, 2, 1),
-(2, 0.5, 2, 3);
+INSERT INTO `supplementplat` (`ID`, `ADDITION`, `PLATE_ID`, `SUPPLEMENT_ID`, `NEWPRICE`) VALUES
+(1, 1.5, 2, 1, NULL),
+(2, 0.5, 2, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -422,8 +425,8 @@ ALTER TABLE `commandeitem`
 -- Constraints for table `commandeitem_supplementplat`
 --
 ALTER TABLE `commandeitem_supplementplat`
-  ADD CONSTRAINT `FK_COMMANDEITEM_SUPPLEMENTPLAT_supplementPlats_ID` FOREIGN KEY (`supplementPlats_ID`) REFERENCES `supplementplat` (`ID`),
-  ADD CONSTRAINT `FK_COMMANDEITEM_SUPPLEMENTPLAT_CommandeItem_ID` FOREIGN KEY (`CommandeItem_ID`) REFERENCES `commandeitem` (`ID`);
+  ADD CONSTRAINT `FK_COMMANDEITEM_SUPPLEMENTPLAT_CommandeItem_ID` FOREIGN KEY (`CommandeItem_ID`) REFERENCES `commandeitem` (`ID`),
+  ADD CONSTRAINT `FK_COMMANDEITEM_SUPPLEMENTPLAT_supplementPlats_ID` FOREIGN KEY (`supplementPlats_ID`) REFERENCES `supplementplat` (`ID`);
 
 --
 -- Constraints for table `cuisine_menu`
