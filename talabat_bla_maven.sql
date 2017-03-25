@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2017 at 09:50 AM
+-- Generation Time: Mar 25, 2017 at 08:34 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -28,7 +28,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `adress` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`ID`)
+  `BUILDING` varchar(255) DEFAULT NULL,
+  `FLOOR` int(11) DEFAULT NULL,
+  `NOM` varchar(255) DEFAULT NULL,
+  `NUMBER` int(11) DEFAULT NULL,
+  `PRENOM` varchar(255) DEFAULT NULL,
+  `STREET` varchar(255) DEFAULT NULL,
+  `TEL` varchar(255) DEFAULT NULL,
+  `TELFIX` varchar(255) DEFAULT NULL,
+  `QUARTIER_ID` bigint(20) DEFAULT NULL,
+  `USER_LOGIN` varchar(255) DEFAULT NULL,
+  `VILLE_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_ADRESS_USER_LOGIN` (`USER_LOGIN`),
+  KEY `FK_ADRESS_QUARTIER_ID` (`QUARTIER_ID`),
+  KEY `FK_ADRESS_VILLE_ID` (`VILLE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -127,6 +141,26 @@ INSERT INTO `cuisine_menu` (`Cuisine_ID`, `menus_ID`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `device`
+--
+
+CREATE TABLE IF NOT EXISTS `device` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ADRESSEIP` varchar(255) DEFAULT NULL,
+  `ADRESSEMAC` varchar(255) DEFAULT NULL,
+  `BROWSER` varchar(255) DEFAULT NULL,
+  `DEVICECATEGORIE` varchar(255) DEFAULT NULL,
+  `NOM` varchar(255) DEFAULT NULL,
+  `OPERATINGSYSTEM` varchar(255) DEFAULT NULL,
+  `PRENOM` varchar(255) DEFAULT NULL,
+  `USER_LOGIN` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_DEVICE_USER_LOGIN` (`USER_LOGIN`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `menu`
 --
 
@@ -190,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `plate` (
   `COSTUME` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_PLATE_CUISINE_ID` (`CUISINE_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `plate`
@@ -214,7 +248,22 @@ INSERT INTO `plate` (`ID`, `NOM`, `PRIX`, `CUISINE_ID`, `MENU_ID`, `COSTUME`) VA
 (15, 'Chahan', 70, 4, 2, 0),
 (16, 'Udon', 30, 4, 2, 0),
 (17, 'Omuraisu', 30, 4, 2, 0),
-(18, 'Bocadios', 10, 5, 1, 1);
+(18, 'Bocadios', 10, 5, 1, 1),
+(19, 'Chicken Burger', 35, 2, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `platmenu`
+--
+
+CREATE TABLE IF NOT EXISTS `platmenu` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `MENU_ID` bigint(20) DEFAULT NULL,
+  `PLATE_ID` bigint(20) DEFAULT NULL,
+  `CUISINE_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -336,8 +385,8 @@ CREATE TABLE IF NOT EXISTS `supplementplat` (
 --
 
 INSERT INTO `supplementplat` (`ID`, `ADDITION`, `PLATE_ID`, `SUPPLEMENT_ID`, `NEWPRICE`) VALUES
-(1, 1.5, 2, 1, NULL),
-(2, 0.5, 2, 3, NULL);
+(1, 1.5, 2, 1, 4.5),
+(2, 0.5, 2, 3, 1.5);
 
 -- --------------------------------------------------------
 
@@ -363,9 +412,10 @@ CREATE TABLE IF NOT EXISTS `supplementselected` (
 CREATE TABLE IF NOT EXISTS `user` (
   `LOGIN` varchar(255) NOT NULL,
   `ADMIIN` tinyint(1) DEFAULT '0',
-  `GENDER` varchar(255) DEFAULT NULL,
   `BLOCKED` int(11) DEFAULT NULL,
+  `DATENAISSANCE` longblob,
   `EMAIL` varchar(255) DEFAULT NULL,
+  `GENDER` varchar(255) DEFAULT NULL,
   `MDPCHANGED` tinyint(1) DEFAULT '0',
   `NBRCNX` int(11) DEFAULT NULL,
   `NOM` varchar(255) DEFAULT NULL,
@@ -373,7 +423,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `PRENOM` varchar(255) DEFAULT NULL,
   `TEL` varchar(255) DEFAULT NULL,
   `TENTATIVEREST` int(11) DEFAULT NULL,
-  `DATENAISSANCE` longblob,
   PRIMARY KEY (`LOGIN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -415,6 +464,14 @@ INSERT INTO `ville` (`ID`, `NOM`) VALUES
 --
 
 --
+-- Constraints for table `adress`
+--
+ALTER TABLE `adress`
+  ADD CONSTRAINT `FK_ADRESS_VILLE_ID` FOREIGN KEY (`VILLE_ID`) REFERENCES `ville` (`ID`),
+  ADD CONSTRAINT `FK_ADRESS_QUARTIER_ID` FOREIGN KEY (`QUARTIER_ID`) REFERENCES `quartier` (`ID`),
+  ADD CONSTRAINT `FK_ADRESS_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`);
+
+--
 -- Constraints for table `commandeitem`
 --
 ALTER TABLE `commandeitem`
@@ -434,6 +491,12 @@ ALTER TABLE `commandeitem_supplementplat`
 ALTER TABLE `cuisine_menu`
   ADD CONSTRAINT `FK_CUISINE_MENU_Cuisine_ID` FOREIGN KEY (`Cuisine_ID`) REFERENCES `cuisine` (`ID`),
   ADD CONSTRAINT `FK_CUISINE_MENU_menus_ID` FOREIGN KEY (`menus_ID`) REFERENCES `menu` (`ID`);
+
+--
+-- Constraints for table `device`
+--
+ALTER TABLE `device`
+  ADD CONSTRAINT `FK_DEVICE_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`);
 
 --
 -- Constraints for table `menu`

@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
-    <Scope Scope="Project"/>
+    <Scope Scope="Project">
+        <Node id="results/Results.xhtml" x="400" y="900" zoom="false"/>
+        <Node id="supplement/Edit.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="plate/Create.xhtml" x="650" y="900" zoom="true"/>
+        <Node id="supplementSelected/Edit.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="platMenu/Create.xhtml" x="1900" y="450" zoom="true"/>
+        <Node id="supplement/View.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="plate/List.xhtml" x="1650" y="150" zoom="true"/>
+        <Node id="supplementSelected/View.xhtml" x="400" y="1200" zoom="true"/>
+        <Node id="manage/ManageRestau.xhtml" x="150" y="1200" zoom="true"/>
+        <Node id="user/Edit.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="plate/View.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="supplement/List.xhtml" x="2400" y="300" zoom="true"/>
+        <Node id="cuisine/Create.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="ville/Create.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="ville/List.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="supplementSelected/List.xhtml" x="1150" y="450" zoom="true"/>
+        <Node id="ville/Edit.xhtml" x="1150" y="1050" zoom="true"/>
+        <Node id="ville/View.xhtml" x="400" y="1050" zoom="true"/>
+        <Node id="menu/View.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="results/SupplementSelect.xhtml" x="900" y="900" zoom="true"/>
+        <Node id="index.xhtml" x="650" y="1200" zoom="true"/>
+        <Node id="plate/Edit.xhtml" x="650" y="750" zoom="true"/>
+        <Node id="restaurant/Create.xhtml" x="1150" y="600" zoom="true"/>
+        <Node id="menu/List.xhtml" x="1400" y="900" zoom="true"/>
+        <Node id="adress/Create.xhtml" x="1650" y="600" zoom="true"/>
+        <Node id="adress/Edit.xhtml" x="1650" y="300" zoom="true"/>
+        <Node id="supplementSelected/Create.xhtml" x="900" y="1200" zoom="true"/>
+        <Node id="supplementPlat/Edit.xhtml" x="1650" y="750" zoom="true"/>
+        <Node id="commandeItem/Edit.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="quartier/Create.xhtml" x="1900" y="150" zoom="true"/>
+        <Node id="commande/List.xhtml" x="1400" y="600" zoom="true"/>
+        <Node id="restaurant/View.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="commandeItem/View.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="cuisine/Edit.xhtml" x="650" y="1050" zoom="true"/>
+        <Node id="supplementPlat/Create.xhtml" x="2400" y="150" zoom="true"/>
+        <Node id="commande/View.xhtml" x="2150" y="300" zoom="true"/>
+        <Node id="cuisine/View.xhtml" x="150" y="1050" zoom="true"/>
+        <Node id="restaurant/List.xhtml" x="2650" y="150" zoom="true"/>
+        <Node id="commandeItem/List.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="supplementPlat/List.xhtml" x="900" y="750" zoom="true"/>
+        <Node id="supplement/Create.xhtml" x="1400" y="450" zoom="true"/>
+        <Node id="quartier/List.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="platMenu/View.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="commande/Edit.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="quartier/View.xhtml" x="1900" y="300" zoom="true"/>
+        <Node id="quartier/Edit.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="template.xhtml" x="1150" y="750" zoom="true"/>
+        <Node id="home/Home.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="restaurant/Edit.xhtml" x="900" y="1050" zoom="true"/>
+        <Node id="platMenu/List.xhtml" x="2150" y="150" zoom="true"/>
+        <Node id="user/List.xhtml" x="1650" y="450" zoom="true"/>
+        <Node id="platMenu/Edit.xhtml" x="400" y="1350" zoom="true"/>
+        <Node id="user/Create.xhtml" x="1150" y="900" zoom="true"/>
+        <Node id="menu/Edit.xhtml" x="150" y="1350" zoom="true"/>
+        <Node id="user/View.xhtml" x="150" y="1500" zoom="true"/>
+        <Node id="adress/View.xhtml" x="1400" y="750" zoom="true"/>
+        <Node id="commandeItem/Create.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="cuisine/List.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="commande/Create.xhtml" x="2150" y="450" zoom="true"/>
+        <Node id="supplementPlat/View.xhtml" x="1900" y="600" zoom="true"/>
+        <Node id="menu/Create.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="results/ViewMenu.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="adress/List.xhtml" x="150" y="750" zoom="true"/>
+    </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>

@@ -39,7 +39,7 @@
                 <div class="col-lg-6" style="width: 53%; float: left; ">
                     <h:form id="PlateViewForm" class="form-group form-inline">
                         <h1><h:outputText value="List"/></h1>
-                        <h:dataTable  value="#{viewMenuController.items}" var="item" class="table table-responsive">
+                        <h:dataTable  value="#{viewMenuController.items}" var="item" class="table table-striped ">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Nom" class=""/>
@@ -77,24 +77,22 @@
                                     <h:outputText value="#{item.plate.nom}"/>
                                     <div style="float: right;">
                                         <center>
-                                            <p:commandButton action="#{viewMenuController.delete(item)}"  value="Delete" update=":CommandeItemCreateForm:CommandeItemList" class="btn btn-danger"></p:commandButton>
-                                            <h4>
-                                                <h:outputText value="#{item.prixTotalItem} MAD" />
-                                            </h4>
+                                            <h:outputText class="h4" value="#{item.prixTotalItem} MAD" /><br/>
+                                            <b:commandButton action="#{viewMenuController.delete(item)}" value="" icon="trash" update=":CommandeItemCreateForm:CommandeItemList" class="btn btn-xs btn-danger"/>
+                                                
                                         </center>
                                     </div>
                                     <br></br>
+                                    
                                     <div class="btn-group">
-                                        <b:commandButton action="#{viewMenuController.minus(item)}"  value="-" update=":CommandeItemCreateForm:CommandeItemList" class="btn btn-default btn-group-sm "></b:commandButton>
-                                        <b:commandButton disabled="true" value="  #{item.qte}  " class="btn btn-info btn-group-sm "/>
-                                        <b:commandButton action="#{viewMenuController.plus(item)}"  value="+" update=":CommandeItemCreateForm:CommandeItemList" class="btn btn-default btn-group-sm"></b:commandButton>
+                                        <b:commandButton action="#{viewMenuController.minus(item)}"  value="" icon="minus" update=":CommandeItemCreateForm:CommandeItemList" class="btn  btn-group-xs "></b:commandButton>
+                                        <b:commandButton disabled="true" value="#{item.qte}" class="btn  btn-info btn-group-xs"/>
+                                        <b:commandButton action="#{viewMenuController.plus(item)}"  value="" icon="plus" update=":CommandeItemCreateForm:CommandeItemList" class="btn  btn-group-xs"></b:commandButton>
                                     </div>
                                 </div>
                             </p:column>
                         </p:dataTable>
                     </h:form>
-
-
                 </div>
             </div>
         </f:view>

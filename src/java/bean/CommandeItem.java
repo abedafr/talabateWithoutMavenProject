@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,13 +29,15 @@ public class CommandeItem implements Serializable {
     private Long id;
     private Double prixTotalItem;
     private Double totalSupplements;
+    private int qte;
+    
     
     @OneToMany
     private List<SupplementPlat> supplementPlats;
-    private int qte;
 
     @ManyToOne
     private Commande commande;
+    
     @OneToOne
     private Plate plate;
 
@@ -114,17 +117,24 @@ public class CommandeItem implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CommandeItem)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        CommandeItem other = (CommandeItem) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CommandeItem other = (CommandeItem) obj;
+        if (!Objects.equals(this.plate, other.plate)) {
             return false;
         }
         return true;
     }
+
+    
 
     public CommandeItem() {
     }

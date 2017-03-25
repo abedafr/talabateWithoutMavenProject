@@ -25,11 +25,6 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
-<!--     resolve probleme " Unable to save dynamic action with clientId 'j_id9' because the UIComponent cannot be found"
-    <context-param> 
-        <param-name>javax.faces.PARTIAL_STATE_SAVING</param-name> 
-        <param-value>false</param-value> 
-    </context-param>-->
     
     <!-- web fonts -->
     <mime-mapping>
@@ -56,9 +51,4 @@
         <extension>ico</extension>
         <mime-type>image/x-icon</mime-type>
     </mime-mapping>
-    <!--    <ejb-local-ref>
-        <ejb-ref-name>restaurantFacade</ejb-ref-name>
-        <ejb-ref-type>Session</ejb-ref-type>
-        <ejb-link>#RestaurantFacade</ejb-link>
-    </ejb-local-ref>-->
 </web-app>

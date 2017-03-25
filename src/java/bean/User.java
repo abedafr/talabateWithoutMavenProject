@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,6 +46,19 @@ public class User implements Serializable {
     
     @OneToMany(mappedBy = "user")
     private List<Adress> adresss;
+    @OneToMany(mappedBy = "user")
+    private List<Device> devices;
+
+    public List<Device> getDevices() {
+        if(devices==null){
+            devices= new ArrayList<>();
+        }
+        return devices;
+    }
+
+    public void setDevices(List<Device> devices) {
+        this.devices = devices;
+    }
 
     public boolean isAdmin() {
         return admiin;

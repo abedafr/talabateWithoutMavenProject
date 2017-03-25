@@ -133,6 +133,7 @@ public class UserController implements Serializable {
                     getValue(facesContext.getELContext(), null, "userController");
             return controller.getUser(getKey(value));
         }
+        
 
         java.lang.String getKey(String value) {
             java.lang.String key;

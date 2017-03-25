@@ -32,23 +32,25 @@ public class CommandeItemFacade extends AbstractFacade<CommandeItem> {
     public CommandeItemFacade() {
         super(CommandeItem.class);
     }
-    
+
     @EJB
     private SupplementPlatFacade supplementPlatFacade;
-    
-    public CommandeItem addCmdItem(Plate plate, List<SupplementPlat> supplementPlats){
+
+    public CommandeItem addCmdItem(Plate plate, List<SupplementPlat> supplementPlats) {
+        System.out.println("==== F 2");
         CommandeItem commandeItem;
-        if(plate.isCostume()){
-        commandeItem = new CommandeItem(plate.getPrix()+supplementPlatFacade.CalculePrixSupplementPlat(supplementPlats), 1, plate);
-        commandeItem.setTotalSupplements(supplementPlatFacade.CalculePrixSupplementPlat(supplementPlats));
-        }else{
-        commandeItem = new CommandeItem(plate.getPrix(), 1, plate);
+        if (plate.isCostume()) {
+            Double prix = plate.getPrix() + supplementPlatFacade.CalculePrixSupplementPlat(supplementPlats);
+            commandeItem = new CommandeItem(prix, 1, plate);
+            commandeItem.setTotalSupplements(supplementPlatFacade.CalculePrixSupplementPlat(supplementPlats));
+            System.out.println("==== F 5");
+        } else {
+            commandeItem = new CommandeItem(plate.getPrix(), 1, plate);
         }
         return commandeItem;
     }
-    
-    
-    public void clone(CommandeItem commandeItemSource, CommandeItem commandeItemDestination){
+
+    public void clone(CommandeItem commandeItemSource, CommandeItem commandeItemDestination) {
 //        commandeItemDestination=commandeItemSource;
         commandeItemDestination.setCommande(commandeItemSource.getCommande());
         commandeItemDestination.setId(commandeItemSource.getId());
@@ -56,13 +58,13 @@ public class CommandeItemFacade extends AbstractFacade<CommandeItem> {
         commandeItemDestination.setPrixTotalItem(commandeItemSource.getPrixTotalItem());
         commandeItemDestination.setQte(commandeItemSource.getQte());
         commandeItemDestination.setSupplementSelecteds(commandeItemSource.getSupplementSelecteds());
-        
+
     }
-    
-    public CommandeItem clone(CommandeItem commandeItem){
+
+    public CommandeItem clone(CommandeItem commandeItem) {
         CommandeItem cloned = new CommandeItem();
         clone(commandeItem, cloned);
         return cloned;
     }
-    
+
 }

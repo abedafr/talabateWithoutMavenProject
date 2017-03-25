@@ -41,7 +41,6 @@ public class SupplementPlat implements Serializable {
     }
 
     public Double getNewPrice() {
-        newPrice = supplement.getDefaultPrice() + addition;
         return newPrice;
     }
 

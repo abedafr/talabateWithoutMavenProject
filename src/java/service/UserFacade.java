@@ -102,7 +102,6 @@ public class UserFacade extends AbstractFacade<User> {
 
     public int seConnnecter(User user) {
         if (user == null || user.getLogin() == null) {
-            JsfUtil.addErrorMessage("Veuilliez saisir votre login");
             return -5;
         } else {
             User loadedUser = find(user.getLogin());
@@ -115,20 +114,18 @@ public class UserFacade extends AbstractFacade<User> {
                 } else if (loadedUser.getNbrCnx() >= 3) {
                     System.out.println("hana loadedUser.getNbrCnx() >= 3::: " + loadedUser.getNbrCnx());
                     loadedUser.setBlocked(1);
-                    // edit(loadedUser);
                 }
-                JsfUtil.addErrorMessage("Mot de passe incorrect");
+                edit(loadedUser);
                 return -3;
             } else if (loadedUser.getBlocked() == 1) {
-                JsfUtil.addErrorMessage("Cet utilisateur est bloqué");
                 return -2;
             } else {
                 loadedUser.setNbrCnx(0);
-                //edit(loadedUser);
+                edit(loadedUser);
 //                user = clone(loadedUser);
 //                user.setCommune(communeFacade.findByUser(user));
 //                user.setMdpChanged(loadedUser.isMdpChanged());
-//                user.setPassword(null);
+                user.setPassword(null);
 //                SessionUtil.attachUserToCommune(user);
 //                historiqueConnexionFacade.createConnexion(loadedUser);
                 return 1;

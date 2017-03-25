@@ -33,7 +33,8 @@ public class ViewMenuController implements Serializable {
     private List<Plate> items;
     private CommandeItem commandeItem;
     private List<CommandeItem> commandeItems = null;
-    private List<SupplementPlat> supplementPlats = null;
+    private List<SupplementPlat> AllSupplementPlats = null;
+    private List<SupplementPlat> SelecedSupplementPlats = null;
 
     @EJB
     private CommandeFacade commandeFacade;
@@ -43,7 +44,7 @@ public class ViewMenuController implements Serializable {
     private SupplementPlatFacade supplementPlatFacade;
 
     public void addCart(Plate plate) {
-        setCommandeItems(commandeFacade.addToCart(plate, getCommandeItems(),getSupplementPlats()));
+        setCommandeItems(commandeFacade.addToCart(plate, getCommandeItems(),getSelecedSupplementPlats()));
     }
 
     public void plus(CommandeItem commandeItem) {
@@ -62,7 +63,7 @@ public class ViewMenuController implements Serializable {
 
     public void delete(CommandeItem commandeItem) {
         for (CommandeItem item : commandeItems) {
-            if (item.getPlate().equals(commandeItem.getPlate())) {
+            if (item.equals(commandeItem)) {
                 commandeItems.remove(item);
                 break;
             }
@@ -76,11 +77,12 @@ public class ViewMenuController implements Serializable {
     public void prepareSuplement(Plate item) {
         System.out.println(item);
         plate = item;
-        plate.setSupplementPlats(supplementPlatFacade.findByPlate(plate));
+//        plate.setSupplementPlats(supplementPlatFacade.findByPlate(plate));
         
-        supplementPlats=supplementPlatFacade.findByPlate(plate);
+//        AllSupplementPlats=supplementPlatFacade.findByPlate(plate);
         System.out.println(plate);
-        System.out.println(plate.getSupplementPlats());
+        System.out.println("All "+getAllSupplementPlats());
+        System.out.println("Selectd pre "+getSelecedSupplementPlats());
 
     }
     public String confirmCmd(){
@@ -89,12 +91,16 @@ public class ViewMenuController implements Serializable {
     }
 
     public void saveSupplement() {
+        System.out.println("==== C 1");
+        System.out.println(plate);
+//        System.out.println(AllSupplementPlats);
         getCommandeItem().setPlate(plate);
-        getCommandeItem().setSupplementPlats(supplementPlats);
-        
+//        getCommandeItem().setSupplementPlats(AllSupplementPlats);
+        System.out.println("Selectd "+getSelecedSupplementPlats());
         addCart(plate);
-        plate=null;
-        commandeItem=null;
+        
+//        plate=null;
+//        commandeItem=null;
     }
 
     public List<CommandeItem> getCommandeItems() {
@@ -129,6 +135,27 @@ public class ViewMenuController implements Serializable {
         this.plate = plate;
     }
 
+    public List<SupplementPlat> getSelecedSupplementPlats() {
+        if (SelecedSupplementPlats == null) {
+            SelecedSupplementPlats = new ArrayList<>();
+        }
+        return SelecedSupplementPlats;
+    }
+
+    public void setSelecedSupplementPlats(List<SupplementPlat> SelecedSupplementPlats) {
+        this.SelecedSupplementPlats = SelecedSupplementPlats;
+    }
+
+    public SupplementPlatFacade getSupplementPlatFacade() {
+        return supplementPlatFacade;
+    }
+
+    public void setSupplementPlatFacade(SupplementPlatFacade supplementPlatFacade) {
+        this.supplementPlatFacade = supplementPlatFacade;
+    }
+
+    
+    
     public CommandeFacade getCommandeFacade() {
         return commandeFacade;
     }
@@ -165,16 +192,16 @@ public class ViewMenuController implements Serializable {
         this.commandeItem = commandeItem;
     }
 
-    public List<SupplementPlat> getSupplementPlats() {
-        supplementPlats = supplementPlatFacade.findByPlate(plate);
-        if (supplementPlats == null) {
-            supplementPlats = new ArrayList<>();
+    public List<SupplementPlat> getAllSupplementPlats() {
+        AllSupplementPlats = supplementPlatFacade.findByPlate(plate);
+        if (AllSupplementPlats == null) {
+            AllSupplementPlats = new ArrayList<>();
         }
-        return supplementPlats;
+        return AllSupplementPlats;
     }
 
-    public void setSupplementPlats(List<SupplementPlat> supplementPlats) {
-        this.supplementPlats = supplementPlats;
+    public void setAllSupplementPlats(List<SupplementPlat> AllSupplementPlats) {
+        this.AllSupplementPlats = AllSupplementPlats;
     }
 
     /**

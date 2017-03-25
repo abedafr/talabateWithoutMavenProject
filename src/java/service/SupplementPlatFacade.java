@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -39,13 +40,16 @@ public class SupplementPlatFacade extends AbstractFacade<SupplementPlat> {
     }
 
     public Double CalculePrixSupplementPlat(List<SupplementPlat> supplementPlats) {
+        System.out.println("==== F 3");
         Double prix = 0D;
-        if (supplementPlats == null || supplementPlats.isEmpty()) {
-            return 0D;
-        }
-        for (SupplementPlat supplementPlat : supplementPlats) {
-            prix += supplementPlat.getNewPrice();
-        }
+//        if (supplementPlats == null || supplementPlats.isEmpty()) {
+//            return 0D;
+//        } else {
+        prix = supplementPlats.stream().map((supplementPlat) -> {
+            System.out.println("==== F 4");
+            return supplementPlat;
+        }).map((supplementPlat) -> supplementPlat.getNewPrice()).reduce(prix, (accumulator, _item) -> accumulator + _item);
+//        }
         return prix;
     }
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AdressEditDlg" widgetVar="AdressEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAdressTitle}">
+            <h:form id="AdressEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{adressController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAdressLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{adressController.selected.id}" title="#{bundle.EditAdressTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditAdressLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{adressController.selected.nom}" title="#{bundle.EditAdressTitle_nom}" />
+                        <p:outputLabel value="#{bundle.EditAdressLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{adressController.selected.prenom}" title="#{bundle.EditAdressTitle_prenom}" />
+                        <p:outputLabel value="#{bundle.EditAdressLabel_tel}" for="tel" />
+                        <p:inputText id="tel" value="#{adressController.selected.tel}" title="#{bundle.EditAdressTitle_tel}" />
+                        <p:outputLabel value="#{bundle.EditAdressLabel_telFix}" for="telFix" />
+                        <p:inputText id="telFix" value="#{adressController.selected.telFix}" title="#{bundle.EditAdressTitle_telFix}" />
+                        <p:outputLabel value="#{bundle.EditAdressLabel_user}" for="user" />
+                        <p:selectOneMenu id="user" value="#{adressController.selected.user}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userItem"
+                                           itemValue="#{userItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAdressLabel_ville}" for="ville" />
+                        <p:selectOneMenu id="ville" value="#{adressController.selected.ville}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                           var="villeItem"
+                                           itemValue="#{villeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAdressLabel_quartier}" for="quartier" />
+                        <p:selectOneMenu id="quartier" value="#{adressController.selected.quartier}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{quartierController.itemsAvailableSelectOne}"
+                                           var="quartierItem"
+                                           itemValue="#{quartierItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAdressLabel_building}" for="building" />
+                        <p:inputText id="building" value="#{adressController.selected.building}" title="#{bundle.EditAdressTitle_building}" />
+                        <p:outputLabel value="#{bundle.EditAdressLabel_street}" for="street" />
+                        <p:inputText id="street" value="#{adressController.selected.street}" title="#{bundle.EditAdressTitle_street}" />
+                        <p:outputLabel value="#{bundle.EditAdressLabel_number}" for="number" />
+                        <p:inputText id="number" value="#{adressController.selected.number}" title="#{bundle.EditAdressTitle_number}" />
+                        <p:outputLabel value="#{bundle.EditAdressLabel_floor}" for="floor" />
+                        <p:inputText id="floor" value="#{adressController.selected.floor}" title="#{bundle.EditAdressTitle_floor}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{adressController.update}" value="#{bundle.Save}" update="display,:AdressListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AdressEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AdressEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

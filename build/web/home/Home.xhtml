@@ -74,35 +74,36 @@
         ================================================== -->
 
         <b:carousel id="myCarousel" interval="3000">
-            <b:carouselCaption class="fa">
+            <b:carouselCaption class="">
                 <!--
                 search Form
                 -->
                 <h3 >TALABAT | طلبات</h3>
                 <p> Search Restaurants nearby your actual position</p>
                 <h:form class=" form-group form-inline "  >
-                    <h:selectOneMenu id="ville" value="#{homeController.ville}" class="form-control" >                      <!--update="quartier" process="ville"-->
-                        <f:selectItem itemValue="#{null}"  itemLabel="Select Ville.."/>
-                        <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
-                                       var="villeItem"
-                                       itemValue="#{villeItem}" />
-                        <p:ajax rendered="#{homeController.ville!=null}" process="ville" listener="#{homeController.findByVille()}" update="quartier"></p:ajax>
-                    </h:selectOneMenu>
-                    <h:selectOneMenu id="quartier" value="#{homeController.quartier}" class="form-control" >
-                        <f:selectItem itemValue="#{null}" itemLabel="Select Quartier.."/>
-                        <f:selectItems value="#{homeController.quartiers}"
-                                       var="quartierItem"
-                                       itemValue="#{quartierItem}"/>
-                    </h:selectOneMenu>
-                    <h:selectOneMenu id="cuisine" value="#{homeController.cuisine}" class="form-control" >
-                        <f:selectItem itemValue="#{null}" itemLabel="Select Cuisine.."/>
-                        <f:selectItems value="#{homeController.cuisines}"
-                                       var="cuisineItem"
-                                       itemValue="#{cuisineItem}"/>
-                    </h:selectOneMenu>
+                    <div class="btn-group">
+                        <h:selectOneMenu id="ville" value="#{homeController.ville}" class="form-control btn btn-group-justified btn-group-lg" >                      <!--update="quartier" process="ville"-->
+                            <f:selectItem itemValue="#{null}"  itemLabel="Select Ville.."/>
+                            <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                           var="villeItem"
+                                           itemValue="#{villeItem}" />
+                            <p:ajax rendered="#{homeController.ville!=null}" process="ville" listener="#{homeController.findByVille()}" update="quartier"></p:ajax>
+                        </h:selectOneMenu>
+                        <h:selectOneMenu id="quartier" value="#{homeController.quartier}" class="form-control btn btn-group-justified btn-group-lg" >
+                            <f:selectItem itemValue="#{null}" itemLabel="Select Quartier.."/>
+                            <f:selectItems value="#{homeController.quartiers}"
+                                           var="quartierItem"
+                                           itemValue="#{quartierItem}"/>
+                        </h:selectOneMenu>
+                        <h:selectOneMenu id="cuisine" value="#{homeController.cuisine}" class="form-control btn btn-group-justified btn-group-lg" >
+                            <f:selectItem itemValue="#{null}" itemLabel="Select Cuisine.."/>
+                            <f:selectItems value="#{homeController.cuisines}"
+                                           var="cuisineItem"
+                                           itemValue="#{cuisineItem}"/>
+                        </h:selectOneMenu>
 
-                    <h:commandButton action="#{homeController.search()}" value="Search" class="btn btn-success" ></h:commandButton>
-
+                        <h:commandButton action="#{homeController.search()}" value="Search" class="btn btn-success  btn-group-lg" ></h:commandButton>
+                    </div>
 
                 </h:form>
             </b:carouselCaption>

@@ -48,8 +48,11 @@ public class CommandeFacade extends AbstractFacade<Commande> {
             }
         }
         if (res == 0) {
+            System.out.println("==== F 1");
             CommandeItem commandeItem = commandeItemFacade.addCmdItem(plate, supplementPlats);
             if (plate.isCostume() && (supplementPlats != null || !supplementPlats.isEmpty())) {
+                System.out.println("==== F 6");
+                System.out.println("costume plate");
                 commandeItem.setSupplementPlats(supplementPlats);
             }
             commandeItems.add(commandeItem);

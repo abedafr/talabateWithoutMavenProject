@@ -22,7 +22,6 @@ import javax.persistence.OneToOne;
 @Entity
 public class Plate implements Serializable {
 
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +41,19 @@ public class Plate implements Serializable {
     
     @ManyToOne
     private Cuisine cuisine;
+    
+    @OneToMany(mappedBy = "plate")
+    private List<PlatMenu> platMenus;
+
+    public List<PlatMenu> getPlatMenus() {
+        return platMenus;
+    }
+
+    public void setPlatMenus(List<PlatMenu> platMenus) {
+        this.platMenus = platMenus;
+    }
+    
+    
 
     public List<SupplementPlat> getSupplementPlats() {
         return supplementPlats;

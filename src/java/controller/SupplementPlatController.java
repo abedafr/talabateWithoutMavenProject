@@ -92,6 +92,7 @@ public class SupplementPlatController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
+                    selected.setNewPrice(selected.getSupplement().getDefaultPrice() + selected.getAddition());
                     getFacade().edit(selected);
                 } else {
                     getFacade().remove(selected);
@@ -131,7 +132,7 @@ public class SupplementPlatController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = SupplementPlat.class)
+    @FacesConverter(value = "supplementPlatControllerConverter")
     public static class SupplementPlatControllerConverter implements Converter {
 
         @Override
