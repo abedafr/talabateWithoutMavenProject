@@ -6,42 +6,62 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="shortcut icon" type="image/x-icon" href="#{resource['imgs/favicon.png']}"/>
+
+            <title>Talabat | Connecter vous..</title>
+        </f:facet>
+
+        <f:facet name="middle">
+            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+
+            <h:outputStylesheet name="css/dashboard.css" />
+
+            <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />-->
+
+            <h:outputScript name="bootstrap/js/bootstrap.js" />
+        </f:facet>
+
+        <f:facet name="last">
+            <h:outputStylesheet name="css/font-awesome.css" />
+        </f:facet>
     </h:head>
-    <h:body>
+    <h:body style="background-image: url(../resources/imgs/bg2.jpg); background-size: cover">
 
+        <h:form class="form-group">
 
-
-
-
-        <h:form>
-            <h1 style="color:red "><h:outputText value="Create An Account"/></h1>
-            <p:panelGrid id="CreateCompte" columns="2">
-
+            <b:panel title="Cree nouveau Compte.." col-lg="6" offset-lg="3" col-md="6" offset-md="3" col-sm="8" offset-sm="2" col-xs="10" offset-xs="1">
+                <b:panelGrid columns="2" >
                 <p:outputLabel value="Nom:" for="nom" />
-                <p:inputText id="nom" value="#{connectController.selected.nom}" title="Nom" />
+                <p:inputText id="nom" value="#{connectController.selected.nom}" title="Nom" class="form-control"/>
                 <p:outputLabel value="Prenom:" for="prenom" />
-                <p:inputText id="prenom" value="#{connectController.selected.prenom}" title="Prenom" />
+                <p:inputText id="prenom" value="#{connectController.selected.prenom}" title="Prenom" class="form-control" />
                 <p:outputLabel value="Email:" for="email" />
-                <p:inputText id="email" value="#{connectController.selected.email}" title="Email" />
+                <p:inputText id="email" value="#{connectController.selected.email}" title="Email" class="form-control"/>
                 <p:outputLabel value="Login:" for="login" />
-                <p:inputText id="login" value="#{connectController.selected.login}" title="Login" />
+                <p:inputText id="login" value="#{connectController.selected.login}" title="Login" class="form-control"/>
                 <p:outputLabel value="Password:" for="password" />
-                <p:password id="password" value="#{connectController.selected.password}" title="Password" />
+                <p:password id="password" value="#{connectController.selected.password}" title="Password" class="form-control"/>
 
-                <p:outputLabel value="ConfirmePassword:" for="Confirmepassword" />
-                <p:password id="Confirmepassword" title="Password" />
+                <p:outputLabel value="ConfirmePassword:" for="Confirmepassword"/>
+                <p:password id="Confirmepassword" title="Password" class="form-control" />
                 <p:outputLabel value="Tel:" for="tel" />
-                <p:inputText id="tel" value="#{connectController.selected.tel}" title="Tel" />
+                <p:inputText id="tel" value="#{connectController.selected.tel}" title="Tel" class="form-control"/>
 
-                <p:outputLabel value="Gender:" for="gender" />
-                <p:inputText id="gender" value="#{connectController.selected.gender}" title="Gender" />
-                
-            </p:panelGrid>
-            <br/>
-            <br/>
-            <b:commandButton action="#{connectController.createAccount()}" value="Create Your Account" icon="ui-icon-check" class="btn btn-success" />
-
+                <p:outputLabel value="Gender:" />
+                <b:selectOneMenu id="gender" value="#{connectController.selected.gender}" class="form-control">
+                    <f:selectItem itemLabel="Male" itemValue="M"/>
+                    <f:selectItem itemLabel="Female" itemValue="F"/>
+                </b:selectOneMenu>
+                </b:panelGrid>
+                <b:commandButton action="#{connectController.createAccount()}" value="Create Your Account" icon="ui-icon-check" class="btn btn-success btn-group-justified" />
+                <center>
+                Vous avez deja un compte?<p:commandLink action="/connexion/SeConnecter.xhtml" value=" Connecter Vous!" />
+                </center>
+            </b:panel>
         </h:form>
 
 

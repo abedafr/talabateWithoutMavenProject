@@ -3,15 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
-        <title>Facelet Title</title>
+
         <f:facet name="first">
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="shortcut icon" type="image/x-icon" href="#{resource['imgs/favicon.png']}"/>
 
-            <title>Talabat | Command Your food Online</title>
+            <title>Talabat | Connecter vous..</title>
         </f:facet>
 
         <f:facet name="middle">
@@ -29,30 +31,43 @@
         </f:facet>
 
     </h:head>
-    <h:body>
-        <h:form>
-            <p:panel header="Login">
-                <p:messages autoUpdate="true"/>
+    <h:body style=" margin-top: 70px; background-image: url(../resources/imgs/bg9.jpg); background-size: cover; background-position-y: -150px">
+        <b:growl delay="3000"/>
+        <h:form class="col-lg-4 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-8 col-xs-offset-2">
+            <b:panel title="Login" style="opacity: 52%">
+                <br/>
+                <div id="email" class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>
+                                <i id="j_idt8_icon" class="glyphicon glyphicon-user"></i>
+                            </span>
+                        </span>
+                        <p:inputText id="login" placeholder="Email address" class="form-control bf-no-message has-success" value="#{connectController.connected.login}" title="#{bundle.CreateUserTitle_login}" ></p:inputText>
+                    </div>
+                </div>
 
-                <h:panelGrid id="grid" columns="2" cellpadding="5" >
-                    <p:outputLabel value="#{bundle.CreateUserLabel_login}" for="login" />
-                    <p:inputText id="login" value="#{connectController.connected.login}" title="#{bundle.CreateUserTitle_login}" />
-                        <p:outputLabel value="#{bundle.CreateUserLabel_password}" for="password" />
-                        <p:password id="password" value="#{connectController.connected.password}" title="#{bundle.CreateUserTitle_password}" />
-                  <br/>
-                  <br/>
-                     <h:link outcome="/connexion/ForgetPassword" value="Forgot password?"/>
-                </h:panelGrid>
+                <div id="password" class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>
+                                <i id="j_idt9_icon" class="fa fa-key"></i>
+                            </span>
+                        </span>
+                        <p:password id="password" class="form-control bf-no-message has-success" placeholder="Password" value="#{connectController.connected.password}" title="#{bundle.CreateUserTitle_password}" ></p:password>
+                    </div>
+                </div>
 
 
-                <p:commandButton  value="Login." action="#{connectController.SeConnecter()}" update="grid" icon="ui-icon-check" validateClient="true" style=" btn"/>
-              <br/>
-              <br/>
-              <br/>
-               <br />
-        <h:link outcome="/connexion/CreateAnAccount" value="Don't have an account? Create an account"/>
-         
-            </p:panel>
+
+                <h:link outcome="/connexion/ForgetPassword" value="Forgot password?"/>
+
+
+                <b:commandButton  value="Login." action="#{connectController.SeConnecter()}" icon="glyphicon glyphicon-log-in"  class="btn btn-success btn-group-justified" />
+                <br/>
+                Don't have an account? <h:link outcome="/connexion/CreateAnAccount" value="Create an account"/>
+
+            </b:panel>
         </h:form>
     </h:body>
 </html>

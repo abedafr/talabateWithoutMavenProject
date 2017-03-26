@@ -61,7 +61,7 @@ public class ConnectController implements Serializable {
             JsfUtil.addErrorMessage("Veuilliez saisir votre login");
             return null;
         } else if (res == -4) {
-            JsfUtil.addErrorMessage("Login non Trouver..");
+//            JsfUtil.addErrorMessage("Login non Trouver..");
             return null;
         } else if (res == -3) {
             JsfUtil.addErrorMessage("Mot de passe incorrect");
