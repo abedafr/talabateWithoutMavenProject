@@ -12,6 +12,10 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import service.UserFacade;
 
 /**
@@ -36,6 +40,14 @@ public class ConnectController implements Serializable {
 
     }
 
+    public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) {
+    String confirmPassword = (String)value;
+    if (!confirmPassword.equals(selected.getPassword())) {
+      FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Passwords do not match!", "Passwords do not match!");
+      throw new ValidatorException(message);
+    }
+  }
+    
     public UserFacade getEjbFacade() {
         return ejbFacade;
     }

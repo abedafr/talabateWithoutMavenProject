@@ -124,7 +124,7 @@ public class SupplementController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Supplement.class)
+    @FacesConverter(value = "supplementControllerConverter")
     public static class SupplementControllerConverter implements Converter {
 
         @Override

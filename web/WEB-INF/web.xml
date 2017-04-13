@@ -25,7 +25,6 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
-    
     <!-- web fonts -->
     <mime-mapping>
         <extension>eot</extension>

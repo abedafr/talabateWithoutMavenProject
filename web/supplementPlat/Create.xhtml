@@ -12,19 +12,13 @@
             <h:form id="SupplementPlatCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{supplementPlatController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateSupplementPlatLabel_prix}" for="prix" />
-                        <p:inputText id="prix" value="#{supplementPlatController.selected.addition}" title="#{bundle.CreateSupplementPlatTitle_prix}" />
+                        <p:outputLabel value="#{bundle.CreateSupplementPlatLabel_prix}" for="addition" />
+                        <p:inputText id="addition" value="#{supplementPlatController.selected.addition}" title="#{bundle.CreateSupplementPlatTitle_prix}" />
                         <p:outputLabel value="#{bundle.CreateSupplementPlatLabel_supplement}" for="supplement" />
                         <p:selectOneMenu id="supplement" value="#{supplementPlatController.selected.supplement}" >
                             <f:selectItems value="#{supplementController.itemsAvailableSelectOne}"
                                            var="supplementItem"
                                            itemValue="#{supplementItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateSupplementPlatLabel_plate}" for="plate" />
-                        <p:selectOneMenu id="plate" value="#{supplementPlatController.selected.plate}" >
-                            <f:selectItems value="#{supplementPlatController.costumePlates()}"
-                                           var="plateItem"
-                                           itemValue="#{plateItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{supplementPlatController.create}" value="#{bundle.Save}" update="display,:SupplementPlatListForm:datalist,:growl" oncomplete="handleSubmit(args,'SupplementPlatCreateDialog');"/>

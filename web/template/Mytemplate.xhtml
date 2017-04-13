@@ -2,16 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <ui:define name="header">
-        <link rel="icon" href="/resources/imgs/favinon.png"/>
-        <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-        <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
         <f:facet name="first">
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="shortcut icon" type="image/x-icon" href="#{resource['imgs/favicon.png']}"/>
 
             <title><ui:insert name="title">Default Title</ui:insert></title>
         </f:facet>
@@ -27,8 +25,29 @@
         <f:facet name="last">
             <h:outputStylesheet name="css/font-awesome.css" />
         </f:facet>
+    </h:head>
 
+    <h:body style="padding-top: 50px;">
 
-    </ui:define>
+        <div id="page">
+
+            <div id="header">
+                <ui:insert name="header" >
+                    <ui:include src="/template/Header.xhtml" />
+                </ui:insert>
+            </div>
+
+            <div id="content">
+                <ui:insert name="content" />
+            </div>
+
+            <div id="footer">
+                <ui:insert name="footer" >
+                    <ui:include src="/template/Footer.xhtml" />
+                </ui:insert>
+            </div>
+
+        </div>
+
+    </h:body>
 </html>
-

@@ -6,6 +6,7 @@
 package service;
 
 import bean.CommandeItem;
+import bean.PlatMenu;
 import bean.Plate;
 import bean.SupplementPlat;
 import java.util.List;
@@ -36,16 +37,16 @@ public class CommandeItemFacade extends AbstractFacade<CommandeItem> {
     @EJB
     private SupplementPlatFacade supplementPlatFacade;
 
-    public CommandeItem addCmdItem(Plate plate, List<SupplementPlat> supplementPlats) {
+    public CommandeItem addCmdItem(PlatMenu platMenu, List<SupplementPlat> supplementPlats) {
         System.out.println("==== F 2");
         CommandeItem commandeItem;
-        if (plate.isCostume()) {
-            Double prix = plate.getPrix() + supplementPlatFacade.CalculePrixSupplementPlat(supplementPlats);
-            commandeItem = new CommandeItem(prix, 1, plate);
+        if (platMenu.isCostume()) {
+            Double prix = platMenu.getPrix() + supplementPlatFacade.CalculePrixSupplementPlat(supplementPlats);
+            commandeItem = new CommandeItem(prix, 1, platMenu);
             commandeItem.setTotalSupplements(supplementPlatFacade.CalculePrixSupplementPlat(supplementPlats));
             System.out.println("==== F 5");
         } else {
-            commandeItem = new CommandeItem(plate.getPrix(), 1, plate);
+            commandeItem = new CommandeItem(platMenu.getPrix(), 1, platMenu);
         }
         return commandeItem;
     }
@@ -54,7 +55,7 @@ public class CommandeItemFacade extends AbstractFacade<CommandeItem> {
 //        commandeItemDestination=commandeItemSource;
         commandeItemDestination.setCommande(commandeItemSource.getCommande());
         commandeItemDestination.setId(commandeItemSource.getId());
-        commandeItemDestination.setPlate(commandeItemSource.getPlate());
+        commandeItemDestination.setPlatMenu(commandeItemSource.getPlatMenu());
         commandeItemDestination.setPrixTotalItem(commandeItemSource.getPrixTotalItem());
         commandeItemDestination.setQte(commandeItemSource.getQte());
         commandeItemDestination.setSupplementSelecteds(commandeItemSource.getSupplementSelecteds());

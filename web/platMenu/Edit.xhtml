@@ -12,8 +12,6 @@
             <h:form id="PlatMenuEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{platMenuController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditPlatMenuLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{platMenuController.selected.id}" title="#{bundle.EditPlatMenuTitle_id}" />
                         <p:outputLabel value="#{bundle.EditPlatMenuLabel_menu}" for="menu" />
                         <p:selectOneMenu id="menu" value="#{platMenuController.selected.menu}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -23,17 +21,27 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditPlatMenuLabel_cuisine}" for="cuisine" />
                         <p:selectOneMenu id="cuisine" value="#{platMenuController.selected.cuisine}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItem itemValue="#{null}"  itemLabel="Select.."/>
                             <f:selectItems value="#{cuisineController.itemsAvailableSelectOne}"
                                            var="cuisineItem"
                                            itemValue="#{cuisineItem}"/>
+                            <p:ajax rendered="#{platMenuController.selected.cuisine!=null}" process="cuisine" listener="#{platMenuController.plateByCuisine()}" update="plate"></p:ajax>
+
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditPlatMenuLabel_plate}" for="plate" />
                         <p:selectOneMenu id="plate" value="#{platMenuController.selected.plate}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{plateController.itemsAvailableSelectOne}"
+                            <f:selectItem itemValue="#{null}"  itemLabel="Select.."/>
+                            <f:selectItems value="#{platMenuController.plateByCuisine()}"
                                            var="plateItem"
                                            itemValue="#{plateItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.PlatMenuLabel_prix}" for="prix" />
+                        <p:inputText id="prix" value="#{platMenuController.selected.prix}" title="#{bundle.EditPlatMenuTitle_prix}" />
+                        <p:outputLabel value="#{bundle.EditPlatMenuLabel_costume}" for="costume" />
+                        <p:selectOneMenu id="costume" value="#{platMenuController.selected.costume}" >
+                            <f:selectItem itemValue="#{null}"  itemLabel="Select.."/>
+                            <f:selectItem itemValue="#{true}"  itemLabel="TRUE"/>
+                            <f:selectItem itemValue="#{false}"  itemLabel="FALSE"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{platMenuController.update}" value="#{bundle.Save}" update="display,:PlatMenuListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PlatMenuEditDialog');"/>

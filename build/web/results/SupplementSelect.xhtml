@@ -13,7 +13,7 @@
                 <p:selectManyCheckbox id="supplementPlat" value="#{viewMenuController.selecedSupplementPlats}" converter="supplementPlatControllerConverter" >
                     <f:selectItems value="#{viewMenuController.allSupplementPlats}" var="item" itemLabel="#{item}" itemValue="#{item}"  />
                 </p:selectManyCheckbox>
-                <b:commandButton  actionListener="#{viewMenuController.saveSupplement()}" class="btn btn-success btn-group-justified" value="#{bundle.Save}" update=":SupplementSelectForm, :CommandeItemCreateForm:CommandeItemList" oncomplete="SupplementSelectDialog.hide()"/>
+                <p:commandButton  actionListener="#{viewMenuController.saveSupplement()}" style=" background-color: green" class="btn btn-success btn-group-justified" value="#{bundle.Save}" update=":SupplementSelectForm, :CommandeItemCreateForm:CommandeItemList" oncomplete="handleSubmit(args, 'SupplementSelectDialog');"/>
             </h:form>
         </p:dialog>
     </ui:composition>

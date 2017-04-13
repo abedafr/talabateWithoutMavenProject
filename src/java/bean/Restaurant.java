@@ -6,11 +6,13 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -25,6 +27,10 @@ public class Restaurant implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
+    private boolean accepted;
+    
+    @OneToMany(mappedBy = "restaurant")
+    private List<Commande> commandes;
 
     @ManyToOne
     private Quartier quartier;
@@ -32,6 +38,15 @@ public class Restaurant implements Serializable {
     @OneToOne(mappedBy = "restaurant")
     private Menu menu;
 
+    public List<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setCommandes(List<Commande> commandes) {
+        this.commandes = commandes;
+    }
+
+    
     public Menu getMenu() {
         return menu;
     }
@@ -40,6 +55,14 @@ public class Restaurant implements Serializable {
         this.menu = menu;
     }
 
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+    
     public String getNom() {
         return nom;
     }

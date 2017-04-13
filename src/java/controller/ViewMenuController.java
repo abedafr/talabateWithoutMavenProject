@@ -7,6 +7,7 @@ package controller;
 
 import bean.CommandeItem;
 import bean.Menu;
+import bean.PlatMenu;
 import bean.Plate;
 import bean.SupplementPlat;
 import javax.inject.Named;
@@ -29,8 +30,8 @@ import service.SupplementPlatFacade;
 public class ViewMenuController implements Serializable {
 
     private Menu menu;
-    private Plate plate;
-    private List<Plate> items;
+    private PlatMenu platMenu;
+    private List<PlatMenu> items;
     private CommandeItem commandeItem;
     private List<CommandeItem> commandeItems = null;
     private List<SupplementPlat> AllSupplementPlats = null;
@@ -43,19 +44,19 @@ public class ViewMenuController implements Serializable {
     @EJB
     private SupplementPlatFacade supplementPlatFacade;
 
-    public void addCart(Plate plate) {
-        setCommandeItems(commandeFacade.addToCart(plate, getCommandeItems(),getSelecedSupplementPlats()));
+    public void addCart(PlatMenu platMenu) {
+        setCommandeItems(commandeFacade.addToCart(platMenu, getCommandeItems(), getSelecedSupplementPlats()));
     }
 
     public void plus(CommandeItem commandeItem) {
         commandeItem.setQte(commandeItem.getQte() + 1);
-        commandeItem.setPrixTotalItem(commandeItem.getPrixTotalItem() + commandeItem.getPlate().getPrix());
+        commandeItem.setPrixTotalItem(commandeItem.getPrixTotalItem() + commandeItem.getPlatMenu().getPrix());
     }
 
     public void minus(CommandeItem commandeItem) {
         if (commandeItem.getQte() != 1) {
             commandeItem.setQte(commandeItem.getQte() - 1);
-            commandeItem.setPrixTotalItem(commandeItem.getPrixTotalItem() - commandeItem.getPlate().getPrix());
+            commandeItem.setPrixTotalItem(commandeItem.getPrixTotalItem() - commandeItem.getPlatMenu().getPrix());
         } else {
             delete(commandeItem);
         }
@@ -74,37 +75,38 @@ public class ViewMenuController implements Serializable {
         commandeItems = new ArrayList<>();
     }
 
-    public void prepareSuplement(Plate item) {
+    public void prepareSuplement(PlatMenu item) {
         System.out.println(item);
-        plate = item;
-//        plate.setSupplementPlats(supplementPlatFacade.findByPlate(plate));
-        
-//        AllSupplementPlats=supplementPlatFacade.findByPlate(plate);
-        System.out.println(plate);
-        System.out.println("All "+getAllSupplementPlats());
-        System.out.println("Selectd pre "+getSelecedSupplementPlats());
+        platMenu = item;
+//        platMenu.setSupplementPlats(supplementPlatFacade.findByPlate(platMenu));
+
+//        AllSupplementPlats=supplementPlatFacade.findByPlate(platMenu);
+        System.out.println(platMenu);
+        System.out.println("All " + getAllSupplementPlats());
+        System.out.println("Selectd pre " + getSelecedSupplementPlats());
 
     }
-    public String confirmCmd(){
+
+    public String confirmCmd() {
         Session.setAttribute(getCommandeItems(), "ConfirmCommand");
         return "/checkout/ConfirmCommand";
     }
 
     public void saveSupplement() {
         System.out.println("==== C 1");
-        System.out.println(plate);
+        System.out.println(platMenu);
 //        System.out.println(AllSupplementPlats);
-        getCommandeItem().setPlate(plate);
+        getCommandeItem().setPlatMenu(platMenu);
 //        getCommandeItem().setSupplementPlats(AllSupplementPlats);
-        System.out.println("Selectd "+getSelecedSupplementPlats());
-        addCart(plate);
-        
-//        plate=null;
+        System.out.println("Selectd " + getSelecedSupplementPlats());
+        addCart(platMenu);
+
+//        platMenu=null;
 //        commandeItem=null;
     }
 
     public List<CommandeItem> getCommandeItems() {
-        if(commandeItems == null){
+        if (commandeItems == null) {
             commandeItems = new ArrayList<>();
         }
         return commandeItems;
@@ -124,15 +126,15 @@ public class ViewMenuController implements Serializable {
         this.menu = menu;
     }
 
-    public Plate getPlate() {
-        if (plate == null) {
-            plate = new Plate();
+    public PlatMenu getPlatMenu() {
+        if (platMenu == null) {
+            platMenu = new PlatMenu();
         }
-        return plate;
+        return platMenu;
     }
 
-    public void setPlate(Plate plate) {
-        this.plate = plate;
+    public void setPlatMenu(PlatMenu platMenu) {
+        this.platMenu = platMenu;
     }
 
     public List<SupplementPlat> getSelecedSupplementPlats() {
@@ -154,8 +156,6 @@ public class ViewMenuController implements Serializable {
         this.supplementPlatFacade = supplementPlatFacade;
     }
 
-    
-    
     public CommandeFacade getCommandeFacade() {
         return commandeFacade;
     }
@@ -172,12 +172,12 @@ public class ViewMenuController implements Serializable {
         this.commandeItemFacade = commandeItemFacade;
     }
 
-    public List<Plate> getItems() {
-        items = getMenu().getPlates();
+    public List<PlatMenu> getItems() {
+        items = getMenu().getPlatMenus();
         return items;
     }
 
-    public void setItems(List<Plate> items) {
+    public void setItems(List<PlatMenu> items) {
         this.items = items;
     }
 
@@ -193,7 +193,7 @@ public class ViewMenuController implements Serializable {
     }
 
     public List<SupplementPlat> getAllSupplementPlats() {
-        AllSupplementPlats = supplementPlatFacade.findByPlate(plate);
+        AllSupplementPlats = supplementPlatFacade.findByPlate(getPlatMenu().getPlate());
         if (AllSupplementPlats == null) {
             AllSupplementPlats = new ArrayList<>();
         }

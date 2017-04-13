@@ -37,19 +37,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSupplementPlatTitle_prix}"/>
                             </f:facet>
-                            <h:outputText value="#{item.prix}"/>
+                            <h:outputText value="#{item.addition}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSupplementPlatTitle_supplement}"/>
                             </f:facet>
                             <h:outputText value="#{item.supplement}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSupplementPlatTitle_plate}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.plate}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{supplementPlatController.prepareCreate}" update=":SupplementPlatCreateForm" oncomplete="PF('SupplementPlatCreateDialog').show()"/>

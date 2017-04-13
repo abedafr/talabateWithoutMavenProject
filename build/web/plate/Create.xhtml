@@ -12,22 +12,11 @@
             <h:form id="PlateCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" >
-                        <p:outputLabel value="#{bundle.CreatePlateLabel_commandeItem}" for="commandeItem" />
-                        <p:selectOneMenu id="commandeItem" value="#{plateController.selected.commandeItem}" >
-                            <f:selectItems value="#{commandeItemController.itemsAvailableSelectOne}"
-                                           var="commandeItemItem"
-                                           itemValue="#{commandeItemItem}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatePlateLabel_menu}" for="menu" />
                         <p:selectOneMenu id="menu" value="#{plateController.selected.menu}" >
                             <f:selectItems value="#{menuController.itemsAvailableSelectOne}"
                                            var="menuItem"
                                            itemValue="#{menuItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreatePlateLabel_costume}" for="costume" />
-                        <p:selectOneMenu id="costume" value="#{plateController.selected.costume}" >
-                            <f:selectItem itemLabel="True" itemValue="#{true}"/>
-                            <f:selectItem itemLabel="False" itemValue="#{false}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatePlateLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{plateController.selected.nom}" title="#{bundle.CreatePlateTitle_nom}" />

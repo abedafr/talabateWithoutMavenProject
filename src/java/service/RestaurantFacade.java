@@ -38,7 +38,6 @@ public class RestaurantFacade extends AbstractFacade<Restaurant> {
         super(Restaurant.class);
     }
 
-
     public List<Restaurant> mainSearch(Quartier quartier, Cuisine cuisine) {
         String req = "SELECT r FROM Restaurant r WHERE 1=1";
         req += SearchUtil.addConstraint("r", "quartier.id", "=", quartier.getId());
@@ -63,6 +62,14 @@ public class RestaurantFacade extends AbstractFacade<Restaurant> {
         }
     }
 
-    
-    
+    public List<Restaurant> search(String nom) {
+
+        String req = "select r from Restaurant r where 1=1";
+        if (!nom.equals("")) {
+            req += " AND r.nom LIKE '%" + nom + "%'";
+        }
+        return em.createQuery(req).getResultList();
+
+    }
+
 }

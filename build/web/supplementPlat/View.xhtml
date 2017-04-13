@@ -15,11 +15,9 @@
                         <h:outputText value="#{bundle.ViewSupplementPlatLabel_id}"/>
                         <h:outputText value="#{supplementPlatController.selected.id}" title="#{bundle.ViewSupplementPlatTitle_id}"/>
                         <h:outputText value="#{bundle.ViewSupplementPlatLabel_prix}"/>
-                        <h:outputText value="#{supplementPlatController.selected.prix}" title="#{bundle.ViewSupplementPlatTitle_prix}"/>
+                        <h:outputText value="#{supplementPlatController.selected.addition}" title="#{bundle.ViewSupplementPlatTitle_prix}"/>
                         <h:outputText value="#{bundle.ViewSupplementPlatLabel_supplement}"/>
                         <h:outputText value="#{supplementPlatController.selected.supplement}" title="#{bundle.ViewSupplementPlatTitle_supplement}"/>
-                        <h:outputText value="#{bundle.ViewSupplementPlatLabel_plate}"/>
-                        <h:outputText value="#{supplementPlatController.selected.plate}" title="#{bundle.ViewSupplementPlatTitle_plate}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="SupplementPlatViewDialog.hide()"/>
                 </h:panelGroup>

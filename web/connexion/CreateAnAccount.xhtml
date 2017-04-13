@@ -12,7 +12,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="shortcut icon" type="image/x-icon" href="#{resource['imgs/favicon.png']}"/>
 
-            <title>Talabat | Connecter vous..</title>
+            <title>FOODelivery | Connecter vous..</title>
         </f:facet>
 
         <f:facet name="middle">
@@ -29,39 +29,52 @@
             <h:outputStylesheet name="css/font-awesome.css" />
         </f:facet>
     </h:head>
-    <h:body style="background-image: url(../resources/imgs/bg2.jpg); background-size: cover">
+    <h:body style="background-image: url(../resources/imgs/bg5.jpg); background-size: cover">
 
         <h:form class="form-group">
-
-            <b:panel title="Cree nouveau Compte.." col-lg="6" offset-lg="3" col-md="6" offset-md="3" col-sm="8" offset-sm="2" col-xs="10" offset-xs="1">
+            <br/>
+            <br/>
+            <br/>
+            <b:panel title="Cree nouveau Compte.." col-lg="4" offset-lg="3" col-md="4" offset-md="3" col-sm="6" offset-sm="1" col-xs="10" offset-xs="1">
                 <b:panelGrid columns="2" >
-                <p:outputLabel value="Nom:" for="nom" />
-                <p:inputText id="nom" value="#{connectController.selected.nom}" title="Nom" class="form-control"/>
-                <p:outputLabel value="Prenom:" for="prenom" />
-                <p:inputText id="prenom" value="#{connectController.selected.prenom}" title="Prenom" class="form-control" />
-                <p:outputLabel value="Email:" for="email" />
-                <p:inputText id="email" value="#{connectController.selected.email}" title="Email" class="form-control"/>
-                <p:outputLabel value="Login:" for="login" />
-                <p:inputText id="login" value="#{connectController.selected.login}" title="Login" class="form-control"/>
-                <p:outputLabel value="Password:" for="password" />
-                <p:password id="password" value="#{connectController.selected.password}" title="Password" class="form-control"/>
+                    <p:outputLabel value="Nom:" for="nom" />
+                    <p:inputText id="nom" value="#{connectController.selected.nom}" title="Nom" class="form-control"/>
+                    <p:outputLabel value="Prenom:" for="prenom" />
+                    <p:inputText id="prenom" value="#{connectController.selected.prenom}" title="Prenom" class="form-control" />
+                    <p:outputLabel value="Email:" for="email" />
+                    <p:inputText id="email" value="#{connectController.selected.email}" title="Email" class="form-control"/>
+                    <p:outputLabel value="Login:" for="login" />
+                    <p:inputText id="login" value="#{connectController.selected.login}" title="Login" class="form-control"/>
+                    <p:outputLabel value="Password:" for="password" />
+                    <h:inputSecret id="password" value="#{connectController.selected.password}" class=" form-control form-control-static" >
+<!--                        <f:ajax event="keyup" render="passwordError" />
+                        <h:message for="password" errorClass="invalid" id="passwordError" />-->
+                    </h:inputSecret> 
 
-                <p:outputLabel value="ConfirmePassword:" for="Confirmepassword"/>
-                <p:password id="Confirmepassword" title="Password" class="form-control" />
-                <p:outputLabel value="Tel:" for="tel" />
-                <p:inputText id="tel" value="#{connectController.selected.tel}" title="Tel" class="form-control"/>
+                    <p:outputLabel value="Confirme Password:"/>
+                    <p:password id="password2" validator="#{connectController.validateSamePassword}" class="form-control" >
+                        <f:ajax event="keyup" render="password2Error"  />
 
-                <p:outputLabel value="Gender:" />
-                <b:selectOneMenu id="gender" value="#{connectController.selected.gender}" class="form-control">
-                    <f:selectItem itemLabel="Male" itemValue="M"/>
-                    <f:selectItem itemLabel="Female" itemValue="F"/>
-                </b:selectOneMenu>
+                        <b:growl for="password2"  id="password2Error"  />
+                    </p:password> 
+
+                    <p:outputLabel value="Tel:" for="tel" />
+                    <p:inputText id="tel" value="#{connectController.selected.tel}" title="Tel" class="form-control"/>
+
+                    <p:outputLabel value="Gender:" />
+                    <b:selectOneMenu id="gender" value="#{connectController.selected.gender}" class="form-control">
+                        <f:selectItem itemLabel="Male" itemValue="M"/>
+                        <f:selectItem itemLabel="Female" itemValue="F"/>
+                    </b:selectOneMenu>
                 </b:panelGrid>
-                <b:commandButton action="#{connectController.createAccount()}" value="Create Your Account" icon="ui-icon-check" class="btn btn-success btn-group-justified" />
+                <b:commandButton id="confirme" action="#{connectController.createAccount()}" value="Create Your Account" icon="ui-icon-check" class="btn btn-success btn-group-justified" />
                 <center>
-                Vous avez deja un compte?<p:commandLink action="/connexion/SeConnecter.xhtml" value=" Connecter Vous!" />
+                    Vous avez deja un compte?<h:link outcome="/connexion/SeConnecter.xhtml" value=" Connecter Vous!" />
                 </center>
             </b:panel>
+
+
+
         </h:form>
 
 

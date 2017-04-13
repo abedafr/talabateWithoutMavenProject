@@ -7,7 +7,7 @@ package service;
 
 import bean.Commande;
 import bean.CommandeItem;
-import bean.Plate;
+import bean.PlatMenu;
 import bean.SupplementPlat;
 import java.util.List;
 import javax.ejb.EJB;
@@ -36,12 +36,12 @@ public class CommandeFacade extends AbstractFacade<Commande> {
         super(Commande.class);
     }
 
-    public List<CommandeItem> addToCart(Plate plate, List<CommandeItem> commandeItems, List<SupplementPlat> supplementPlats) {
+    public List<CommandeItem> addToCart(PlatMenu platMenu, List<CommandeItem> commandeItems, List<SupplementPlat> supplementPlats) {
         int res = 0;
         int pos = -1;
         for (CommandeItem item : commandeItems) {
             pos++;
-            if (item.getPlate().equals(plate)) {
+            if (item.getPlatMenu().equals(platMenu)) {
                 res = 1;
                 System.out.println("position for = " + pos);
                 break;
@@ -49,8 +49,8 @@ public class CommandeFacade extends AbstractFacade<Commande> {
         }
         if (res == 0) {
             System.out.println("==== F 1");
-            CommandeItem commandeItem = commandeItemFacade.addCmdItem(plate, supplementPlats);
-            if (plate.isCostume() && (supplementPlats != null || !supplementPlats.isEmpty())) {
+            CommandeItem commandeItem = commandeItemFacade.addCmdItem(platMenu, supplementPlats);
+            if (platMenu.isCostume() && (supplementPlats != null || !supplementPlats.isEmpty())) {
                 System.out.println("==== F 6");
                 System.out.println("costume plate");
                 commandeItem.setSupplementPlats(supplementPlats);
@@ -59,10 +59,10 @@ public class CommandeFacade extends AbstractFacade<Commande> {
         } else {
             CommandeItem commandeItem = commandeItems.get(pos);
             commandeItem.setQte(commandeItem.getQte() + 1);
-            if (!plate.isCostume()) {
-                commandeItem.setPrixTotalItem(commandeItem.getPrixTotalItem() + plate.getPrix());
+            if (!platMenu.isCostume()) {
+                commandeItem.setPrixTotalItem(commandeItem.getPrixTotalItem() + platMenu.getPrix());
             }else{
-                commandeItem.setPrixTotalItem(commandeItem.getPrixTotalItem() + plate.getPrix()+commandeItem.getTotalSupplements());
+                commandeItem.setPrixTotalItem(commandeItem.getPrixTotalItem() + platMenu.getPrix()+commandeItem.getTotalSupplements());
             }
             System.out.println("position elif = " + pos);
             commandeItems.set(pos, commandeItem);

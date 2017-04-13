@@ -39,7 +39,7 @@ public class CommandeItem implements Serializable {
     private Commande commande;
     
     @OneToOne
-    private Plate plate;
+    private PlatMenu platMenu;
 
     @OneToMany(mappedBy = "commandeItem")
     private List<SupplementSelected> supplementSelecteds;
@@ -76,14 +76,6 @@ public class CommandeItem implements Serializable {
         this.qte = qte;
     }
 
-    public Plate getPlate() {
-        return plate;
-    }
-
-    public void setPlate(Plate plate) {
-        this.plate = plate;
-    }
-
     public List<SupplementSelected> getSupplementSelecteds() {
         return supplementSelecteds;
     }
@@ -108,6 +100,14 @@ public class CommandeItem implements Serializable {
         this.supplementPlats = supplementPlats;
     }
 
+    public PlatMenu getPlatMenu() {
+        return platMenu;
+    }
+
+    public void setPlatMenu(PlatMenu platMenu) {
+        this.platMenu = platMenu;
+    }
+
     
     @Override
     public int hashCode() {
@@ -128,7 +128,7 @@ public class CommandeItem implements Serializable {
             return false;
         }
         final CommandeItem other = (CommandeItem) obj;
-        if (!Objects.equals(this.plate, other.plate)) {
+        if (!Objects.equals(this.platMenu, other.platMenu)) {
             return false;
         }
         return true;
@@ -139,10 +139,10 @@ public class CommandeItem implements Serializable {
     public CommandeItem() {
     }
 
-    public CommandeItem(Double prixTotalItem, int qte, Plate plate) {
+    public CommandeItem(Double prixTotalItem, int qte, PlatMenu platMenu) {
         this.prixTotalItem = prixTotalItem;
         this.qte = qte;
-        this.plate = plate;
+        this.platMenu = platMenu;
     }
 
     @Override

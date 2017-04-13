@@ -12,14 +12,16 @@
             <h:form id="PlatMenuViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{platMenuController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPlatMenuLabel_id}"/>
-                        <h:outputText value="#{platMenuController.selected.id}" title="#{bundle.ViewPlatMenuTitle_id}"/>
                         <h:outputText value="#{bundle.ViewPlatMenuLabel_menu}"/>
-                        <h:outputText value="#{platMenuController.selected.menu}" title="#{bundle.ViewPlatMenuTitle_menu}"/>
+                        <h:outputText value="#{platMenuController.selected.menu.restaurant.nom}" title="#{bundle.ViewPlatMenuTitle_menu}"/>
+                        <h:outputText value="#{bundle.ViewPlatMenuTitle_prix}"/>
+                        <h:outputText value="#{platMenuController.selected.prix}" title="#{bundle.ViewPlatMenuTitle_prix}"/>
                         <h:outputText value="#{bundle.ViewPlatMenuLabel_cuisine}"/>
-                        <h:outputText value="#{platMenuController.selected.cuisine}" title="#{bundle.ViewPlatMenuTitle_cuisine}"/>
+                        <h:outputText value="#{platMenuController.selected.cuisine.nom}" title="#{bundle.ViewPlatMenuTitle_cuisine}"/>
                         <h:outputText value="#{bundle.ViewPlatMenuLabel_plate}"/>
-                        <h:outputText value="#{platMenuController.selected.plate}" title="#{bundle.ViewPlatMenuTitle_plate}"/>
+                        <h:outputText value="#{platMenuController.selected.plate.nom}" title="#{bundle.ViewPlatMenuTitle_plate}"/>
+                        <h:outputText value="#{bundle.ViewPlatMenuLabel_costume}"/>
+                        <h:outputText value="#{platMenuController.selected.costume}" title="#{bundle.ViewPlatMenuLabel_costume}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="PlatMenuViewDialog.hide()"/>
                 </h:panelGroup>

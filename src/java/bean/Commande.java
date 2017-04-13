@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -22,21 +23,22 @@ import javax.persistence.OneToMany;
 @Entity
 public class Commande implements Serializable {
 
-    
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double total;
-    private  LocalDateTime dateCmd = LocalDateTime.now();
+    private LocalDateTime dateCmd = LocalDateTime.now();
+
+    @ManyToOne
+    private Restaurant restaurant;
 
     @OneToMany(mappedBy = "commande")
     private List<CommandeItem> commandeItems;
 
     @ManyToMany(mappedBy = "commandes")
     private List<User> users;
-    
+
     public Double getTotal() {
         return total;
     }
@@ -45,6 +47,15 @@ public class Commande implements Serializable {
         this.total = total;
     }
 
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    
     public LocalDateTime getDateCmd() {
         return dateCmd;
     }
@@ -68,7 +79,6 @@ public class Commande implements Serializable {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-    
 
     public Long getId() {
         return id;

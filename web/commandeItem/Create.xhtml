@@ -16,12 +16,6 @@
                         <p:inputText id="prixTotalItem" value="#{commandeItemController.selected.prixTotalItem}" title="#{bundle.CreateCommandeItemTitle_prixTotalItem}" />
                         <p:outputLabel value="#{bundle.CreateCommandeItemLabel_qte}" for="qte" />
                         <p:inputText id="qte" value="#{commandeItemController.selected.qte}" title="#{bundle.CreateCommandeItemTitle_qte}" />
-                        <p:outputLabel value="#{bundle.CreateCommandeItemLabel_plate}" for="plate" />
-                        <p:selectOneMenu id="plate" value="#{commandeItemController.selected.plate}" >
-                            <f:selectItems value="#{plateController.itemsAvailableSelectOne}"
-                                           var="plateItem"
-                                           itemValue="#{plateItem}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateCommandeItemLabel_commande}" for="commande" />
                         <p:selectOneMenu id="commande" value="#{commandeItemController.selected.commande}" >
                             <f:selectItems value="#{commandeController.itemsAvailableSelectOne}"

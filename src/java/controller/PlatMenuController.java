@@ -1,11 +1,15 @@
 package controller;
 
 import bean.PlatMenu;
+import bean.Plate;
+import bean.Supplement;
+import bean.SupplementPlat;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import service.PlatMenuFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -26,6 +30,7 @@ public class PlatMenuController implements Serializable {
     @EJB
     private service.PlatMenuFacade ejbFacade;
     private List<PlatMenu> items = null;
+    private List<Supplement> supplements = null;
     private PlatMenu selected;
 
     public PlatMenuController() {
@@ -39,6 +44,30 @@ public class PlatMenuController implements Serializable {
         this.selected = selected;
     }
 
+    public void saveSupplements() {
+        System.out.println("Sups +" + supplements);
+        if (supplements != null) {
+            List<SupplementPlat> list = new ArrayList();
+            for (Supplement item : supplements) {
+                SupplementPlat supplementPlat = new SupplementPlat(0D, selected, item);
+                list.add(supplementPlat);
+            }
+            System.out.println("SupPlats " + list);
+            selected.setSupplementPlats(list);
+        }
+    }
+
+    public List<Supplement> getSupplements() {
+        if (supplements == null) {
+            supplements = new ArrayList<>();
+        }
+        return supplements;
+    }
+
+    public void setSupplements(List<Supplement> supplements) {
+        this.supplements = supplements;
+    }
+
     protected void setEmbeddableKeys() {
     }
 
@@ -47,6 +76,14 @@ public class PlatMenuController implements Serializable {
 
     private PlatMenuFacade getFacade() {
         return ejbFacade;
+    }
+
+    public List<Plate> plateByCuisine() {
+        if (selected != null && selected.getCuisine() != null) {
+            return ejbFacade.getPlateByCuisine(selected.getCuisine());
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     public PlatMenu prepareCreate() {
@@ -58,6 +95,7 @@ public class PlatMenuController implements Serializable {
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PlatMenuCreated"));
         if (!JsfUtil.isValidationFailed()) {
+            supplements = null;
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
@@ -86,6 +124,10 @@ public class PlatMenuController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
+                    System.out.println("1//////////");
+                    System.out.println("2///"+ selected.getMenu());
+                    getFacade().addPlateMenuCuisine(selected.getMenu(), selected.getCuisine());
+                    saveSupplements();
                     getFacade().edit(selected);
                 } else {
                     getFacade().remove(selected);
@@ -96,6 +138,9 @@ public class PlatMenuController implements Serializable {
                 Throwable cause = ex.getCause();
                 if (cause != null) {
                     msg = cause.getLocalizedMessage();
+                }
+                if (msg == null) {
+                    msg = "";
                 }
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);

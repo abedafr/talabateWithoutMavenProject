@@ -31,9 +31,6 @@ public class Cuisine implements Serializable {
     private List<Menu> menus;
 
     @OneToMany(mappedBy = "cuisine")
-    private List<Plate> plates;
-
-    @OneToMany(mappedBy = "cuisine")
     private List<PlatMenu> platMenus;
 
     public List<PlatMenu> getPlatMenus() {
@@ -60,14 +57,6 @@ public class Cuisine implements Serializable {
 
     public void setMenus(List<Menu> menus) {
         this.menus = menus;
-    }
-
-    public List<Plate> getPlates() {
-        return plates;
-    }
-
-    public void setPlates(List<Plate> plates) {
-        this.plates = plates;
     }
 
     public Long getId() {

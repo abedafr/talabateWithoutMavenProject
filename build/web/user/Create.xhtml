@@ -12,8 +12,6 @@
             <h:form id="UserCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{userController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateUserLabel_adress}" for="adress" />
-                        <p:inputText id="adress" value="#{userController.selected.adress}" title="#{bundle.CreateUserTitle_adress}" />
                         <p:outputLabel value="#{bundle.CreateUserLabel_login}" for="login" />
                         <p:inputText id="login" value="#{userController.selected.login}" title="#{bundle.CreateUserTitle_login}" />
                         <p:outputLabel value="#{bundle.CreateUserLabel_password}" for="password" />

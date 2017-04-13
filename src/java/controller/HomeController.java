@@ -25,7 +25,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJBException;
-import javax.faces.view.ViewScoped;
 
 /**
  *

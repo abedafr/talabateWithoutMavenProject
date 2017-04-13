@@ -6,11 +6,14 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -21,21 +24,38 @@ public class PlatMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Double prix;
+    private boolean costume;
+
+    @OneToOne(mappedBy = "platMenu")
+    private CommandeItem commandeItem;
+
+    @OneToMany(mappedBy = "platMenu")
+    private List<SupplementPlat> supplementPlats;
+
     @ManyToOne
     private Menu menu;
     @ManyToOne
-    private Cuisine cuisine; 
+    private Cuisine cuisine;
     @ManyToOne
     private Plate plate;
-        
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Double prix) {
+        this.prix = prix;
     }
 
     public Menu getMenu() {
@@ -61,8 +81,31 @@ public class PlatMenu implements Serializable {
     public void setPlate(Plate plate) {
         this.plate = plate;
     }
+
+    public boolean isCostume() {
+        return costume;
+    }
+
+    public void setCostume(boolean costume) {
+        this.costume = costume;
+    }
+
+    public List<SupplementPlat> getSupplementPlats() {
+        return supplementPlats;
+    }
+
+    public void setSupplementPlats(List<SupplementPlat> supplementPlats) {
+        this.supplementPlats = supplementPlats;
+    }
+
     
-    
+    public CommandeItem getCommandeItem() {
+        return commandeItem;
+    }
+
+    public void setCommandeItem(CommandeItem commandeItem) {
+        this.commandeItem = commandeItem;
+    }
 
     @Override
     public int hashCode() {
@@ -88,5 +131,5 @@ public class PlatMenu implements Serializable {
     public String toString() {
         return "bean.PlatMenu[ id=" + id + " ]";
     }
-    
+
 }

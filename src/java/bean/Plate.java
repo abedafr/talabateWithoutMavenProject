@@ -28,19 +28,12 @@ public class Plate implements Serializable {
     private Long id;
     private String nom;
     private Double prix;
-    private boolean costume;
-
-    @OneToMany(mappedBy = "plate")
-    private List<SupplementPlat> supplementPlats;
-    
-    @OneToOne(mappedBy = "plate")
-    private CommandeItem commandeItem;
-    
-    @ManyToOne
-    private Menu menu;
     
     @ManyToOne
     private Cuisine cuisine;
+
+    @ManyToOne
+    private Menu menu;
     
     @OneToMany(mappedBy = "plate")
     private List<PlatMenu> platMenus;
@@ -52,43 +45,6 @@ public class Plate implements Serializable {
     public void setPlatMenus(List<PlatMenu> platMenus) {
         this.platMenus = platMenus;
     }
-    
-    
-
-    public List<SupplementPlat> getSupplementPlats() {
-        return supplementPlats;
-    }
-
-    public void setSupplementPlats(List<SupplementPlat> supplementPlats) {
-        this.supplementPlats = supplementPlats;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
-
-    
-    public CommandeItem getCommandeItem() {
-        return commandeItem;
-    }
-
-    public void setCommandeItem(CommandeItem commandeItem) {
-        this.commandeItem = commandeItem;
-    }
-
-    public boolean isCostume() {
-        return costume;
-    }
-
-    public void setCostume(boolean costume) {
-        this.costume = costume;
-    }
-
-    
     
     public String getNom() {
         return nom;
@@ -106,6 +62,15 @@ public class Plate implements Serializable {
         this.prix = prix;
     }
 
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+    
+    
 
     public Cuisine getCuisine() {
         return cuisine;

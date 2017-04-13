@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2017 at 08:34 PM
+-- Generation Time: Apr 13, 2017 at 02:45 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DATECMD` longblob,
   `TOTAL` double DEFAULT NULL,
+  `RESTAURANT_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -71,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `commandeitem` (
   `COMMANDE_ID` bigint(20) DEFAULT NULL,
   `PLATE_ID` bigint(20) DEFAULT NULL,
   `TOTALSUPPLEMENTS` double DEFAULT NULL,
+  `PLATMENU_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_COMMANDEITEM_PLATE_ID` (`PLATE_ID`),
   KEY `FK_COMMANDEITEM_COMMANDE_ID` (`COMMANDE_ID`)
@@ -135,6 +137,7 @@ INSERT INTO `cuisine_menu` (`Cuisine_ID`, `menus_ID`) VALUES
 (1, 2),
 (4, 2),
 (5, 2),
+(2, 3),
 (5, 3),
 (5, 4);
 
@@ -169,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `RESTAURANT_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_MENU_RESTAURANT_ID` (`RESTAURANT_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `menu`
@@ -177,7 +180,6 @@ CREATE TABLE IF NOT EXISTS `menu` (
 
 INSERT INTO `menu` (`ID`, `RESTAURANT_ID`) VALUES
 (1, 1),
-(6, 1),
 (2, 2),
 (3, 3),
 (4, 4),
@@ -203,6 +205,7 @@ CREATE TABLE IF NOT EXISTS `menu_cuisine` (
 INSERT INTO `menu_cuisine` (`Menu_ID`, `cuisines_ID`) VALUES
 (2, 1),
 (1, 2),
+(3, 2),
 (2, 4),
 (1, 5),
 (2, 5),
@@ -221,7 +224,6 @@ CREATE TABLE IF NOT EXISTS `plate` (
   `PRIX` double DEFAULT NULL,
   `CUISINE_ID` bigint(20) DEFAULT NULL,
   `MENU_ID` bigint(20) DEFAULT NULL,
-  `COSTUME` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_PLATE_CUISINE_ID` (`CUISINE_ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
@@ -230,26 +232,26 @@ CREATE TABLE IF NOT EXISTS `plate` (
 -- Dumping data for table `plate`
 --
 
-INSERT INTO `plate` (`ID`, `NOM`, `PRIX`, `CUISINE_ID`, `MENU_ID`, `COSTUME`) VALUES
-(1, 'Cheese Burger', 30, 2, 1, 0),
-(2, 'Hamburger', 25, 2, 1, 1),
-(3, 'Couscous', 30, 5, 3, 0),
-(4, 'Sushi', 150, 4, 2, 0),
-(5, 'Tako Yaki', 125, 4, 2, 0),
-(6, 'Yakisoba', 170, 4, 2, 0),
-(7, 'Tajine poulet', 40, 5, 4, 0),
-(8, 'Tajine Viande', 40, 5, 4, 0),
-(9, 'Suki Yaki', 100, 4, 2, 0),
-(10, 'Chawarma', 20, 1, 2, 0),
-(11, 'Ramen', 30, 4, 2, 0),
-(12, 'Japanese Curry', 80, 4, 2, 0),
-(13, 'Sashimi', 160, 4, 2, 0),
-(14, 'Onigiri', 20, 4, 2, 0),
-(15, 'Chahan', 70, 4, 2, 0),
-(16, 'Udon', 30, 4, 2, 0),
-(17, 'Omuraisu', 30, 4, 2, 0),
-(18, 'Bocadios', 10, 5, 1, 1),
-(19, 'Chicken Burger', 35, 2, 1, 0);
+INSERT INTO `plate` (`ID`, `NOM`, `PRIX`, `CUISINE_ID`, `MENU_ID`) VALUES
+(1, 'Cheese Burger', 30, 2, 1),
+(2, 'Hamburger', 25, 2, 1),
+(3, 'Couscous', 30, 5, 3),
+(4, 'Sushi', 150, 4, 2),
+(5, 'Tako Yaki', 125, 4, 2),
+(6, 'Yakisoba', 170, 4, 2),
+(7, 'Tajine poulet', 40, 5, 4),
+(8, 'Tajine Viande', 40, 5, 4),
+(9, 'Suki Yaki', 100, 4, 2),
+(10, 'Chawarma', 20, 1, 2),
+(11, 'Ramen', 30, 4, 2),
+(12, 'Japanese Curry', 80, 4, 2),
+(13, 'Sashimi', 160, 4, 2),
+(14, 'Onigiri', 20, 4, 2),
+(15, 'Chahan', 70, 4, 2),
+(16, 'Udon', 30, 4, 2),
+(17, 'Omuraisu', 30, 4, 2),
+(18, 'Bocadios', 10, 5, 1),
+(19, 'Chicken Burger', 35, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -262,8 +264,30 @@ CREATE TABLE IF NOT EXISTS `platmenu` (
   `MENU_ID` bigint(20) DEFAULT NULL,
   `PLATE_ID` bigint(20) DEFAULT NULL,
   `CUISINE_ID` bigint(20) DEFAULT NULL,
+  `PRIX` double DEFAULT NULL,
+  `Costume` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=166 ;
+
+--
+-- Dumping data for table `platmenu`
+--
+
+INSERT INTO `platmenu` (`ID`, `MENU_ID`, `PLATE_ID`, `CUISINE_ID`, `PRIX`, `Costume`) VALUES
+(1, 2, 5, 4, 120, 0),
+(3, 2, 4, 4, 155, 0),
+(154, 2, 6, 4, 120, 0),
+(155, 2, 9, 4, 99, 0),
+(156, 2, 11, 4, 20, 0),
+(157, 2, 13, 4, 175, 0),
+(158, 2, 14, 4, 15, 0),
+(159, 2, 15, 4, 60, 0),
+(160, 2, 17, 4, 25, 0),
+(161, 1, 2, 2, 30, 0),
+(162, 3, 2, 2, 25, 0),
+(163, 1, 1, 2, 27, 0),
+(164, 1, 1, 2, 25, 0),
+(165, 1, 8, 5, 123, 1);
 
 -- --------------------------------------------------------
 
@@ -306,6 +330,7 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `NOM` varchar(255) DEFAULT NULL,
   `QUARTIER_ID` bigint(20) DEFAULT NULL,
+  `ACCEPTED` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_RESTAURANT_QUARTIER_ID` (`QUARTIER_ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
@@ -314,12 +339,12 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
 -- Dumping data for table `restaurant`
 --
 
-INSERT INTO `restaurant` (`ID`, `NOM`, `QUARTIER_ID`) VALUES
-(1, 'Mc Donald''s', 6),
-(2, 'Fayrouz', 6),
-(3, 'KFC ', 6),
-(4, 'Taiba', 8),
-(5, 'Hani', 5);
+INSERT INTO `restaurant` (`ID`, `NOM`, `QUARTIER_ID`, `ACCEPTED`) VALUES
+(1, 'Mc Donald''s', 6, 0),
+(2, 'Fayrouz', 6, 0),
+(3, 'KFC ', 6, 0),
+(4, 'Taiba', 8, 0),
+(5, 'Hani', 5, 0);
 
 -- --------------------------------------------------------
 
@@ -338,7 +363,7 @@ CREATE TABLE IF NOT EXISTS `sequence` (
 --
 
 INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '150');
+('SEQ_GEN', '200');
 
 -- --------------------------------------------------------
 
@@ -375,18 +400,20 @@ CREATE TABLE IF NOT EXISTS `supplementplat` (
   `PLATE_ID` bigint(20) DEFAULT NULL,
   `SUPPLEMENT_ID` bigint(20) DEFAULT NULL,
   `NEWPRICE` double DEFAULT NULL,
+  `PLATMENU_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_SUPPLEMENTPLAT_SUPPLEMENT_ID` (`SUPPLEMENT_ID`),
   KEY `FK_SUPPLEMENTPLAT_PLATE_ID` (`PLATE_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `supplementplat`
 --
 
-INSERT INTO `supplementplat` (`ID`, `ADDITION`, `PLATE_ID`, `SUPPLEMENT_ID`, `NEWPRICE`) VALUES
-(1, 1.5, 2, 1, 4.5),
-(2, 0.5, 2, 3, 1.5);
+INSERT INTO `supplementplat` (`ID`, `ADDITION`, `PLATE_ID`, `SUPPLEMENT_ID`, `NEWPRICE`, `PLATMENU_ID`) VALUES
+(3, 0, NULL, 1, NULL, 166),
+(4, 0, NULL, 2, NULL, 166),
+(5, 0, NULL, 1, NULL, 165);
 
 -- --------------------------------------------------------
 
@@ -425,6 +452,13 @@ CREATE TABLE IF NOT EXISTS `user` (
   `TENTATIVEREST` int(11) DEFAULT NULL,
   PRIMARY KEY (`LOGIN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`LOGIN`, `ADMIIN`, `BLOCKED`, `DATENAISSANCE`, `EMAIL`, `GENDER`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TEL`, `TENTATIVEREST`) VALUES
+('abed', 0, 0, NULL, 'abed@dlks', 'M', 0, 0, 'abed', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'afr', '2136549', 0);
 
 -- --------------------------------------------------------
 
@@ -467,9 +501,9 @@ INSERT INTO `ville` (`ID`, `NOM`) VALUES
 -- Constraints for table `adress`
 --
 ALTER TABLE `adress`
-  ADD CONSTRAINT `FK_ADRESS_VILLE_ID` FOREIGN KEY (`VILLE_ID`) REFERENCES `ville` (`ID`),
   ADD CONSTRAINT `FK_ADRESS_QUARTIER_ID` FOREIGN KEY (`QUARTIER_ID`) REFERENCES `quartier` (`ID`),
-  ADD CONSTRAINT `FK_ADRESS_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`);
+  ADD CONSTRAINT `FK_ADRESS_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`),
+  ADD CONSTRAINT `FK_ADRESS_VILLE_ID` FOREIGN KEY (`VILLE_ID`) REFERENCES `ville` (`ID`);
 
 --
 -- Constraints for table `commandeitem`

@@ -27,11 +27,11 @@ public class Menu implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "menu")
-    private List<Plate> plates;
-
     @ManyToMany
     private List<Cuisine> cuisines;
+
+    @OneToMany(mappedBy = "menu")
+    private List<Plate> plates;
 
     @OneToOne
     private Restaurant restaurant;
@@ -39,22 +39,20 @@ public class Menu implements Serializable {
     @OneToMany(mappedBy = "menu")
     private List<PlatMenu> platMenus;
 
-    public List<PlatMenu> getPlatMenus() {
-        return platMenus;
-    }
-
-    public void setPlatMenus(List<PlatMenu> platMenus) {
-        this.platMenus = platMenus;
-    }
-    
-    
-
     public List<Plate> getPlates() {
         return plates;
     }
 
     public void setPlates(List<Plate> plates) {
         this.plates = plates;
+    }
+
+    public List<PlatMenu> getPlatMenus() {
+        return platMenus;
+    }
+
+    public void setPlatMenus(List<PlatMenu> platMenus) {
+        this.platMenus = platMenus;
     }
 
     public List<Cuisine> getCuisines() {

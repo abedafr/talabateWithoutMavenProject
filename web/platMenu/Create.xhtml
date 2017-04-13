@@ -12,26 +12,43 @@
             <h:form id="PlatMenuCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{platMenuController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreatePlatMenuLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{platMenuController.selected.id}" title="#{bundle.CreatePlatMenuTitle_id}" />
                         <p:outputLabel value="#{bundle.CreatePlatMenuLabel_menu}" for="menu" />
                         <p:selectOneMenu id="menu" value="#{platMenuController.selected.menu}" >
+                            <f:selectItem itemValue="#{null}"  itemLabel="Select.."/>
                             <f:selectItems value="#{menuController.itemsAvailableSelectOne}"
                                            var="menuItem"
                                            itemValue="#{menuItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatePlatMenuLabel_cuisine}" for="cuisine" />
                         <p:selectOneMenu id="cuisine" value="#{platMenuController.selected.cuisine}" >
+                            <f:selectItem itemValue="#{null}"  itemLabel="Select.."/>
                             <f:selectItems value="#{cuisineController.itemsAvailableSelectOne}"
                                            var="cuisineItem"
                                            itemValue="#{cuisineItem}"/>
+                            <p:ajax process="cuisine" listener="#{platMenuController.plateByCuisine()}" update="plate"></p:ajax>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatePlatMenuLabel_plate}" for="plate" />
                         <p:selectOneMenu id="plate" value="#{platMenuController.selected.plate}" >
-                            <f:selectItems value="#{plateController.itemsAvailableSelectOne}"
+                            <f:selectItem itemValue="#{null}"  itemLabel="Select.."/>
+                            <f:selectItems value="#{platMenuController.plateByCuisine()}"
                                            var="plateItem"
                                            itemValue="#{plateItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePlatMenuLabel_costume}" for="costume" />
+                        <p:selectOneMenu id="costume" value="#{platMenuController.selected.costume}" >
+                            <f:selectItem itemValue="#{null}"  itemLabel="Select.."/>
+                            <f:selectItem itemValue="#{true}"  itemLabel="TRUE"/>
+                            <f:selectItem itemValue="#{false}"  itemLabel="FALSE"/>
+                            <!--<p:ajax process="costume"  update="PlatMenuCreateForm:display:supplementPlatsLabel, PlatMenuCreateForm:display:supplementPlats"></p:ajax>-->
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePlatMenuLabel_prix}" for="prix" />
+                        <p:inputText id="prix" value="#{platMenuController.selected.prix}" title="#{bundle.CreatePlatMenuTitle_prix}" />
+                        <p:outputLabel id="supplementPlatsLabel" value="#{bundle.CreatePlatMenuLabel_supplementPlats}" for="supplementPlats" />
+                        <p:selectManyCheckbox id="supplementPlats" value="#{platMenuController.supplements}" converter="supplementControllerConverter">
+                                <f:selectItems value="#{supplementController.itemsAvailableSelectMany}"
+                                               var="supplementItem"
+                                               itemValue="#{supplementItem}"/>
+                            </p:selectManyCheckbox>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{platMenuController.create}" value="#{bundle.Save}" update="display,:PlatMenuListForm:datalist,:growl" oncomplete="handleSubmit(args,'PlatMenuCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PlatMenuCreateDialog.hide()"/>

@@ -3,8 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/NotFound.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/PlatMenu.java</file>
             <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/home/Home.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/service/RestaurantFacade.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/restaurant/Search.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/contactUs/Create.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/Supplement.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/controller/ContactUsController.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/results/Results.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/results/ViewMenu.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/bean/SupplementPlat.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/controller/RestaurantController.java</file>
             <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/index.xhtml</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/src/java/controller/PlatMenuController.java</file>
+            <file>file:/C:/Users/acer/Documents/NetBeansProjects/TalabatWithoutMaven/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

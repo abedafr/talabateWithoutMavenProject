@@ -27,6 +27,7 @@ public class RestaurantController implements Serializable {
     private service.RestaurantFacade ejbFacade;
     private List<Restaurant> items = null;
     private Restaurant selected;
+    private String nom;
 
     public RestaurantController() {
     }
@@ -36,6 +37,18 @@ public class RestaurantController implements Serializable {
             selected = new Restaurant();
         }
         return selected;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void search() {
+        items = ejbFacade.search(nom);
     }
 
     public void setSelected(Restaurant selected) {

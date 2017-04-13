@@ -25,12 +25,10 @@ public class SupplementPlat implements Serializable {
     private Long id;
     private Double addition;
     private Double newPrice;
-
+    @ManyToOne
+    private PlatMenu platMenu;
     @ManyToOne
     private Supplement supplement;
-
-    @ManyToOne
-    private Plate plate;
 
     public Long getId() {
         return id;
@@ -38,6 +36,14 @@ public class SupplementPlat implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public PlatMenu getPlatMenu() {
+        return platMenu;
+    }
+
+    public void setPlatMenu(PlatMenu platMenu) {
+        this.platMenu = platMenu;
     }
 
     public Double getNewPrice() {
@@ -64,14 +70,6 @@ public class SupplementPlat implements Serializable {
         this.supplement = supplement;
     }
 
-    public Plate getPlate() {
-        return plate;
-    }
-
-    public void setPlate(Plate plate) {
-        this.plate = plate;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -92,9 +90,17 @@ public class SupplementPlat implements Serializable {
         return true;
     }
 
+    public SupplementPlat(Double addition, PlatMenu platMenu, Supplement supplement) {
+        this.addition = addition;
+        this.platMenu = platMenu;
+        this.supplement = supplement;
+    }
+
+    public SupplementPlat() {
+    }
+
     @Override
     public String toString() {
-       
         return supplement.getNom() + "(" + getNewPrice() + ")";
     }
 

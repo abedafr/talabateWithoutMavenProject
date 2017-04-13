@@ -12,21 +12,14 @@
             <h:form id="SupplementPlatEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{supplementPlatController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditSupplementPlatLabel_prix}" for="prix" />
-                        <p:inputText id="prix" value="#{supplementPlatController.selected.addition}" title="#{bundle.EditSupplementPlatTitle_prix}" />
+                        <p:outputLabel value="#{bundle.EditSupplementPlatLabel_prix}" for="addition" />
+                        <p:inputText id="addition" value="#{supplementPlatController.selected.addition}" title="#{bundle.EditSupplementPlatTitle_addition}" />
                         <p:outputLabel value="#{bundle.EditSupplementPlatLabel_supplement}" for="supplement" />
                         <p:selectOneMenu id="supplement" value="#{supplementPlatController.selected.supplement}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{supplementController.itemsAvailableSelectOne}"
                                            var="supplementItem"
                                            itemValue="#{supplementItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditSupplementPlatLabel_plate}" for="plate" />
-                        <p:selectOneMenu id="plate" value="#{supplementPlatController.selected.plate}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{plateController.itemsAvailableSelectOne}"
-                                           var="plateItem"
-                                           itemValue="#{plateItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{supplementPlatController.update}" value="#{bundle.Save}" update="display,:SupplementPlatListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SupplementPlatEditDialog');"/>

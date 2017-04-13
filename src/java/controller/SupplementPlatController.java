@@ -1,6 +1,6 @@
 package controller;
 
-import bean.Plate;
+import bean.PlatMenu;
 import bean.SupplementPlat;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
@@ -25,7 +25,7 @@ import javax.faces.convert.FacesConverter;
 public class SupplementPlatController implements Serializable {
 
     @EJB
-    private service.PlateFacade plateFacade;
+    private service.PlatMenuFacade platMenuFacade;
     @EJB
     private service.SupplementPlatFacade ejbFacade;
     private List<SupplementPlat> items = null;
@@ -116,8 +116,8 @@ public class SupplementPlatController implements Serializable {
         }
     }
 
-    public List<Plate> costumePlates() {
-        return plateFacade.findCostumePlates();
+    public List<PlatMenu> costumePlates() {
+        return platMenuFacade.findCostumePlatMenus();
     }
 
     public SupplementPlat getSupplementPlat(java.lang.Long id) {

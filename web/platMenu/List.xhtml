@@ -37,19 +37,31 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPlatMenuTitle_menu}"/>
                             </f:facet>
-                            <h:outputText value="#{item.menu}"/>
+                            <h:outputText value="#{item.menu.restaurant.nom}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPlatMenuTitle_cuisine}"/>
                             </f:facet>
-                            <h:outputText value="#{item.cuisine}"/>
+                            <h:outputText value="#{item.cuisine.nom}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPlatMenuTitle_plate}"/>
                             </f:facet>
-                            <h:outputText value="#{item.plate}"/>
+                            <h:outputText value="#{item.plate.nom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlatMenuTitle_prix}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prix}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlatMenuTitle_costume}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.costume}" />
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{platMenuController.prepareCreate}" update=":PlatMenuCreateForm" oncomplete="PF('PlatMenuCreateDialog').show()"/>

@@ -29,12 +29,6 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPlateTitle_commandeItem}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.commandeItem}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPlateTitle_nom}"/>
                             </f:facet>
                             <h:outputText value="#{item.nom}"/>
@@ -49,7 +43,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPlateTitle_cuisine}"/>
                             </f:facet>
-                            <h:outputText value="#{item.cuisine}"/>
+                            <h:outputText value="#{item.cuisine.nom}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -62,12 +56,6 @@
                                 <h:outputText value="#{bundle.ListPlateTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPlateTitle_costume}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.costume}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{plateController.prepareCreate}" update=":PlateCreateForm" oncomplete="PF('PlateCreateDialog').show()"/>
