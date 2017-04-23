@@ -41,9 +41,6 @@ public class CommandeItem implements Serializable {
     @OneToOne
     private PlatMenu platMenu;
 
-    @OneToMany(mappedBy = "commandeItem")
-    private List<SupplementSelected> supplementSelecteds;
-
     public Long getId() {
         return id;
     }
@@ -74,14 +71,6 @@ public class CommandeItem implements Serializable {
 
     public void setQte(int qte) {
         this.qte = qte;
-    }
-
-    public List<SupplementSelected> getSupplementSelecteds() {
-        return supplementSelecteds;
-    }
-
-    public void setSupplementSelecteds(List<SupplementSelected> supplementSelecteds) {
-        this.supplementSelecteds = supplementSelecteds;
     }
 
     public Commande getCommande() {

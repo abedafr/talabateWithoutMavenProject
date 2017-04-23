@@ -58,7 +58,6 @@ public class CommandeItemFacade extends AbstractFacade<CommandeItem> {
         commandeItemDestination.setPlatMenu(commandeItemSource.getPlatMenu());
         commandeItemDestination.setPrixTotalItem(commandeItemSource.getPrixTotalItem());
         commandeItemDestination.setQte(commandeItemSource.getQte());
-        commandeItemDestination.setSupplementSelecteds(commandeItemSource.getSupplementSelecteds());
 
     }
 

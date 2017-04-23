@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 /**
@@ -47,6 +48,9 @@ public class User implements Serializable {
     private List<Adress> adresss;
     @OneToMany(mappedBy = "user")
     private List<Device> devices;
+    
+    @OneToOne(mappedBy = "adminRestau")
+    private Restaurant restaurant;
 
     public List<Device> getDevices() {
         if(devices==null){
@@ -89,6 +93,14 @@ public class User implements Serializable {
 
     public void setCommandes(List<Commande> commandes) {
         this.commandes = commandes;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     

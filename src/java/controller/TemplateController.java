@@ -35,6 +35,23 @@ public class TemplateController implements Serializable {
             return false;
         }
     }
+    
+    public boolean isAdmin(){
+        if(UserConnected()){
+            if (user.isAdmin()==2){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean isRestauAdmin(){
+        if(UserConnected()){
+            if (user.isAdmin()==1){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public User getUser() {
         return user;

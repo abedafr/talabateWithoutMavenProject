@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2017 at 08:50 PM
+-- Generation Time: Apr 24, 2017 at 12:38 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -327,6 +327,7 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
   `NOM` varchar(255) DEFAULT NULL,
   `QUARTIER_ID` bigint(20) DEFAULT NULL,
   `ACCEPTED` tinyint(1) DEFAULT NULL,
+  `USER_EMAIL` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_RESTAURANT_QUARTIER_ID` (`QUARTIER_ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
@@ -335,12 +336,12 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
 -- Dumping data for table `restaurant`
 --
 
-INSERT INTO `restaurant` (`ID`, `NOM`, `QUARTIER_ID`, `ACCEPTED`) VALUES
-(1, 'Mc Donald''s', 6, 0),
-(2, 'Fayrouz', 6, 0),
-(3, 'KFC ', 6, 0),
-(4, 'Taiba', 8, 0),
-(5, 'Hani', 5, 0);
+INSERT INTO `restaurant` (`ID`, `NOM`, `QUARTIER_ID`, `ACCEPTED`, `USER_EMAIL`) VALUES
+(1, 'Mc Donald''s', 6, 0, NULL),
+(2, 'Fayrouz', 6, 0, NULL),
+(3, 'KFC ', 6, 0, NULL),
+(4, 'Taiba', 8, 0, NULL),
+(5, 'Hani', 5, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -445,6 +446,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `PRENOM` varchar(255) DEFAULT NULL,
   `TEL` varchar(255) DEFAULT NULL,
   `TENTATIVEREST` int(11) DEFAULT NULL,
+  `RESTAURANT_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`EMAIL`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -452,13 +454,13 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`EMAIL`, `ISADMIN`, `BLOCKED`, `DATENAISSANCE`, `GENDER`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TEL`, `TENTATIVEREST`) VALUES
-('abed', 1, 0, NULL, 'M', 0, 0, 'abed', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'afr', '2136549', 0),
-('abed2', 0, 0, NULL, 'M', 0, 3, 'abed', '6ebfe7cb61ea44af9b44a1c1c51e15db75349ddea16cae87cd8f05ae40c0c76b', 'afr', '123456789', 0),
-('abed@afr', 0, 0, NULL, 'M', 0, 0, 'abed ', '16ba98cf66cf7253aea999eaa6a5fabdc0c3aa69de11a844b474da6ca83ddb2a', 'afr', '21654969879', 0),
-('larbi@', 0, 0, NULL, NULL, 0, 0, 'larbi', '123', 'id', '123456789', 0),
-('SEFsef12364@gmail.com', 0, 0, NULL, 'M', 0, 0, 'Souhail', 'aee634bc2bff88a128bb080299088864883716dd70f58bb1306faa8970122acc', 'Elfahimi', '123456789', 0),
-('younesss.bfs@gmail.com', 0, 0, NULL, 'M', 0, 0, 'youness', '541ac1c4c88e3ea8d80b2569424a0b4edc27f44762cae16047b97244ae20f2a5', 'boufous', '04653598', 0);
+INSERT INTO `user` (`EMAIL`, `ISADMIN`, `BLOCKED`, `DATENAISSANCE`, `GENDER`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TEL`, `TENTATIVEREST`, `RESTAURANT_ID`) VALUES
+('abed', 1, 0, NULL, 'M', 0, 0, 'abed', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'afr', '2136549', 0, NULL),
+('abed2', 0, 0, NULL, 'M', 0, 3, 'abed', '6ebfe7cb61ea44af9b44a1c1c51e15db75349ddea16cae87cd8f05ae40c0c76b', 'afr', '123456789', 0, NULL),
+('abed@afr', 0, 0, NULL, 'M', 0, 0, 'abed ', '16ba98cf66cf7253aea999eaa6a5fabdc0c3aa69de11a844b474da6ca83ddb2a', 'afr', '21654969879', 0, NULL),
+('larbi@', 0, 0, NULL, NULL, 0, 0, 'larbi', '123', 'id', '123456789', 0, NULL),
+('SEFsef12364@gmail.com', 0, 0, NULL, 'M', 0, 0, 'Souhail', 'aee634bc2bff88a128bb080299088864883716dd70f58bb1306faa8970122acc', 'Elfahimi', '123456789', 0, NULL),
+('younesss.bfs@gmail.com', 0, 0, NULL, 'M', 0, 0, 'youness', '541ac1c4c88e3ea8d80b2569424a0b4edc27f44762cae16047b97244ae20f2a5', 'boufous', '04653598', 0, NULL);
 
 -- --------------------------------------------------------
 

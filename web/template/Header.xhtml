@@ -20,6 +20,7 @@
             <b:navbarLinks pull="right">
                 <b:navLink value="" tooltip="Home" href="/TalabatWithoutMaven/faces/home/Home.xhtml" icon="glyphicon-home"></b:navLink>
                 <b:navLink value="" tooltip="Search Restaurants" href="/TalabatWithoutMaven/faces/restaurant/Search.xhtml" icon="glyphicon-search"></b:navLink>
+                <b:navLink rendered="#{templateController.restauAdmin}" value="Mon Restaurant"  href="/TalabatWithoutMaven/faces/restaurant/Search.xhtml" icon="glyphicon-search"></b:navLink>
                 <b:navLink rendered="#{templateController.UserConnected()!=true}" value="Se Connecter" href="/TalabatWithoutMaven/faces/connexion/SeConnecter.xhtml" icon="glyphicon-log-in"></b:navLink>
                 <b:navLink rendered="#{templateController.UserConnected()!=true}" value="Crée un Compte" href="/TalabatWithoutMaven/faces/connexion/CreateAnAccount.xhtml" icon="glyphicon-user"></b:navLink>
                 <b:dropMenu rendered="#{templateController.UserConnected()}" value="My Profil"  icon="glyphicon-user">

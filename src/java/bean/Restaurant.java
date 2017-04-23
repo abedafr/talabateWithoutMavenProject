@@ -29,6 +29,9 @@ public class Restaurant implements Serializable {
     private String nom;
     private boolean accepted;
     
+    @OneToOne
+    private User adminRestau;
+    
     @OneToMany(mappedBy = "restaurant")
     private List<Commande> commandes;
 
@@ -85,6 +88,14 @@ public class Restaurant implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public User getAdminRestau() {
+        return adminRestau;
+    }
+
+    public void setAdminRestau(User adminRestau) {
+        this.adminRestau = adminRestau;
     }
 
     @Override
