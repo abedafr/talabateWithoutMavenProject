@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2017 at 12:38 AM
+-- Generation Time: Apr 24, 2017 at 12:48 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -327,7 +327,7 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
   `NOM` varchar(255) DEFAULT NULL,
   `QUARTIER_ID` bigint(20) DEFAULT NULL,
   `ACCEPTED` tinyint(1) DEFAULT NULL,
-  `USER_EMAIL` varchar(255) DEFAULT NULL,
+  `ADMINRESTAU_EMAIL` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_RESTAURANT_QUARTIER_ID` (`QUARTIER_ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
@@ -336,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
 -- Dumping data for table `restaurant`
 --
 
-INSERT INTO `restaurant` (`ID`, `NOM`, `QUARTIER_ID`, `ACCEPTED`, `USER_EMAIL`) VALUES
+INSERT INTO `restaurant` (`ID`, `NOM`, `QUARTIER_ID`, `ACCEPTED`, `ADMINRESTAU_EMAIL`) VALUES
 (1, 'Mc Donald''s', 6, 0, NULL),
 (2, 'Fayrouz', 6, 0, NULL),
 (3, 'KFC ', 6, 0, NULL),
