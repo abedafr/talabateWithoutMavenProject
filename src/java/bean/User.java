@@ -26,18 +26,17 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    private String login;
+    private String email;
     private String password;
     private String nom;
     private String prenom;
-    private String email;
     private String tel;
     private String gender;
     private LocalDate dateNaissance;
-    private int blocked;
+    private boolean blocked;
     private int nbrCnx;
     private boolean mdpChanged;
-    private boolean admiin;
+    private int isAdmin;
     private int tentativeRest;
     
     
@@ -60,12 +59,12 @@ public class User implements Serializable {
         this.devices = devices;
     }
 
-    public boolean isAdmin() {
-        return admiin;
+    public int isAdmin() {
+        return isAdmin;
     }
 
-    public void setAdmin(boolean admiin) {
-        this.admiin = admiin;
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public List<Adress> getAdresss() {
@@ -94,8 +93,8 @@ public class User implements Serializable {
 
     
 
-    public User(String login) {
-        this.login = login;
+    public User(String email) {
+        this.email = email;
     }
 
     public User() {
@@ -108,14 +107,6 @@ public class User implements Serializable {
 
     public void setMdpChanged(boolean mdpChanged) {
         this.mdpChanged = mdpChanged;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getPassword() {
@@ -158,11 +149,11 @@ public class User implements Serializable {
         this.tel = tel;
     }
 
-    public int getBlocked() {
+    public boolean getBlocked() {
         return blocked;
     }
 
-    public void setBlocked(int blocked) {
+    public void setBlocked(boolean blocked) {
         this.blocked = blocked;
     }
 
@@ -183,13 +174,6 @@ public class User implements Serializable {
         this.nbrCnx = nbrCnx;
     }
 
-    public boolean isAdmiin() {
-        return admiin;
-    }
-
-    public void setAdmiin(boolean admiin) {
-        this.admiin = admiin;
-    }
 
     public int getTentativeRest() {
         return tentativeRest;
@@ -204,7 +188,7 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.login);
+        hash = 67 * hash + Objects.hashCode(this.email);
         return hash;
     }
 
@@ -220,7 +204,7 @@ public class User implements Serializable {
             return false;
         }
         final User other = (User) obj;
-        if (!Objects.equals(this.login, other.login)) {
+        if (!Objects.equals(this.email, other.email)) {
             return false;
         }
         return true;
@@ -231,6 +215,6 @@ public class User implements Serializable {
     
     @Override
     public String toString() {
-        return login;
+        return email;
     }
 }

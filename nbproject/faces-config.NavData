@@ -16,9 +16,9 @@
         <Node id="supplement/List.xhtml" x="2400" y="300" zoom="true"/>
         <Node id="cuisine/Create.xhtml" x="150" y="450" zoom="true"/>
         <Node id="ville/Create.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="ville/Edit.xhtml" x="1150" y="1050" zoom="true"/>
         <Node id="ville/List.xhtml" x="650" y="600" zoom="true"/>
         <Node id="supplementSelected/List.xhtml" x="1150" y="450" zoom="true"/>
-        <Node id="ville/Edit.xhtml" x="1150" y="1050" zoom="true"/>
         <Node id="ville/View.xhtml" x="400" y="1050" zoom="true"/>
         <Node id="menu/View.xhtml" x="150" y="900" zoom="true"/>
         <Node id="results/SupplementSelect.xhtml" x="900" y="900" zoom="true"/>
@@ -34,22 +34,22 @@
         <Node id="quartier/Create.xhtml" x="1900" y="150" zoom="true"/>
         <Node id="commande/List.xhtml" x="1400" y="600" zoom="true"/>
         <Node id="restaurant/View.xhtml" x="150" y="150" zoom="true"/>
-        <Node id="commandeItem/View.xhtml" x="400" y="150" zoom="true"/>
         <Node id="cuisine/Edit.xhtml" x="650" y="1050" zoom="true"/>
-        <Node id="supplementPlat/Create.xhtml" x="2400" y="150" zoom="true"/>
+        <Node id="commandeItem/View.xhtml" x="400" y="150" zoom="true"/>
         <Node id="commande/View.xhtml" x="2150" y="300" zoom="true"/>
+        <Node id="supplementPlat/Create.xhtml" x="2400" y="150" zoom="true"/>
         <Node id="cuisine/View.xhtml" x="150" y="1050" zoom="true"/>
         <Node id="restaurant/List.xhtml" x="2650" y="150" zoom="true"/>
         <Node id="commandeItem/List.xhtml" x="900" y="600" zoom="true"/>
         <Node id="supplementPlat/List.xhtml" x="900" y="750" zoom="true"/>
         <Node id="supplement/Create.xhtml" x="1400" y="450" zoom="true"/>
         <Node id="quartier/List.xhtml" x="900" y="150" zoom="true"/>
-        <Node id="platMenu/View.xhtml" x="1400" y="150" zoom="true"/>
         <Node id="commande/Edit.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="platMenu/View.xhtml" x="1400" y="150" zoom="true"/>
         <Node id="quartier/View.xhtml" x="1900" y="300" zoom="true"/>
         <Node id="quartier/Edit.xhtml" x="150" y="300" zoom="true"/>
-        <Node id="template.xhtml" x="1150" y="750" zoom="true"/>
         <Node id="home/Home.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="template.xhtml" x="1150" y="750" zoom="true"/>
         <Node id="restaurant/Edit.xhtml" x="900" y="1050" zoom="true"/>
         <Node id="platMenu/List.xhtml" x="2150" y="150" zoom="true"/>
         <Node id="user/List.xhtml" x="1650" y="450" zoom="true"/>

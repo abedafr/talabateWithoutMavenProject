@@ -4,84 +4,40 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-
-    
-
-
- <h:head>
-        <link rel="icon" href="/resources/imgs/favinon.png"/>
-        <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-        <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="shortcut icon" type="image/x-icon" href="#{resource['imgs/favicon.png']}"/>
-
-            <title>Search Restaurant</title>
-        </f:facet>
-
-        <f:facet name="middle">
-            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
-
-            <h:outputStylesheet name="css/dashboard.css" />
-
-            <h:outputScript name="bootstrap/js/bootstrap.js" />
-        </f:facet>
-
-        <f:facet name="last">
-            <h:outputStylesheet name="css/font-awesome.css" />
-        </f:facet>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
 
-    </h:head>
-    <h:body>
-            <h:form>
-                <p:panelGrid columns="3">
-                   <p:outputLabel value="nom" for="nom" />
-                   <p:inputText id="nom" value="#{restaurantController.nom}" title="#{bundle.CreateRestaurantTitle_nom}" >
-                       
-                   </p:inputText>
-                        <p:commandButton value="find" actionListener="#{restaurantController.search()}" update=":RestaurantListForm"/>
-                </p:panelGrid>
-                
-            </h:form>
-            <h:form id="RestaurantListForm">
-                <p:panel header="#{bundle.ListRestaurantTitle}">
-                    <p:dataTable id="datalist" value="#{restaurantController.items}" var="item"
-                                 selectionMode="single" selection="#{restaurantController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
+    <ui:composition template="/template/Mytemplate.xhtml">
+        <ui:define name="title">
+            Search Restaurants
+        </ui:define> 
+        <ui:define name="content">
+            <b:panel collapsible="false" class="col-lg-8 col-lg-offset-2">
+                <f:facet name="heading">
+                         <i class="glyphicon glyphicon-cutlery" style="padding-right:20px" />
+                         <h:outputText value="Find Restaurant " />
+                       </f:facet>
+                <h:form class="form-group">
+                    <p:outputLabel value="Restaurant: " />
+                    <b:inputText id="nom" value="#{restaurantController.nom}" class="form-control" 
+                                 onkeyup="ajax:restaurantController.search()" update=":RestaurantListForm"
                                  >
-
-                        
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRestaurantTitle_menu}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.menu}"/>
-                        </p:column>
-                        <p:column>
+                    </b:inputText>
+                </h:form>
+                <h:form id="RestaurantListForm">
+                    <b:dataTable id="datalist" value="#{restaurantController.results}" var="item" searching="false">
+                        <b:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListRestaurantTitle_nom}"/>
                             </f:facet>
                             <h:outputText value="#{item.nom}"/>
-                        </p:column>
-                       
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRestaurantTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                       
-                    </p:dataTable>
-                
-                </p:panel>
-            </h:form>
-    </h:body>
-           
+                        </b:column>
+
+                    </b:dataTable>
+
+                </h:form>
+            </b:panel>
+        </ui:define>
+    </ui:composition>
 </html>

@@ -12,6 +12,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import controller.util.Session;
+import controller.util.SessionUtil;
 import javax.faces.view.ViewScoped;
 
 /**
@@ -33,6 +34,7 @@ public class ResultsController implements Serializable {
 
     public List<Restaurant> getItems() {
         items = (List<Restaurant>) Session.getAttribut("ResultHomeSearch");
+//        SessionUtil.getSession().invalidate();
         return items;
     }
 

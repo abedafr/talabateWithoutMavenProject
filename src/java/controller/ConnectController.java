@@ -16,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import javax.mail.MessagingException;
 import service.UserFacade;
 
 /**
@@ -30,6 +31,23 @@ public class ConnectController implements Serializable {
     private UserFacade ejbFacade;
     private User selected;
     private User connected;
+    private String email;
+
+    public String SendPW() throws MessagingException {
+        int res = ejbFacade.sendPW(email);
+        if (res < 0) {
+            JsfUtil.addErrorMessage("Email non trouvé!\n si vou n'avez pas de compte crée le!");
+            return null;
+        } else {
+            return "/home/Home";
+        }
+    }
+
+    public String deconnecter() {
+        ejbFacade.seDeConnnecter();
+        return "/home/Home";
+
+    }
 
     public String createAccount() {
         selected.setPassword(HashageUtil.sha256(selected.getPassword()));
@@ -40,33 +58,13 @@ public class ConnectController implements Serializable {
 
     }
 
-    public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) {
-    String confirmPassword = (String)value;
-    if (!confirmPassword.equals(selected.getPassword())) {
-      FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Passwords do not match!", "Passwords do not match!");
-      throw new ValidatorException(message);
-    }
-  }
-    
-    public UserFacade getEjbFacade() {
-        return ejbFacade;
-    }
-
-    public void setEjbFacade(UserFacade ejbFacade) {
-        this.ejbFacade = ejbFacade;
-    }
-
-    public User getSelected() {
-        if (selected == null) {
-            selected = new User();
-        }
-        return selected;
-    }
-
-    public void setSelected(User selected) {
-        this.selected = selected;
-    }
-
+//    public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) {
+//        String confirmPassword = (String) value;
+//        if (!confirmPassword.equals(selected.getPassword())) {
+//            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Passwords do not match!", "Passwords do not match!");
+//            throw new ValidatorException(message);
+//        }
+//    }
     public String SeConnecter() {
         int res = ejbFacade.seConnnecter(connected);
         if (res == -5) {
@@ -87,9 +85,36 @@ public class ConnectController implements Serializable {
 
     }
 
+    public UserFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(UserFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public User getSelected() {
+        if (selected == null) {
+            selected = new User();
+        }
+        return selected;
+    }
+
+    public void setSelected(User selected) {
+        this.selected = selected;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public User getConnected() {
-        if(connected == null){
-            connected= new User();
+        if (connected == null) {
+            connected = new User();
         }
         return connected;
     }
@@ -98,7 +123,6 @@ public class ConnectController implements Serializable {
         this.connected = connected;
     }
 
-    
     /**
      * Creates a new instance of ConnectController
      */

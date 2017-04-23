@@ -6,32 +6,11 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui">
-    <h:head>
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="shortcut icon" type="image/x-icon" href="#{resource['imgs/favicon.png']}"/>
+    <ui:composition template="/template/Mytemplate.xhtml">
 
-            <title>View Menu</title>
-        </f:facet>
+        <ui:define name="title">FOODelivery | View Menu..</ui:define>
 
-        <f:facet name="middle">
-            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
-
-            <h:outputStylesheet name="css/dashboard.css" />
-
-            <h:outputScript name="bootstrap/js/bootstrap.js" />
-        </f:facet>
-
-        <f:facet name="last">
-            <h:outputStylesheet name="css/font-awesome.css" />
-        </f:facet>
-    </h:head>
-    <h:body>
-
-        <!--    <ui:composition template="/default/main.xhtml">
-                <ui:define name="content">-->
+        <ui:define name="content">
 
         <f:view class="container">
             <div class="row">
@@ -59,36 +38,45 @@
                                 <f:facet name="header">
                                     <h:outputText value="Action"/>
                                 </f:facet>
-                                <p:commandButton rendered="#{item.costume==true}" class="btn btn-primary btn-xs glyphicon glyphicon-shopping-cart" value=""  icon="" actionListener="#{viewMenuController.prepareSuplement(item)}" update=":CommandeItemCreateForm, :SupplementSelectForm" oncomplete="PF('SupplementSelectDialog').show()"></p:commandButton>
-                                <p:commandButton rendered="#{item.costume==false}" class="btn btn-primary btn-xs glyphicon glyphicon-shopping-cart" value="" icon=""  actionListener="#{viewMenuController.addCart(item)}" update=":CommandeItemCreateForm:CommandeItemList"></p:commandButton>
+                                <b:commandButton rendered="#{item.costume==true}" 
+                                                 class="btn btn-primary btn-xs glyphicon glyphicon-shopping-cart" 
+                                                 value=""  icon="" 
+                                                 actionListener="#{viewMenuController.prepareSuplement(item)}" 
+                                                 update=":CommandeItemCreateForm, :SupplementSelectForm" 
+                                                 oncomplete="PF('SupplementSelectDialog').show()"></b:commandButton>
+                                <b:commandButton rendered="#{item.costume==false}" 
+                                                 class="btn btn-primary btn-xs glyphicon glyphicon-shopping-cart" 
+                                                 value="" icon="" 
+                                                 actionListener="#{viewMenuController.addCart(item)}" 
+                                                 update=":CommandeItemCreateForm"></b:commandButton>
                             </h:column>
                         </h:dataTable>
                     </h:form>
                 </div>
-                <div class="col-lg-3  col-md-3" style="float: left; width: 40%;" >
+                <div class="container col-lg-5  col-md-5 pull-right"  >
 
 
-                    <h:form id="CommandeItemCreateForm" class="form-group form-inline ">
+                    <h:form id="CommandeItemCreateForm" class="form-group form-inline pull-right">
                         <h1><h:outputText value="Panier"/></h1>
                         <p:commandButton  value="Vider La Liste" actionListener="#{viewMenuController.vider()}" update="CommandeItemList" class="form-control btn btn-danger "></p:commandButton>
-                        <p:commandButton  value="Confimer commande" action="#{viewMenuController.confirmCmd()}"  update="CommandeItemList" class="form-control btn btn-success"></p:commandButton>
+                        <p:commandButton  value="Confimer commande (#{viewMenuController.calculTotal()})" action="#{viewMenuController.confirmCmd()}"  update="CommandeItemList" class="form-control btn btn-success"></p:commandButton>
                         <p:dataTable id="CommandeItemList"  value="#{viewMenuController.commandeItems}" var="item" class="table table-striped " >
                             <p:column>
                                 <div  class="list-inline">
                                     <h:outputText value="#{item.platMenu.plate.nom}"/>
-                                    <div style="float: right;">
+                                    <div class="pull-right">
                                         <center>
                                             <h:outputText class="h4" value="#{item.prixTotalItem} MAD" /><br/>
-                                            <b:commandButton action="#{viewMenuController.delete(item)}" value="" icon="trash" update=":CommandeItemCreateForm:CommandeItemList" class="btn btn-xs btn-danger"/>
+                                            <b:commandButton action="#{viewMenuController.delete(item)}" value="" icon="trash" update=":CommandeItemCreateForm" class="btn btn-xs btn-danger"/>
                                                 
                                         </center>
                                     </div>
                                     <br></br>
                                     
                                     <div class="btn-group">
-                                        <b:commandButton action="#{viewMenuController.minus(item)}"  value="" icon="minus" update=":CommandeItemCreateForm:CommandeItemList" class="btn  btn-group-xs "></b:commandButton>
+                                        <b:commandButton action="#{viewMenuController.minus(item)}"  value="" icon="minus" update=":CommandeItemCreateForm" class="btn  btn-group-xs "></b:commandButton>
                                         <b:commandButton disabled="true" value="#{item.qte}" class="btn btn-info btn-group-xs"/>
-                                        <b:commandButton action="#{viewMenuController.plus(item)}"  value="" icon="plus" update=":CommandeItemCreateForm:CommandeItemList" class="btn  btn-group-xs"></b:commandButton>
+                                        <b:commandButton action="#{viewMenuController.plus(item)}"  value="" icon="plus" update=":CommandeItemCreateForm" class="btn  btn-group-xs"></b:commandButton>
                                     </div>
                                 </div>
                             </p:column>
@@ -99,7 +87,6 @@
         </f:view>
         <ui:include src="SupplementSelect.xhtml"/>
 
-        <!--</ui:define></ui:composition>-->
-    </h:body>
+        </ui:define></ui:composition>
 </html>
 

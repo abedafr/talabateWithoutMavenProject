@@ -6,78 +6,59 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:head>
+    <ui:composition template="/template/Mytemplate.xhtml">
 
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="shortcut icon" type="image/x-icon" href="#{resource['imgs/favicon.png']}"/>
+        <ui:define name="title">FOODelivery | Connecter vous..</ui:define>
 
-            <!--<ui:define name="title">-->
-            <title>FOODelivery | Connecter vous..</title>
-            <!--</ui:define>-->
-        </f:facet>
-
-        <f:facet name="middle">
-            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
-
-            <h:outputStylesheet name="css/dashboard.css" />
-
-            <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />-->
-
-            <h:outputScript name="bootstrap/js/bootstrap.js" />
-        </f:facet>
-
-        <f:facet name="last">
-            <h:outputStylesheet name="css/font-awesome.css" />
-        </f:facet>
-
-    </h:head>
-    <h:body style=" margin-top: 70px; background-image: url(../resources/imgs/bg9.jpg); background-size: cover; background-position-y: -150px">
-        <!--        <ui:composition>
-                    <ui:define name="content">-->
+        <ui:define name="content">
+            <style> body {
+                    /**/ 
+                    background-image: url(../resources/imgs/bg9.jpg); background-size: cover;
+                    background-position-y: -150px;
+                }
+            </style>
 
 
-        <b:growl delay="3000"/>
-        <h:form class="col-lg-4 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-8 col-xs-offset-2">
-            <b:panel title="Login" style="opacity: 52%">
-                <br/>
-                <div id="email" class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span>
-                                <i id="j_idt8_icon" class="glyphicon glyphicon-user"></i>
+            <b:growl delay="3000"/>
+            <h:form class="col-lg-4 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-8 col-xs-offset-2">
+                <b:panel title="Login" style="opacity: 52%; margin-top: 70px;" collapsible="false">
+                    <br/>
+                    <div id="email" class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>
+                                    <i id="j_idt8_icon" class="glyphicon glyphicon-user"></i>
+                                </span>
                             </span>
-                        </span>
-                        <p:inputText id="login" placeholder="Email address" class="form-control bf-no-message has-success" value="#{connectController.connected.login}" title="#{bundle.CreateUserTitle_login}" ></p:inputText>
+                            <p:inputText id="login" placeholder="Email address" class="form-control bf-no-message has-success" 
+                                         value="#{connectController.connected.email}" title="#{bundle.CreateUserTitle_login}" ></p:inputText>
+                        </div>
                     </div>
-                </div>
 
-                <div id="password" class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span>
-                                <i id="j_idt9_icon" aria-hidden="true" class="fa fa-key"></i>
+                    <div id="password" class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>
+                                    <i id="j_idt9_icon" aria-hidden="true" class="fa fa-key"></i>
+                                </span>
                             </span>
-                        </span>
-                        <p:password id="password" class="form-control bf-no-message has-success" placeholder="Password" value="#{connectController.connected.password}" title="#{bundle.CreateUserTitle_password}" ></p:password>
+                            <p:password id="password" class="form-control bf-no-message has-success" placeholder="Password" value="#{connectController.connected.password}" title="#{bundle.CreateUserTitle_password}" ></p:password>
+                        </div>
                     </div>
-                </div>
 
 
 
-                <h:link outcome="/connexion/ForgetPassword" value="Forgot password?"/>
+                    <h:link outcome="/connexion/ForgetPassword" value="Forgot password?"/>
 
-                <br/>
-                <b:commandButton  value="Login." action="#{connectController.SeConnecter()}" icon="glyphicon glyphicon-log-in"  class="btn btn-success btn-group-justified" />
+                    <br/>
+                    <b:commandButton  value="Login." action="#{connectController.SeConnecter()}" icon="glyphicon glyphicon-log-in"  class="btn btn-success btn-group-justified" />
 
-                Don't have an account? <h:link outcome="/connexion/CreateAnAccount" value="Create an account"/>
+                    Don't have an account? <h:link outcome="/connexion/CreateAnAccount" value="Create an account"/>
 
-            </b:panel>
-        </h:form>
-        <!--        </ui:define>
-                </ui:composition>-->
-    </h:body>
+                </b:panel>
+            </h:form>
+            
+        </ui:define>
+    </ui:composition>
 </html>
 

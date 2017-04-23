@@ -6,6 +6,7 @@ import controller.util.JsfUtil.PersistAction;
 import service.RestaurantFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -26,11 +27,13 @@ public class RestaurantController implements Serializable {
     @EJB
     private service.RestaurantFacade ejbFacade;
     private List<Restaurant> items = null;
+    private List<Restaurant> results = null;
     private Restaurant selected;
     private String nom;
 
     public RestaurantController() {
     }
+
 
     public Restaurant getSelected() {
         if (selected == null) {
@@ -42,13 +45,38 @@ public class RestaurantController implements Serializable {
     public String getNom() {
         return nom;
     }
+//    public String getRestauNom() {
+//        StringBuilder b=new StringBuilder();
+//        for (String s:getNoms()) {
+//            if (b.length()>0) {
+//                b.append(",");
+//            }
+//            b.append(s);
+//        }
+//        return b.toString();
+//    }
+    public String toRestau(Restaurant restaurant){
+        selected= restaurant;
+        return "/restaurant/ShowRestau.xhtml";
+    }
 
     public void setNom(String nom) {
         this.nom = nom;
     }
 
+    public List<Restaurant> getResults() {
+        if (results == null) {
+            results = ejbFacade.findAll();
+        }
+        return results;
+    }
+
+    public void setResults(List<Restaurant> results) {
+        this.results = results;
+    }
+
     public void search() {
-        items = ejbFacade.search(nom);
+        results = ejbFacade.search(nom);
     }
 
     public void setSelected(Restaurant selected) {

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import controller.util.Session;
+import controller.util.SessionUtil;
 import javax.enterprise.context.SessionScoped;
 import service.CommandeFacade;
 import service.CommandeItemFacade;
@@ -87,9 +88,13 @@ public class ViewMenuController implements Serializable {
 
     }
 
-    public String confirmCmd() {
+    public String confirmCmd(){
         Session.setAttribute(getCommandeItems(), "ConfirmCommand");
-        return "/checkout/ConfirmCommand";
+        return "/checkout/Paiment";
+    }
+    
+    public double calculTotal(){
+        return commandeFacade.calculTotalCommande(commandeItems);
     }
 
     public void saveSupplement() {
@@ -174,6 +179,7 @@ public class ViewMenuController implements Serializable {
 
     public List<PlatMenu> getItems() {
         items = getMenu().getPlatMenus();
+//        SessionUtil.getSession().invalidate();
         return items;
     }
 

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition>
+
+        <p:dialog id="AddAdressDlg" widgetVar="AddAdressDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAdressTitle}">
+            <h:form id="AddAdressForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4">
+                        <p:outputLabel value="#{bundle.CreateAdressLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{confirmCommand.adress.user.nom}" title="#{bundle.CreateAdressTitle_nom}" />
+                        <p:outputLabel value="#{bundle.CreateAdressLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{confirmCommand.adress.user.prenom}" title="#{bundle.CreateAdressTitle_prenom}" />
+                        <p:outputLabel value="#{bundle.CreateAdressLabel_tel}" for="tel" />
+                        <p:inputText id="tel" value="#{confirmCommand.adress.user.tel}" title="#{bundle.CreateAdressTitle_tel}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_email}" for="telFix" />
+                        <p:inputText id="telFix" value="#{confirmCommand.adress.user.email}" title="#{bundle.CreateAdressTitle_telFix}" />
+<!--                        <p:outputLabel value="#{bundle.CreateAdressLabel_ville}" for="ville" />
+                        <p:selectOneMenu id="ville" value="#{confirmCommand.adress.ville}" >
+                            <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                           var="villeItem"
+                                           itemValue="#{villeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAdressLabel_quartier}" for="quartier" />
+                        <p:selectOneMenu id="quartier" value="#{confirmCommand.adress.quartier}" >
+                            <f:selectItems value="#{quartierController.itemsAvailableSelectOne}"
+                                           var="quartierItem"
+                                           itemValue="#{quartierItem}"/>
+                        </p:selectOneMenu>-->
+                        <p:outputLabel value="#{bundle.CreateAdressLabel_building}" for="building" />
+                        <p:inputText id="building" value="#{confirmCommand.adress.building}" title="#{bundle.CreateAdressTitle_building}" />
+                        <p:outputLabel value="#{bundle.CreateAdressLabel_street}" for="street" />
+                        <p:inputText id="street" value="#{confirmCommand.adress.street}" title="#{bundle.CreateAdressTitle_street}" />
+                        <p:outputLabel value="#{bundle.CreateAdressLabel_number}" for="number" />
+                        <p:inputText id="number" value="#{confirmCommand.adress.number}" title="#{bundle.CreateAdressTitle_number}" />
+                        <p:outputLabel value="#{bundle.CreateAdressLabel_floor}" for="floor" />
+                        <p:inputText id="floor" value="#{confirmCommand.adress.floor}" title="#{bundle.CreateAdressTitle_floor}" />
+                    </p:panelGrid>
+                    <p:commandButton id="saveAdress" actionListener="#{confirmCommand.createAderess()}" value="#{bundle.Save}" update="display" oncomplete="handleSubmit(args,'AddAdressDialog');"/>
+                    <p:commandButton id="cancelAdress" value="#{bundle.Cancel}" onclick="AddAdressDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+            <script >
+                $("#saveAdress").click(function () {
+                    $("#AddAdressDlg").hide("slow");
+                });
+                $("#cancelAdress").click(function () {
+                    $("#AddAdressDlg").hide("fast");
+                });
+            </script>
+        </p:dialog>
+
+    </ui:composition>
+</html>
+

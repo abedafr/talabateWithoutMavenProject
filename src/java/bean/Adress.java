@@ -23,25 +23,23 @@ public class Adress implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nom;
-    private String prenom;
-    private String tel;
-    private String telFix;
+
     @ManyToOne
     private User user;
-    
+
     @ManyToOne
     private Ville ville;
     @ManyToOne
     private Quartier quartier;
-    
-    private enum local{
-        APARTEMENT,HOUSE,OFFICE
+
+    private enum local {
+        APARTEMENT, HOUSE, OFFICE
     }
     private String building;
     private String street;
     private int number;
     private int floor;
+
     public Long getId() {
         return id;
     }
@@ -50,39 +48,10 @@ public class Adress implements Serializable {
         this.id = id;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public String getTelFix() {
-        return telFix;
-    }
-
-    public void setTelFix(String telFix) {
-        this.telFix = telFix;
-    }
-
     public User getUser() {
+        if (user == null) {
+            user = new User();
+        }
         return user;
     }
 
@@ -91,6 +60,9 @@ public class Adress implements Serializable {
     }
 
     public Ville getVille() {
+        if (ville == null) {
+            ville = new Ville();
+        }
         return ville;
     }
 
@@ -99,6 +71,9 @@ public class Adress implements Serializable {
     }
 
     public Quartier getQuartier() {
+        if (quartier == null) {
+            quartier = new Quartier();
+        }
         return quartier;
     }
 
@@ -138,8 +113,6 @@ public class Adress implements Serializable {
         this.floor = floor;
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -164,5 +137,5 @@ public class Adress implements Serializable {
     public String toString() {
         return "bean.Adress[ id=" + id + " ]";
     }
-    
+
 }

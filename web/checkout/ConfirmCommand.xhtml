@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="/template/Mytemplate.xhtml">
+        <ui:define name="content">
+        <b:panel id="listeComande">
+            <h:form>
+                <h:outputText value="La commande" class="H3"></h:outputText>
+                <h:dataTable value="#{confirmCommand.commandeItems}" var="item" class="table table-striped" >
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nom" class=""/>
+                        </f:facet>
+                        <h:outputText value="#{item.platMenu.plate.nom}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Prix Unitaire" class=""/>
+                        </f:facet>
+                        <h:outputText value="#{item.platMenu.prix}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Qte" class=""/>
+                        </f:facet>
+                        <h:outputText value="#{item.qte}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Prix cmd" class=""/>
+                        </f:facet>
+                        <h:outputText value="#{item.prixTotalItem}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </b:panel>
+        <b:panel id="Adress" title="adressDeLivraison">
+            <h:form>
+                <b:commandButton class="btn btn-primary" value="Add Adress" actionListener="#" rendered="#{confirmCommand.adress==null}" update="Adress,:AddAdressForm" oncomplete="PF('AddAdressDialog').show()"></b:commandButton>
+                <b:commandButton class="btn btn-info" value="Edit Adress" actionListener="#" rendered="#{confirmCommand.adress!=null}" update="Adress,:AddAdressForm" oncomplete="PF('AddAdressDialog').show()"></b:commandButton>
+                <p:layoutUnit position="center"  rendered="#{confirmCommand.adress!=null}" >
+                    <b><h:outputText value="#{bundle.ViewAdressLabel_nom}" /></b>
+                    <h:outputText value=" #{confirmCommand.adress.user.nom}" title="#{bundle.ViewAdressTitle_nom}"/>
+                    <b><h:outputText value=" #{bundle.ViewAdressLabel_prenom}" /></b>
+                    <h:outputText value=" #{confirmCommand.adress.user.prenom}" title="#{bundle.ViewAdressTitle_prenom}"/><br/>
+                    <b><h:outputText value=" #{bundle.ViewAdressLabel_tel}" /></b>
+                    <h:outputText value=" #{confirmCommand.adress.user.tel}" title="#{bundle.ViewAdressTitle_tel}"/>
+                    <b><h:outputText value=" #{bundle.CreateUserLabel_email}"/></b>
+                    <h:outputText value=" #{confirmCommand.adress.user.email}" title="#{bundle.ViewAdressTitle_telFix}"/><br/>
+<!--                    <b><h:outputText value=" #{bundle.ViewAdressLabel_ville}" /></b>
+                    <h:outputText value=" #{confirmCommand.adress.ville.nom}" title="#{bundle.ViewAdressTitle_ville}"/>
+                    <b><h:outputText value=" #{bundle.ViewAdressLabel_quartier}" /></b>
+                    <h:outputText value=" #{confirmCommand.adress.quartier.nom}" title="#{bundle.ViewAdressTitle_quartier}"/><br/>-->
+                    <b><h:outputText value=" #{bundle.ViewAdressLabel_building}" /></b>
+                    <h:outputText value=" #{confirmCommand.adress.building}" title="#{bundle.ViewAdressTitle_building}"/>
+                    <b><h:outputText value=" #{bundle.ViewAdressLabel_street}" /></b>
+                    <h:outputText value=" #{confirmCommand.adress.street}" title="#{bundle.ViewAdressTitle_street}"/>
+                    <b><h:outputText value=" #{bundle.ViewAdressLabel_number}" /></b>
+                    <h:outputText value=" #{confirmCommand.adress.number}" title="#{bundle.ViewAdressTitle_number}"/>
+                    <b><h:outputText value=" #{bundle.ViewAdressLabel_floor}" /></b>
+                    <h:outputText value=" #{confirmCommand.adress.floor}" title="#{bundle.ViewAdressTitle_floor}"/>
+                </p:layoutUnit>
+            </h:form>
+        </b:panel>
+        <h:form>
+            <b:panel id="Paiment" title="detailPaiment">
+
+                <h:outputText value="SubTotale" class=""/>
+                <h:outputText value="#{confirmCommand.calculTotal()}"/>
+                <h:outputText value="Totale Amount" class=""/>
+                <h:outputText value="#{confirmCommand.calculTotal()}"/>
+                <b:commandButton  value ="finish" action="#{confirmCommand.finish()}"></b:commandButton>
+
+            </b:panel>
+        </h:form>
+        <ui:include src="AddAdress.xhtml"/>
+        <script >
+            $("body").load(function () {
+                $("#AddAdressDlg").show();
+
+            });
+            $("#saveAdress").click(function () {
+
+                $("#AddAdressDlg").hide("slow");
+            });
+            $("#cancelAdress").click(function () {
+                $("#AddAdressDlg").hide("fast");
+            });
+        </script>
+
+
+        </ui:define>
+    </ui:composition>
+</html>
+

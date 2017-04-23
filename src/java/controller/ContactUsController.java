@@ -25,16 +25,16 @@ public class ContactUsController implements Serializable {
 
     @EJB
     private UserFacade ejbFacade;
-    private User selected; 
+    private User userSelected; 
 
     private Restaurant restSelected;
     @EJB
     private RestaurantFacade ejbRestFacade;
 
     public String create() {
-        selected.setBlocked(1);
+        userSelected.setBlocked(true);
         restSelected.setAccepted(false);
-        ejbFacade.create(selected);
+        ejbFacade.create(userSelected);
         ejbRestFacade.create(restSelected);
         return "/home/Home.xhtml";
 
@@ -48,15 +48,15 @@ public class ContactUsController implements Serializable {
         this.ejbFacade = ejbFacade;
     }
 
-    public User getSelected() {
-        if (selected == null) {
-            selected = new User();
+    public User getUserSelected() {
+        if (userSelected == null) {
+            userSelected = new User();
         }
-        return selected;
+        return userSelected;
     }
 
-    public void setSelected(User selected) {
-        this.selected = selected;
+    public void setUserSelected(User userSelected) {
+        this.userSelected = userSelected;
     }
 
     public Restaurant getRestSelected() {

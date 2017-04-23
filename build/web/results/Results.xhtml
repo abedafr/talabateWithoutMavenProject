@@ -6,77 +6,34 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui">
-    <h:head>
-        <title>FOODelivery</title>
+    <ui:composition template="/template/Mytemplate.xhtml">
 
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="shortcut icon" type="image/x-icon" href="#{resource['imgs/favicon.png']}"/>
+        <ui:define name="title">FOODelivery | Choisissez un Restaurant...</ui:define>
+
+        <ui:define name="content">
 
 
-        </f:facet>
+            <h:form class="form-group col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+                <b:dataTable value="#{resultsController.items}" var="item" class="table-bordered table table-striped" 
+                             row-highlight="false" fixed-header="false" paginated="true" searching="false"
+                             >
 
-        <f:facet name="middle">
-            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+                    <h:column>
+                        <f:facet name="header">
+                                    <h:outputText value="Choisissez un restaurant.." class=""/>
+                                </f:facet>
+                        <h:outputText value="#{item.nom}" class="h4"/>
+                        <b:commandButton action="#{resultsController.viewMenu(item)}" value="View Menu" 
+                                         class="btn btn-info pull-right" ></b:commandButton>
 
-            <h:outputStylesheet name="css/dashboard.css" />
-
-            <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />-->
-
-            <h:outputScript name="bootstrap/js/bootstrap.js" />
-        </f:facet>
-
-        <f:facet name="last">
-            <h:outputStylesheet name="css/font-awesome.css" />
-        </f:facet>
-    </h:head>
-    <h:body>
-        <!--    <ui:composition template="/default/main.xhtml">
-                <ui:define name="content">-->
+                    </h:column>
 
 
+                </b:dataTable>
+            </h:form>
 
-        <!--<f:view>-->
+        </ui:define>
 
-
-        <h:form class="">
-            <h1><h:outputText value="View Restaurants"/></h1>
-            <h:dataTable value="#{resultsController.items}" var="item" class="table-bordered table table-striped">
-
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nom"/>
-                    </f:facet>
-                    <h:outputText value="#{item.nom}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Quartier"/>
-                    </f:facet>
-                    <h:outputText value="#{item.quartier}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Id"/>
-                    </f:facet>
-                    <h:outputText value="#{item.id}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Menu"/>
-                    </f:facet>
-                    <!--<h:outputText value="#{item.menu}"/><br></br>-->
-                    <p:commandButton action="#{resultsController.viewMenu(item)}" value="View Menu" class="btn btn-info" ></p:commandButton>
-                </p:column>
-            </h:dataTable>
-        </h:form>
-        <!--</f:view>-->
-
-        <!--        </ui:define>
-        
-            </ui:composition>-->
-    </h:body>
+    </ui:composition>
 </html>
 

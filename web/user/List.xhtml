@@ -19,7 +19,7 @@
                     <p:dataTable id="datalist" value="#{userController.items}" var="item"
                                  selectionMode="single" selection="#{userController.selected}"
                                  paginator="true"
-                                 rowKey="#{item.login}"
+                                 rowKey="#{item.email}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
@@ -31,7 +31,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUserTitle_login}"/>
                             </f:facet>
-                            <h:outputText value="#{item.login}"/>
+                            <h:outputText value="#{item.email}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -50,12 +50,6 @@
                                 <h:outputText value="#{bundle.ListUserTitle_prenom}"/>
                             </f:facet>
                             <h:outputText value="#{item.prenom}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserTitle_email}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.email}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

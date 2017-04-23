@@ -5,15 +5,19 @@
  */
 package service;
 
-
-
-
 import bean.User;
+import controller.util.EmailUtil;
 import controller.util.HashageUtil;
 import controller.util.JsfUtil;
+import controller.util.RandomStringUtil;
+import controller.util.Session;
+import controller.util.SessionUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -27,7 +31,6 @@ public class UserFacade extends AbstractFacade<User> {
     @PersistenceContext(unitName = "TalabatWithoutMavenPU")
     private EntityManager em;
 
-
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -40,7 +43,7 @@ public class UserFacade extends AbstractFacade<User> {
     @Override
     public User find(Object id) {
         try {
-            User user = (User) em.createQuery("select u from User u where u.login = '" + id + "'").getSingleResult();
+            User user = (User) em.createQuery("select u from User u where u.email = '" + id + "'").getSingleResult();
             if (user != null) {
                 return user;
             }
@@ -50,15 +53,39 @@ public class UserFacade extends AbstractFacade<User> {
         return null;
     }
 
-//    public void seDeConnnecter() {
+    public int sendPW(String email)  {
+        User user = find(email);
+        if (user == null) {
+            return -1;
+        } else {
+            String pw = RandomStringUtil.generate();
+            String msg = "Bienvenu Mr. " +user.getNom()+ ",<br/>"
+                    + "D'après votre demande de reinitialiser le mot de passe de votre compte FOODelivery, nous avons generer ce mot de passe pour vous.\n"
+                    + "<br/><br/>"
+                    + "      Nouveau Mot de Passe: <br/><center><b>"
+                    + pw
+                    +"</b></center><br/><br/><b><i>PS:</i></b> ce mot de passe vous donne l'acces a votre compte une seule fois, une fois que vous avez connecter il faut cree votre propre mot de passe";
+            try {
+                EmailUtil.sendMail("foodelivery.info@gmail.com", "foodelivery", msg, email, "Votre nouveau Mot de passe de FOODelivery");
+            } catch (MessagingException ex) {
+//                Logger.getLogger(UserFacade.class.getName()).log(Level.SEVERE, null, ex);
+                return -2;
+            }
+            
+//            user.setBlocked(1);
+            user.setPassword(HashageUtil.sha256(pw));
+            edit(user);
+            return 1;
+        }
+    }
+
+    public void seDeConnnecter() {
 //        historiqueConnexionFacade.createDeConnexion();
-//        SessionUtil.getSession().invalidate();
-//
-//    }
+        SessionUtil.getSession().invalidate();
+        Session.clear();
+//        SessionUtil.registerUser(null);
 
-    
-
-    
+    }
 
     private List<User> findUsersIntersection(List<User> userAnuels, List<User> userTrims) {
         List<User> res = new ArrayList();
@@ -88,7 +115,7 @@ public class UserFacade extends AbstractFacade<User> {
     }
 
     public void changeData(User user) {
-        User loadedUser = find(user.getLogin());
+        User loadedUser = find(user.getEmail());
         cloneData(user, loadedUser);
         edit(loadedUser);
     }
@@ -101,10 +128,10 @@ public class UserFacade extends AbstractFacade<User> {
     }
 
     public int seConnnecter(User user) {
-        if (user == null || user.getLogin() == null) {
+        if (user == null || user.getEmail()== null) {
             return -5;
         } else {
-            User loadedUser = find(user.getLogin());
+            User loadedUser = find(user.getEmail());
             if (loadedUser == null) {
                 return -4;
             } else if (!loadedUser.getPassword().equals(HashageUtil.sha256(user.getPassword()))) {
@@ -113,11 +140,11 @@ public class UserFacade extends AbstractFacade<User> {
                     loadedUser.setNbrCnx(loadedUser.getNbrCnx() + 1);
                 } else if (loadedUser.getNbrCnx() >= 3) {
                     System.out.println("hana loadedUser.getNbrCnx() >= 3::: " + loadedUser.getNbrCnx());
-                    loadedUser.setBlocked(1);
+                    loadedUser.setBlocked(true);
                 }
                 edit(loadedUser);
                 return -3;
-            } else if (loadedUser.getBlocked() == 1) {
+            } else if (loadedUser.getBlocked()) {
                 return -2;
             } else {
                 loadedUser.setNbrCnx(0);
@@ -126,7 +153,7 @@ public class UserFacade extends AbstractFacade<User> {
 //                user.setCommune(communeFacade.findByUser(user));
 //                user.setMdpChanged(loadedUser.isMdpChanged());
                 user.setPassword(null);
-//                SessionUtil.attachUserToCommune(user);
+                SessionUtil.registerUser(user);
 //                historiqueConnexionFacade.createConnexion(loadedUser);
                 return 1;
             }
@@ -167,8 +194,6 @@ public class UserFacade extends AbstractFacade<User> {
 //
 //        return privileges;
 //    }
-
-
 //    public User clone(User user) {
 //        User clone = new User();
 //        clone.setLogin(user.getLogin());
@@ -199,7 +224,6 @@ public class UserFacade extends AbstractFacade<User> {
 //        clone.setAdmin(user.isAdmin());
 //        return clone;
 //    }
-
 //    @Override
 //    public void create(User user) {
 //        user.setCommune(SessionUtil.getCurrentCommune());
@@ -207,7 +231,6 @@ public class UserFacade extends AbstractFacade<User> {
 //        SessionUtil.getCurrentCommune().getUsers().add(user);
 //
 //    }
-
 //    @Override
 //    public void edit(User user) {
 //        super.edit(user);
@@ -230,5 +253,4 @@ public class UserFacade extends AbstractFacade<User> {
 //    public List<User> findAll() {
 //        return findByCommune(SessionUtil.getCurrentCommune());
 //    }
-
 }

@@ -61,13 +61,34 @@ public class CommandeFacade extends AbstractFacade<Commande> {
             commandeItem.setQte(commandeItem.getQte() + 1);
             if (!platMenu.isCostume()) {
                 commandeItem.setPrixTotalItem(commandeItem.getPrixTotalItem() + platMenu.getPrix());
-            }else{
-                commandeItem.setPrixTotalItem(commandeItem.getPrixTotalItem() + platMenu.getPrix()+commandeItem.getTotalSupplements());
+            } else {
+                commandeItem.setPrixTotalItem(commandeItem.getPrixTotalItem() + platMenu.getPrix() + commandeItem.getTotalSupplements());
             }
             System.out.println("position elif = " + pos);
             commandeItems.set(pos, commandeItem);
         }
         return commandeItems;
+    }
+
+    public Commande createCommande(Commande commande, List<CommandeItem> commandeItems) {
+        commande.setId(generateId("Commande", "id"));
+        create(commande);
+
+        for (CommandeItem commandeItem : commandeItems) {
+            commandeItem.setCommande(commande);
+            commandeItemFacade.create(commandeItem);
+        }
+        return commande;
+    }
+
+    public double calculTotalCommande(List<CommandeItem> commandeItems) {
+        double tot = 0;
+        if (commandeItems != null) {
+            for (CommandeItem commandeItem : commandeItems) {
+                tot = tot + commandeItem.getPrixTotalItem();
+            }
+        }
+        return tot;
     }
 
 }

@@ -6,74 +6,18 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui">
-    <h:head>
-        <link rel="icon" href="/resources/imgs/favinon.png"/>
-        <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-        <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="shortcut icon" type="image/x-icon" href="#{resource['imgs/favicon.png']}"/>
-
-            <title>FOODelivery | Command Your food Online</title>
-        </f:facet>
-
-        <f:facet name="middle">
-            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
-
-            <h:outputStylesheet name="css/dashboard.css" />
-
-            <h:outputScript name="bootstrap/js/bootstrap.js" />
-        </f:facet>
-
-        <f:facet name="last">
-            <h:outputStylesheet name="css/font-awesome.css" />
-        </f:facet>
-
-
-    </h:head>
-    <h:body style="padding-top: 50px; background: black">
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-
-        <!-- Navbar
-        ================================================== -->
-
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">FOODelivery</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Help</a></li>
-                    </ul>
-                    <form class="navbar-form navbar-right">
-                        <input type="text" class="form-control" placeholder="Search..." />
-                    </form>
-                </div>
-            </div>
-        </div>
-
+    <ui:composition template="/template/Mytemplate.xhtml">
+            <ui:define name="title">FOODelivery | Command Your food Online</ui:define>
 
         <!-- Carousel
         ================================================== -->
-
+        <ui:define name="content">
+            <style type="text/css">
+                body{
+                    margin-top: -20px;
+                    background: black;
+                }
+            </style>
         <b:carousel id="myCarousel" interval="3000">
             <b:carouselCaption class="">
                 <!--
@@ -88,7 +32,8 @@
                             <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
                                            var="villeItem"
                                            itemValue="#{villeItem}" />
-                            <p:ajax rendered="#{homeController.ville!=null}" process="ville" listener="#{homeController.findByVille()}" update="quartier"></p:ajax>
+                            <p:ajax rendered="#{homeController.ville!=null}" process="ville" listener="#{homeController.findByVille()}" 
+                                    update="quartier"></p:ajax>
                         </h:selectOneMenu>
                         <h:selectOneMenu id="quartier" value="#{homeController.quartier}" class="form-control btn btn-group-justified btn-group-lg" >
                             <f:selectItem itemValue="#{null}" itemLabel="Select Quartier.."/>
@@ -201,10 +146,7 @@
 
 
             <!-- FOOTER -->
-            <footer>
-                <p class="pull-right"><a href="#">Back to top</a></p>
-                <p>&copy; 2017 JavaEE TALABAT Project, Inc.  <a href="#">Privacy</a> · <a href="#">Terms</a></p>
-            </footer>
+          
 
         </div><!-- /.container -->
 
@@ -215,6 +157,7 @@
         <!--        <script src="./Carousel Template for Bootstrap_files/holder.min.js.téléchargement"></script>
                  IE10 viewport hack for Surface/desktop Windows 8 bug 
                 <script src="./Carousel Template for Bootstrap_files/ie10-viewport-bug-workaround.js.téléchargement"></script>-->
-    </h:body>
+        </ui:define>
+    </ui:composition>
 </html>
 

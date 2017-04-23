@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2017 at 02:45 AM
+-- Generation Time: Apr 23, 2017 at 08:50 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -30,17 +30,13 @@ CREATE TABLE IF NOT EXISTS `adress` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `BUILDING` varchar(255) DEFAULT NULL,
   `FLOOR` int(11) DEFAULT NULL,
-  `NOM` varchar(255) DEFAULT NULL,
   `NUMBER` int(11) DEFAULT NULL,
-  `PRENOM` varchar(255) DEFAULT NULL,
   `STREET` varchar(255) DEFAULT NULL,
-  `TEL` varchar(255) DEFAULT NULL,
-  `TELFIX` varchar(255) DEFAULT NULL,
   `QUARTIER_ID` bigint(20) DEFAULT NULL,
-  `USER_LOGIN` varchar(255) DEFAULT NULL,
+  `USER_EMAIL` varchar(255) DEFAULT NULL,
   `VILLE_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `FK_ADRESS_USER_LOGIN` (`USER_LOGIN`),
+  KEY `FK_ADRESS_USER_LOGIN` (`USER_EMAIL`),
   KEY `FK_ADRESS_QUARTIER_ID` (`QUARTIER_ID`),
   KEY `FK_ADRESS_VILLE_ID` (`VILLE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -437,11 +433,10 @@ CREATE TABLE IF NOT EXISTS `supplementselected` (
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `LOGIN` varchar(255) NOT NULL,
-  `ADMIIN` tinyint(1) DEFAULT '0',
-  `BLOCKED` int(11) DEFAULT NULL,
+  `EMAIL` varchar(255) NOT NULL,
+  `ISADMIN` int(11) DEFAULT '0',
+  `BLOCKED` tinyint(1) DEFAULT NULL,
   `DATENAISSANCE` longblob,
-  `EMAIL` varchar(255) DEFAULT NULL,
   `GENDER` varchar(255) DEFAULT NULL,
   `MDPCHANGED` tinyint(1) DEFAULT '0',
   `NBRCNX` int(11) DEFAULT NULL,
@@ -450,15 +445,20 @@ CREATE TABLE IF NOT EXISTS `user` (
   `PRENOM` varchar(255) DEFAULT NULL,
   `TEL` varchar(255) DEFAULT NULL,
   `TENTATIVEREST` int(11) DEFAULT NULL,
-  PRIMARY KEY (`LOGIN`)
+  PRIMARY KEY (`EMAIL`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`LOGIN`, `ADMIIN`, `BLOCKED`, `DATENAISSANCE`, `EMAIL`, `GENDER`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TEL`, `TENTATIVEREST`) VALUES
-('abed', 0, 0, NULL, 'abed@dlks', 'M', 0, 0, 'abed', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'afr', '2136549', 0);
+INSERT INTO `user` (`EMAIL`, `ISADMIN`, `BLOCKED`, `DATENAISSANCE`, `GENDER`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TEL`, `TENTATIVEREST`) VALUES
+('abed', 1, 0, NULL, 'M', 0, 0, 'abed', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'afr', '2136549', 0),
+('abed2', 0, 0, NULL, 'M', 0, 3, 'abed', '6ebfe7cb61ea44af9b44a1c1c51e15db75349ddea16cae87cd8f05ae40c0c76b', 'afr', '123456789', 0),
+('abed@afr', 0, 0, NULL, 'M', 0, 0, 'abed ', '16ba98cf66cf7253aea999eaa6a5fabdc0c3aa69de11a844b474da6ca83ddb2a', 'afr', '21654969879', 0),
+('larbi@', 0, 0, NULL, NULL, 0, 0, 'larbi', '123', 'id', '123456789', 0),
+('SEFsef12364@gmail.com', 0, 0, NULL, 'M', 0, 0, 'Souhail', 'aee634bc2bff88a128bb080299088864883716dd70f58bb1306faa8970122acc', 'Elfahimi', '123456789', 0),
+('younesss.bfs@gmail.com', 0, 0, NULL, 'M', 0, 0, 'youness', '541ac1c4c88e3ea8d80b2569424a0b4edc27f44762cae16047b97244ae20f2a5', 'boufous', '04653598', 0);
 
 -- --------------------------------------------------------
 
@@ -502,7 +502,7 @@ INSERT INTO `ville` (`ID`, `NOM`) VALUES
 --
 ALTER TABLE `adress`
   ADD CONSTRAINT `FK_ADRESS_QUARTIER_ID` FOREIGN KEY (`QUARTIER_ID`) REFERENCES `quartier` (`ID`),
-  ADD CONSTRAINT `FK_ADRESS_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`),
+  ADD CONSTRAINT `FK_ADRESS_USER_LOGIN` FOREIGN KEY (`USER_EMAIL`) REFERENCES `user` (`EMAIL`),
   ADD CONSTRAINT `FK_ADRESS_VILLE_ID` FOREIGN KEY (`VILLE_ID`) REFERENCES `ville` (`ID`);
 
 --
@@ -530,7 +530,7 @@ ALTER TABLE `cuisine_menu`
 -- Constraints for table `device`
 --
 ALTER TABLE `device`
-  ADD CONSTRAINT `FK_DEVICE_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`);
+  ADD CONSTRAINT `FK_DEVICE_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`EMAIL`);
 
 --
 -- Constraints for table `menu`
@@ -582,7 +582,7 @@ ALTER TABLE `supplementselected`
 --
 ALTER TABLE `user_commande`
   ADD CONSTRAINT `FK_USER_COMMANDE_commandes_ID` FOREIGN KEY (`commandes_ID`) REFERENCES `commande` (`ID`),
-  ADD CONSTRAINT `FK_USER_COMMANDE_users_LOGIN` FOREIGN KEY (`users_LOGIN`) REFERENCES `user` (`LOGIN`);
+  ADD CONSTRAINT `FK_USER_COMMANDE_users_LOGIN` FOREIGN KEY (`users_LOGIN`) REFERENCES `user` (`EMAIL`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

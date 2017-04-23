@@ -17,7 +17,7 @@
         <f:facet name="middle">
             <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
 
-            <h:outputStylesheet name="css/dashboard.css" />
+            <h:outputStylesheet name="css/myTemplate.css" />
 
             <h:outputScript name="bootstrap/js/bootstrap.js" />
         </f:facet>
@@ -27,27 +27,29 @@
         </f:facet>
     </h:head>
 
-    <h:body style="padding-top: 50px;">
+    <h:body>
 
         <div id="page">
 
             <div id="header">
-                <ui:insert name="header" >
-                    <ui:include src="/template/Header.xhtml" />
-                </ui:insert>
+                <!--<ui:insert name="header" >-->
+                <ui:include  src="/template/Header.xhtml" />
+                <!--</ui:insert>-->
             </div>
 
             <div id="content">
                 <ui:insert name="content" />
             </div>
 
-            <div id="footer">
-                <ui:insert name="footer" >
-                    <ui:include src="/template/Footer.xhtml" />
-                </ui:insert>
-            </div>
+
 
         </div>
-
+<!--        <div id="footer">
+            <footer>
+                <ui:insert name="footer" >
+                <ui:include src="/template/Footer.xhtml" />
+                </ui:insert>
+            </footer>
+        </div>-->
     </h:body>
 </html>
