@@ -12,14 +12,16 @@
             <h:form id="RestaurantViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{restaurantController.selected != null}">
-                        <h:outputText value="#{bundle.ViewRestaurantLabel_menu}"/>
-                        <h:outputText value="#{restaurantController.selected.menu}" title="#{bundle.ViewRestaurantTitle_menu}"/>
+                        <h:outputText value="#{bundle.ViewRestaurantLabel_id}"/>
+                        <h:outputText value="#{restaurantController.selected.id}" title="#{bundle.ViewRestaurantTitle_id}"/>
                         <h:outputText value="#{bundle.ViewRestaurantLabel_nom}"/>
                         <h:outputText value="#{restaurantController.selected.nom}" title="#{bundle.ViewRestaurantTitle_nom}"/>
                         <h:outputText value="#{bundle.ViewRestaurantLabel_quartier}"/>
                         <h:outputText value="#{restaurantController.selected.quartier}" title="#{bundle.ViewRestaurantTitle_quartier}"/>
-                        <h:outputText value="#{bundle.ViewRestaurantLabel_id}"/>
-                        <h:outputText value="#{restaurantController.selected.id}" title="#{bundle.ViewRestaurantTitle_id}"/>
+                        <h:outputText value="Admin Restau"/>
+                        <h:outputText value="#{restaurantController.selected.adminRestau.email}" />
+                        <h:outputText value="Accepted"/>
+                        <h:outputText value="#{restaurantController.selected.accepted}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="RestaurantViewDialog.hide()"/>
                 </h:panelGroup>

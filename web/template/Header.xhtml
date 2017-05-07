@@ -7,34 +7,114 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui">
     <ui:composition>
-        <b:navBar inverse="true" position="top" brandHref="/TalabatWithoutMaven/faces/home/Home.xhtml"  brandImg="#{resource['imgs/logo.PNG']}">
-            <b:navbarLinks>
+        <style>
+
+
+        </style>
+        <b:navBar inverse="true" brand-align="left" position="top" brandHref="../home/Home.xhtml"  
+                  brandImg="#{resource['imgs/logo.PNG']}">
+            <b:navbarLinks class="pull-left">
 
             </b:navbarLinks>
-            <!-- Following line is needed for TBS 3.0.1 (panel content overflow issue) -->
-            <b:navbarLinks pull="right" styleClass="hidden-xs">
-                <b:dropMenu value="Panier" icon="glyphicon-shopping-cart">
+             <!--Following line is needed for TBS 3.0.1 (panel content overflow issue)--> 
+            <b:navbarLinks pull="right" style="right: -20px" styleClass="hidden-xs">
+                <b:dropMenu id="panierNavbar" value="" icon="glyphicon-shopping-cart">
+                    <div class=" "   >
+                        <br/>
+                        <h:outputText class="text-center center-block text-faded" rendered="#{viewMenuController.commandeItems.size()==0}"
+                                      value="Votre Panier est Vide!"/>
+                        <br/>
+                        <h:form rendered="#{viewMenuController.commandeItems.size()!=0}" id="panierFormNavbar"
+                                class="form-group form-inline pull-right">
 
+                            <h:outputText style="margin-left: 10px;" class="h3 label label-default" 
+                                          value="#{viewMenuController.calculTotal()} MAD" />
+                            <div class="pull-right btn-group btn-group-xs ">
+                                <b:commandButton  value="" actionListener="#{viewMenuController.vider()}" 
+                                                  update="panierFormNavbar"  
+                                                  class=" btn btn-danger btn-xs 
+                                                  glyphicon glyphicon-remove"/>
+
+                                <b:commandButton  value="" 
+                                                  action="#{viewMenuController.confirmCmd()}"  update="panierFormNavbar" 
+                                                  class=" btn btn-group-xs btn-success btn-xs pull-right
+                                                  glyphicon glyphicon-ok"/>
+                            </div>
+                            <br/>
+                            <br/>
+                            <p:dataTable id="panierListNavbar"  value="#{viewMenuController.commandeItems}" var="item" 
+                                         class="table table-striped " >
+                                <p:column>
+                                    <div  class="list-inline">
+                                        <h:outputText class="h6" value="#{item.platMenu.plate.nom}"/>
+                                        <div class="pull-right">
+                                            <center>
+                                                <h:outputText class="h5" value="#{item.prixTotalItem} MAD" /><br/>
+                                                <b:commandButton action="#{viewMenuController.delete(item)}" value="" 
+                                                                 icon="trash" update="panierFormNavbar" 
+                                                                 class="btn btn-xs btn-danger"/>
+
+                                            </center>
+                                        </div>
+                                        <br></br>
+
+                                        <div class="btn-group btn-group-xs">
+                                            <b:commandButton action="#{viewMenuController.minus(item)}"  value="" 
+                                                             icon="minus" update=" panierFormNavbar" 
+                                                             class="btn  btn-group-xs "></b:commandButton>
+                                            <b:commandButton disabled="true" value="#{item.qte}" 
+                                                             class="btn btn-info btn-group-xs"/>
+                                            <b:commandButton action="#{viewMenuController.plus(item)}"  value="" 
+                                                             icon="plus" update=" panierFormNavbar"
+                                                             class="btn  btn-group-xs"></b:commandButton>
+                                        </div>
+                                    </div>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </div>
                 </b:dropMenu>
             </b:navbarLinks>
-            <b:navbarLinks pull="right">
-                <b:navLink value="" tooltip="Home" href="/TalabatWithoutMaven/faces/home/Home.xhtml" icon="glyphicon-home"></b:navLink>
-                <b:navLink value="" tooltip="Search Restaurants" href="/TalabatWithoutMaven/faces/restaurant/Search.xhtml" icon="glyphicon-search"></b:navLink>
-                <b:navLink rendered="#{templateController.restauAdmin}" value="Mon Restaurant"  href="/TalabatWithoutMaven/faces/restaurant/Search.xhtml" icon="glyphicon-search"></b:navLink>
-                <b:navLink rendered="#{templateController.UserConnected()!=true}" value="Se Connecter" href="/TalabatWithoutMaven/faces/connexion/SeConnecter.xhtml" icon="glyphicon-log-in"></b:navLink>
-                <b:navLink rendered="#{templateController.UserConnected()!=true}" value="Crée un Compte" href="/TalabatWithoutMaven/faces/connexion/CreateAnAccount.xhtml" icon="glyphicon-user"></b:navLink>
+            <b:navbarLinks pull="right" style="right: -20px">
+                <b:navLink value="" tooltip="Home" href="/TalabatWithoutMaven/faces/home/Home.xhtml" 
+                           icon="glyphicon-home"></b:navLink>
+                <b:navLink value="" tooltip="Search Restaurants" href="/TalabatWithoutMaven/faces/restaurant/Search.xhtml" 
+                           icon="glyphicon-search"></b:navLink>
+                <b:navLink rendered="#{templateController.restauAdmin}" value="Mon Restaurant" 
+                           href="/TalabatWithoutMaven/faces/restaurant/Search.xhtml" icon="glyphicon-search"></b:navLink>
+                <b:navLink rendered="#{templateController.UserConnected()!=true}" value="Se Connecter" 
+                           href="/TalabatWithoutMaven/faces/connexion/SeConnecter.xhtml" icon="glyphicon-log-in"></b:navLink>
+                <b:navLink rendered="#{templateController.UserConnected()!=true}" value="Crée un Compte" 
+                           href="/TalabatWithoutMaven/faces/connexion/CreateAnAccount.xhtml" icon="glyphicon-user"></b:navLink>
                 <b:dropMenu rendered="#{templateController.UserConnected()}" value="My Profil"  icon="glyphicon-user">
-                    <h:form>
-                        <p:commandLink rendered="#{templateController.UserConnected()}" value="Mon Profile" class="center-block btn glyphicon glyphicon-user" action="#{connectController.deconnecter()}" ></p:commandLink>
-                        <p:commandLink rendered="#{templateController.UserConnected()}" value="Editer Mon Profile" class="center-block btn glyphicon glyphicon-edit" action="#{connectController.deconnecter()}" ></p:commandLink>
-                        <p:commandLink rendered="#{templateController.UserConnected()}" value="Deconnecter" class="center-block btn glyphicon glyphicon-log-out" action="#{connectController.deconnecter()}" ></p:commandLink>
+                    <h:form class="btn-group text-left">
+                        <b:commandButton rendered="#{templateController.UserConnected()}" value="Mon Profile" 
+                                         class="center-block btn btn-group-justified text-left" icon="glyphicon-user"
+                                       action="/profil/MyProfil.xhtml?faces-redirect=true" ></b:commandButton>
+                        <b:commandButton rendered="#{templateController.UserConnected()}" value="Editer Mon Profile" 
+                                         class="center-block btn btn-group-justified text-left" icon="glyphicon-edit"
+                                       action="/profil/EditProfil.xhtml?faces-redirect=true" ></b:commandButton>
+                        <b:commandButton rendered="#{templateController.UserConnected()}" value="Deconnecter"
+                                         class="center-block btn btn-group-justified text-left" icon="glyphicon-log-out"
+                                         action="#{connectController.deconnecter()}" ></b:commandButton>
                     </h:form>
                 </b:dropMenu>
+
             </b:navbarLinks>
 
         </b:navBar>
-        <br/>
-
+<!--        <nav>
+            <div class="nav-wrapper" style="margin-top:  -30px; background-color: #13121a; margin-bottom: -10px">
+                <a href="../home/Home.xhtml" class="brand-logo col-lg-offset-1"> <img src="../resources/imgs/logo.PNG" alt=""/> </a>
+                
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+                    <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
+                    <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+                    <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+                </ul>
+            </div>
+        </nav>-->
 
     </ui:composition>
 </html>

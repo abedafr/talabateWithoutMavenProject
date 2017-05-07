@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition template="/template/Mytemplate.xhtml">
+        <ui:define name="title">FOODelivery | Sorry! Access Denied.</ui:define>
+        <ui:define name="content">
+            <br/>
+            <br/>
+            <br/>
+            <b:jumbotron style="background: #ffcc00"  class="col-lg-8 col-lg-offset-2">
+                <h:form>
+                <center>
+                    <p:graphicImage class="" value="../resources/imgs/accDen.png"/>
+                    
+                    <b:commandButton value="" action="/home/Home.xhtml?faces-redirect=true" icon="glyphicon-home"
+                                     class="btnm btnm-large waves-button-input waves-block"/>
+                </center>
+                </h:form>
+            </b:jumbotron>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

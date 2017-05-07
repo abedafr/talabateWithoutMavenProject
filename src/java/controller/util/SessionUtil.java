@@ -19,7 +19,6 @@ public class SessionUtil {
 //        }
 //        registerUser(user);
 //    }
-
     public static void registerUser(User user) {
         setAttribute("user", user);
     }
@@ -27,7 +26,7 @@ public class SessionUtil {
     public static User getConnectedUser() {
         return (User) getAttribute("user");
     }
-    
+
 //    public static void registerRedevable(Redevable redevable) {
 //        setAttribute("redevable", redevable);
 //    }
@@ -43,7 +42,6 @@ public class SessionUtil {
 //        }
 //        return new Commune();
 //    }
-
     public static SessionUtil getInstance() {
         return instance;
     }
@@ -86,4 +84,14 @@ public class SessionUtil {
             getSession(fc).setAttribute(cle, valeur);
         }
     }
+
+    public static void deconnectUser() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        if (fc != null && fc.getExternalContext() != null) {
+            getSession(fc).removeValue("user");
+            getSession(fc).removeAttribute("user");
+        }
+    }
+
+    
 }

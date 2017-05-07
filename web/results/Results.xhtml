@@ -10,28 +10,44 @@
 
         <ui:define name="title">FOODelivery | Choisissez un Restaurant...</ui:define>
 
+
+
         <ui:define name="content">
+            <nav style=" background-color: rgba(0,0,0,0.5)">
+                <div class="nav-wrapper">
+                    <div class=" col-lg-offset-2 col s12">
+                        <a href="../home/Home.xhtml" class="breadcrumb-md">Home</a>
+                        <a href="#!" class="breadcrumb-md">Results</a>
+                        
+                    </div>
+                </div>
+            </nav>
+            
+<br/>
+<br/>
+<br/>
 
 
-            <h:form class="form-group col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
-                <b:dataTable value="#{resultsController.items}" var="item" class="table-bordered table table-striped" 
-                             row-highlight="false" fixed-header="false" paginated="true" searching="false"
-                             >
+            <!--<b:panel class="">-->
+                <h:form class="form-group col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+                    <h:dataTable value="#{resultsController.items}" var="item" class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp projects-table" 
+                                 >
 
-                    <h:column>
-                        <f:facet name="header">
-                                    <h:outputText value="Choisissez un restaurant.." class=""/>
-                                </f:facet>
-                        <h:outputText value="#{item.nom}" class="h4"/>
-                        <b:commandButton action="#{resultsController.viewMenu(item)}" value="View Menu" 
-                                         class="btn btn-info pull-right" ></b:commandButton>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Choisissez un restaurant.." class="pull-right"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom}" class="h4 pull-left"/>
+                            <b:commandButton action="#{resultsController.viewMenu(item)}" value="View Menu" 
+                                             class="waves-effect waves-light btnm pull-right" ></b:commandButton>
 
-                    </h:column>
+                        </h:column>
 
 
-                </b:dataTable>
-            </h:form>
-
+                    </h:dataTable>
+                </h:form>
+            <!--</b:panel>-->
+            
         </ui:define>
 
     </ui:composition>

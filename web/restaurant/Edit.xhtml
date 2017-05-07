@@ -12,12 +12,10 @@
             <h:form id="RestaurantEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{restaurantController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditRestaurantLabel_menu}" for="menu" />
-                        <p:selectOneMenu id="menu" value="#{restaurantController.selected.menu}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{menuController.itemsAvailableSelectOne}"
-                                           var="menuItem"
-                                           itemValue="#{menuItem}"/>
+                        <p:outputLabel value="Accepted" for="accepted" />
+                        <p:selectOneMenu id="accepted" value="#{restaurantController.selected.accepted}" >
+                            <f:selectItem itemValue="#{true}" itemLabel="True"/>
+                            <f:selectItem itemValue="#{false}" itemLabel="False"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditRestaurantLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{restaurantController.selected.nom}" title="#{bundle.EditRestaurantTitle_nom}" />
@@ -27,6 +25,12 @@
                             <f:selectItems value="#{quartierController.itemsAvailableSelectOne}"
                                            var="quartierItem"
                                            itemValue="#{quartierItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Admin Restau" for="adminRestau" />
+                        <p:selectOneMenu id="adminRestau" value="#{restaurantController.selected.adminRestau}" >
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userItem"
+                                           itemValue="#{userItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{restaurantController.update}" value="#{bundle.Save}" update="display,:RestaurantListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RestaurantEditDialog');"/>

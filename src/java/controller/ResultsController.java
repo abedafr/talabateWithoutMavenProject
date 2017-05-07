@@ -13,6 +13,8 @@ import java.io.Serializable;
 import java.util.List;
 import controller.util.Session;
 import controller.util.SessionUtil;
+import java.io.IOException;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 
 /**
@@ -26,14 +28,16 @@ public class ResultsController implements Serializable {
     private List<Quartier> quartiers;
     private List<Restaurant> items;
     
-    public String viewMenu(Restaurant restaurant){
-        Session.setAttribute(null, "ResultHomeSearch");
+    public String viewMenu(Restaurant restaurant) throws IOException{
+        Session.delete("ResultHomeSearch");
         Session.setAttribute(restaurant.getMenu(), "ViewMenu");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("../results/ViewMenu.xhtml");
         return "/results/ViewMenu";
     }
 
     public List<Restaurant> getItems() {
         items = (List<Restaurant>) Session.getAttribut("ResultHomeSearch");
+//        Session.delete("ResultHomeSearch");
 //        SessionUtil.getSession().invalidate();
         return items;
     }

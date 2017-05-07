@@ -5,13 +5,12 @@
  */
 package service;
 
-import bean.Plate;
+import bean.PlatMenu;
 import bean.SupplementPlat;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 /**
  *
@@ -32,9 +31,9 @@ public class SupplementPlatFacade extends AbstractFacade<SupplementPlat> {
         super(SupplementPlat.class);
     }
 
-    public List<SupplementPlat> findByPlate(Plate plate) {
-        if (plate != null) {
-            return em.createQuery("SELECT s FROM SupplementPlat s WHERE s.plate.id=" + plate.getId()).getResultList();
+    public List<SupplementPlat> findByPlatMenu(PlatMenu platMenu) {
+        if (platMenu != null) {
+            return em.createQuery("SELECT s FROM SupplementPlat s WHERE s.platMenu.id=" + platMenu.getId()).getResultList();
         }
         return null;
     }

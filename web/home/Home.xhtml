@@ -7,156 +7,174 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui">
     <ui:composition template="/template/Mytemplate.xhtml">
-            <ui:define name="title">FOODelivery | Command Your food Online</ui:define>
+        <ui:define name="head">
+            <f:metadata>
+                <f:viewAction action="#{homeController.init()}"/>
+            </f:metadata>
+            
+        </ui:define>
+
+        <ui:define name="title">FOODelivery | Command Your food Online</ui:define>
 
         <!-- Carousel
         ================================================== -->
         <ui:define name="content">
             <style type="text/css">
                 body{
-                    margin-top: -20px;
-                    background: black;
+
+                    /*background: black;*/
                 }
             </style>
-        <b:carousel id="myCarousel" interval="3000">
-            <b:carouselCaption class="">
-                <!--
-                search Form
-                -->
-                <h3 >FOODelivery</h3>
-                <p> Search Restaurants nearby your actual position</p>
-                <h:form class=" form-group form-inline "  >
-                    <div class="btn-group">
-                        <h:selectOneMenu id="ville" value="#{homeController.ville}" class="form-control btn btn-group-justified btn-group-lg" >                      <!--update="quartier" process="ville"-->
-                            <f:selectItem itemValue="#{null}"  itemLabel="Select Ville.."/>
-                            <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
-                                           var="villeItem"
-                                           itemValue="#{villeItem}" />
-                            <p:ajax rendered="#{homeController.ville!=null}" process="ville" listener="#{homeController.findByVille()}" 
-                                    update="quartier"></p:ajax>
-                        </h:selectOneMenu>
-                        <h:selectOneMenu id="quartier" value="#{homeController.quartier}" class="form-control btn btn-group-justified btn-group-lg" >
-                            <f:selectItem itemValue="#{null}" itemLabel="Select Quartier.."/>
-                            <f:selectItems value="#{homeController.quartiers}"
-                                           var="quartierItem"
-                                           itemValue="#{quartierItem}"/>
-                        </h:selectOneMenu>
-                        <h:selectOneMenu id="cuisine" value="#{homeController.cuisine}" class="form-control btn btn-group-justified btn-group-lg" >
-                            <f:selectItem itemValue="#{null}" itemLabel="Select Cuisine.."/>
-                            <f:selectItems value="#{homeController.cuisines}"
-                                           var="cuisineItem"
-                                           itemValue="#{cuisineItem}"/>
-                        </h:selectOneMenu>
+            <b:carousel id="amyCarousel" interval="3000" style="margin-top: -20px">
+                <b:carouselCaption class="">
+                    <!--
+                    search Form
+                    -->
+                    <h3 >FOODelivery</h3>
+                    <p> Search Restaurants nearby your actual position</p>
+                    <h:form class=" form-group form-inline "  >
+                        <div class="btn-group">
+                            <h:selectOneMenu id="ville" value="#{homeController.ville}" 
+                                             class="form-control btn btn-group-justified btn-group-lg" >                      <!--update="quartier" process="ville"-->
+                                <f:selectItem itemValue="#{null}"  itemLabel="Select Ville.."/>
+                                <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                               var="villeItem"
+                                               itemValue="#{villeItem}" />
+                                <p:ajax rendered="#{homeController.ville!=null}" process="ville" listener="#{homeController.findByVille()}" 
+                                        update="quartier"></p:ajax>
+                            </h:selectOneMenu>
+                            <h:selectOneMenu id="quartier"  value="#{homeController.quartier}" 
+                                             class=" form-control btn btn-group-justified btn-group-lg" >
+                                <f:selectItem itemValue="#{null}" itemLabel="Select Quartier.."/>
+                                <f:selectItems value="#{homeController.quartiers}"
+                                               var="quartierItem"
+                                               itemValue="#{quartierItem}"/>
+                            </h:selectOneMenu>
+                            <h:selectOneMenu id="cuisine" value="#{homeController.cuisine}" class="form-control btn btn-group-justified btn-group-lg" >
+                                <f:selectItem itemValue="#{null}" itemLabel="Select Cuisine.."/>
+                                <f:selectItems value="#{homeController.cuisines}"
+                                               var="cuisineItem"
+                                               itemValue="#{cuisineItem}"/>
+                            </h:selectOneMenu>
 
-                        <b:commandButton action="#{homeController.search()}" icon="glyphicon glyphicon-search"  value="Search" class="btn btn-success  btn-group-lg" ></b:commandButton>
+                            <b:commandButton action="#{homeController.search()}" icon="glyphicon glyphicon-search"  value="Search" class="btn btn-success  btn-group-lg" ></b:commandButton>
+                        </div>
+
+                    </h:form>
+                </b:carouselCaption>
+                <b:carouselItem >
+                    <p:graphicImage class="first-slide" value="/resources/imgs/hamburger.jpg" alt="First slide"/>
+                </b:carouselItem>
+                <b:carouselItem >
+                    <p:graphicImage class="second-slide" value="/resources/imgs/chiken.jpg" alt="second slide"/>
+                </b:carouselItem>
+                <b:carouselItem >
+                    <p:graphicImage class="third-slide" value="/resources/imgs/pizza.jpg" alt="third slide"/>
+                </b:carouselItem>
+            </b:carousel>
+
+
+            <!-- Search Form
+            ================================================== -->
+            <nav style="margin-top: -10px; background-color: rgba(0,0,0,0.5)">
+                <div class="nav-wrapper">
+                    <div class=" center-block center center-align col s12 text-muted">
+                        Vous Avez un Restaurant?.. Vous voulez l'ajouter?.
+                        Ajouter le IMMIDIATEMENT!! 
+                        <a class="waves-effect btnm btnm-flat glyphicon glyphicon-send ba" value=""   href="../contactUs/ContactUs.xhtml?faces-redirect=true"></a>
+
                     </div>
-
-                </h:form>
-            </b:carouselCaption>
-            <b:carouselItem >
-                <p:graphicImage class="first-slide" value="/resources/imgs/hamburger.jpg" alt="First slide"/>
-            </b:carouselItem>
-            <b:carouselItem >
-                <p:graphicImage class="second-slide" value="/resources/imgs/chiken.jpg" alt="second slide"/>
-            </b:carouselItem>
-            <b:carouselItem >
-                <p:graphicImage class="third-slide" value="/resources/imgs/pizza.jpg" alt="third slide"/>
-            </b:carouselItem>
-        </b:carousel>
-
-
-        <!-- Search Form
-        ================================================== -->
-
-        <center>
-
-
-        </center>
-
-
-        <!--
-        les autres copmosant de page
-        ==========================================================================-->
-
-
-        <div class="container marketing">
-
-            <!-- Three columns of text below the carousel -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <center>
-                        <p:graphicImage class="img-circle" value="/resources/imgs/croissant.jpg" alt="Generic placeholder image" width="160" height="160"/>
-                        <h2>Croissants Françaises</h2>
-                        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-                    </center></div><!-- /.col-lg-4 -->
-                <div class="col-lg-4"><center>
-                        <p:graphicImage class="img-circle" value="/resources/imgs/duck.jpg" alt="Generic placeholder image" width="160" height="160"/>
-                        <h2>Duck Americaine</h2>
-                        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-                    </center></div><!-- /.col-lg-4 -->
-                <div class="col-lg-4"><center>
-                        <p:graphicImage class="img-circle" value="/resources/imgs/salad.jpg" alt="Generic placeholder image" width="160" height="160"/>
-                        <h2>Salade Britanique</h2>
-                        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                    </center></div><!-- /.col-lg-4 -->
-            </div><!-- /.row -->
-
-
-            <!-- START THE FEATURETTES -->
-
-            <hr class="featurette-divider"/>
-
-            <div class="row featurette">
-                <div class="col-md-7">
-                    <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
                 </div>
-                <div class="col-md-5">
-                    <p:graphicImage class="featurette-image img-responsive center-block" value="/resources/imgs/meal.jpg" alt="Generic placeholder image" width="500" height="500"/>
+            </nav>
+
+
+            <br/>
+            <br/>
+
+
+            <!--
+            les autres copmosant de page
+            ==========================================================================-->
+
+
+            <div style="color: #999" class=" text-lighten-1">
+
+                <!-- Three columns of text below the carousel -->
+                <div class="row">
+                    <div class="col-lg-4">
+                        <center>
+                            <p:graphicImage class="img-circle" value="/resources/imgs/croissant.jpg" alt="Generic placeholder image" width="160" height="160"/>
+                            <h2>Croissants Françaises</h2>
+                            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+                        </center></div><!-- /.col-lg-4 -->
+                    <div class="col-lg-4"><center>
+                            <p:graphicImage class="img-circle" value="/resources/imgs/duck.jpg" alt="Generic placeholder image" width="160" height="160"/>
+                            <h2>Duck Americaine</h2>
+                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+                        </center></div><!-- /.col-lg-4 -->
+                    <div class="col-lg-4"><center>
+                            <p:graphicImage class="img-circle" value="/resources/imgs/salad.jpg" alt="Generic placeholder image" width="160" height="160"/>
+                            <h2>Salade Britanique</h2>
+                            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                        </center></div><!-- /.col-lg-4 -->
+                </div><!-- /.row -->
+
+
+                <!-- START THE FEATURETTES -->
+
+                <hr class="featurette-divider"/>
+
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+                        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <p:graphicImage class="featurette-image img-responsive center-block" value="/resources/imgs/meal.jpg" alt="Generic placeholder image" width="500" height="500"/>
+                    </div>
                 </div>
-            </div>
 
-            <hr class="featurette-divider"/>
+                <hr class="featurette-divider"/>
 
-            <div class="row featurette">
-                <div class="col-md-7 col-md-push-5">
-                    <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                <div class="row featurette">
+                    <div class="col-md-7 col-md-push-5">
+                        <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+                        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                    </div>
+                    <div class="col-md-5 col-md-pull-7">
+                        <p:graphicImage class="featurette-image img-responsive center-block" value="/resources/imgs/pancakes.jpg" alt="Generic placeholder image" width="500" height="500"/>
+                    </div>
                 </div>
-                <div class="col-md-5 col-md-pull-7">
-                    <p:graphicImage class="featurette-image img-responsive center-block" value="/resources/imgs/pancakes.jpg" alt="Generic placeholder image" width="500" height="500"/>
+
+                <hr class="featurette-divider"/>
+
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+                        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <p:graphicImage class="featurette-image img-responsive center-block" value="/resources/imgs/steak.jpg" alt="Generic placeholder image" width="500" height="500"/>
+                    </div>
                 </div>
-            </div>
 
-            <hr class="featurette-divider"/>
+                <hr class="featurette-divider"/>
 
-            <div class="row featurette">
-                <div class="col-md-7">
-                    <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-                </div>
-                <div class="col-md-5">
-                    <p:graphicImage class="featurette-image img-responsive center-block" value="/resources/imgs/steak.jpg" alt="Generic placeholder image" width="500" height="500"/>
-                </div>
-            </div>
-
-            <hr class="featurette-divider"/>
-
-            <!-- /END THE FEATURETTES -->
+                <!-- /END THE FEATURETTES -->
 
 
-            <!-- FOOTER -->
-          
+                <!-- FOOTER -->
 
-        </div><!-- /.container -->
 
-        <script src="/resources/bootstrap/jquery.min.js.téléchargement"></script>
-        <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>');</script>-->
-        <script src="/resources/bootstrap/bootstrap.min.js"></script>
-        <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-        <!--        <script src="./Carousel Template for Bootstrap_files/holder.min.js.téléchargement"></script>
-                 IE10 viewport hack for Surface/desktop Windows 8 bug 
-                <script src="./Carousel Template for Bootstrap_files/ie10-viewport-bug-workaround.js.téléchargement"></script>-->
+            </div><!-- /.container -->
+
+            <script src="/resources/bootstrap/jquery.min.js.téléchargement"></script>
+            <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>');</script>-->
+            <script src="/resources/bootstrap/bootstrap.min.js"></script>
+            <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+            <!--        <script src="./Carousel Template for Bootstrap_files/holder.min.js.téléchargement"></script>
+                     IE10 viewport hack for Surface/desktop Windows 8 bug 
+                    <script src="./Carousel Template for Bootstrap_files/ie10-viewport-bug-workaround.js.téléchargement"></script>-->
         </ui:define>
     </ui:composition>
 </html>

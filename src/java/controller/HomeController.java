@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJBException;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -55,6 +56,13 @@ public class HomeController implements Serializable {
     @EJB
     private RestaurantFacade restaurantFacade;
 
+    public void init(){
+        ville =null;
+        quartier=null;
+        quartiers= null;
+        cuisine =null;
+    }
+    
     public void findByVille() {
         if (ville != null) {
             quartiers = quartierFacade.findQuartierByVille(ville);
@@ -65,10 +73,13 @@ public class HomeController implements Serializable {
     public String search() {
         if (quartier != null) {
             try {
+                Session.clear();
                 List<Restaurant> results = restaurantFacade.mainSearch(quartier, cuisine);
                 System.out.println("RasultRestau Controller = " + results);
                 Session.setAttribute(results, "ResultHomeSearch");
-                return "/results/Results";
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../results/Results.xhtml");
+//                return "/results/Results";
+//                return ;
 //        }else {
             } catch (EJBException ex) {
                 String msg = "";

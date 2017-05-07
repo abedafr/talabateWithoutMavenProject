@@ -5,10 +5,14 @@
  */
 package service;
 
+import bean.Adress;
 import bean.Commande;
 import bean.CommandeItem;
 import bean.PlatMenu;
+import bean.Restaurant;
 import bean.SupplementPlat;
+import bean.User;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -31,6 +35,10 @@ public class CommandeFacade extends AbstractFacade<Commande> {
     }
     @EJB
     private CommandeItemFacade commandeItemFacade;
+    @EJB
+    private UserFacade userFacade;
+    @EJB
+    private AdressFacade adressFacade;
 
     public CommandeFacade() {
         super(Commande.class);
@@ -70,10 +78,20 @@ public class CommandeFacade extends AbstractFacade<Commande> {
         return commandeItems;
     }
 
-    public Commande createCommande(Commande commande, List<CommandeItem> commandeItems) {
-        commande.setId(generateId("Commande", "id"));
-        create(commande);
+    public Commande createCommande(Commande commande, List<CommandeItem> commandeItems, Restaurant restaurant, User user, Adress adress) {
+        commande = new Commande();
 
+        commande.setId(generateId("Commande", "id"));
+        commande.setDateCmd(LocalDateTime.now());
+        commande.setAdress(adress);
+        commande.setUser(user);
+        commande.setRestaurant(restaurant);
+        commande.setTotal(calculTotalCommande(commandeItems));
+
+        create(commande);
+        userFacade.edit(user);
+        adress.setCommande(commande);
+        adressFacade.edit(adress);
         for (CommandeItem commandeItem : commandeItems) {
             commandeItem.setCommande(commande);
             commandeItemFacade.create(commandeItem);
@@ -90,5 +108,12 @@ public class CommandeFacade extends AbstractFacade<Commande> {
         }
         return tot;
     }
-
+    
+    public List<Commande> findCommandByUser(User user){
+        if(user!=null){
+            return em.createQuery("SELECT c FROM Commande c WHERE c.user.email ='"+user.getEmail()+"'").getResultList();
+        }
+        return null;
+    }
+    
 }

@@ -8,6 +8,7 @@ package controller;
 import bean.User;
 import controller.util.HashageUtil;
 import controller.util.JsfUtil;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -43,10 +44,9 @@ public class ConnectController implements Serializable {
         }
     }
 
-    public String deconnecter() {
+    public void deconnecter() throws IOException {
         ejbFacade.seDeConnnecter();
-        return "/home/Home";
-
+        FacesContext.getCurrentInstance().getExternalContext().redirect("../home/Home.xhtml");
     }
 
     public String createAccount() {
@@ -65,23 +65,44 @@ public class ConnectController implements Serializable {
 //            throw new ValidatorException(message);
 //        }
 //    }
-    public String SeConnecter() {
+    public void SeConnecter() throws IOException {
         int res = ejbFacade.seConnnecter(connected);
         if (res == -5) {
-            JsfUtil.addErrorMessage("Veuilliez saisir votre login");
-            return null;
+            JsfUtil.addErrorMessage("Veuillez saisir votre login");
         } else if (res == -4) {
 //            JsfUtil.addErrorMessage("Login non Trouver..");
-            return null;
         } else if (res == -3) {
             JsfUtil.addErrorMessage("Mot de passe incorrect");
-            return null;
         } else if (res == -2) {
             JsfUtil.addErrorMessage("Cet utilisateur est bloqué");
-            return null;
 
+        } else {
+            User user = ejbFacade.find(connected.getEmail());
+            if (user.isAdmin() == 2) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../admin/AdminHome.xhtml");
+            } else if (user.isAdmin() == 1) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../adminRestau/RestAdminHome.xhtml");
+            } else {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../home/Home.xhtml");
+            }
         }
-        return "/home/Home.xhtml";
+
+    }
+
+    public void SeConnecterCmd() throws IOException {
+        int res = ejbFacade.seConnnecter(connected);
+        if (res == -5) {
+            JsfUtil.addErrorMessage("Veuillez saisir votre login");
+        } else if (res == -4) {
+//            JsfUtil.addErrorMessage("Login non Trouver..");
+        } else if (res == -3) {
+            JsfUtil.addErrorMessage("Mot de passe incorrect");
+        } else if (res == -2) {
+            JsfUtil.addErrorMessage("Cet utilisateur est bloqué");
+
+        } else {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../checkout/ConfirmCommand.xhtml");
+        }
 
     }
 

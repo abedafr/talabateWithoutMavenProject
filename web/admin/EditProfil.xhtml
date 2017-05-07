@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template/Mytemplate.xhtml">
+        <f:metadata>
+            <f:viewAction action="#{templateController.adminPrivileges()}"></f:viewAction>
+        </f:metadata>
+        <ui:define name="title">FOODelivery | Edition Profil..</ui:define>
+        <ui:define name="content">
+
+
+            <style>body {
+                    background-image: url(../resources/imgs/bg5.jpg);
+                    background-size: cover;
+                }
+            </style>
+
+            <nav style="margin-top: 25px; background-color: rgba(0,0,0,0.5)">
+                <div class="nav-wrapper">
+                    <span style="font-size:30px;cursor:pointer; color: #555" class="pull-left" onclick="openNav()">&nbsp;&nbsp;&#9776;</span>
+                    <div class=" col-lg-offset-2 col s12">
+                        <a href="../home/Home.xhtml" class="breadcrumb-md">Home</a>
+                        <a href="#!" class="breadcrumb-md">My Profil</a>
+
+                    </div>
+                </div>
+            </nav>
+
+            <br/>
+            <br/>
+            <br/>
+            <div id="bodynav" class="sidenav" onclick="closeNav()" >
+                <div id="mySidenav" class="sidenav" >
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a href="../adminRestau/MyProfil.xhtml" ><i class="fa fa-user"  /> <h:outputText value=" Mon Profil"/></a>
+                    <a href="../adminRestau/EditProfil.xhtml"> <i class="fa fa-edit"/> <h:outputText  value=" Edit Profil" /></a>
+                    <a href="../adminRestau/EditMdp.xhtml"> <i class="fa fa-key"/> <h:outputText value=" Edit Password" /></a>
+                    <a href="../adminRestau/MonRestaurant.xhtml"> <i class="fa fa-cutlery"/> <h:outputText value=" Mon Restaurant" /></a>
+                </div>
+            </div>
+            <script src="../resources/js/jsInsecription.js" type="text/javascript"></script>
+            <link href="../resources/css/styleInscreption.css" rel="stylesheet" type="text/css"/>
+            <h:form class="form-group">
+
+                <b:panel title="Modification d'informations personnelles" col-lg="4" offset-lg="3" col-md="4" offset-md="3" col-sm="6" offset-sm="1" col-xs="10" offset-xs="1">
+
+                    <h:panelGroup id="display">
+                        <b:panelGrid columns="2" rendered="#{adminController.user != null}">
+                            <h:outputLabel value="Email:" />
+                            <h:inputText disabled="true" value="#{adminController.user.email}" title="#{bundle.ViewUserTitle_email}" class="form-control"/>
+                            <h:outputLabel value="Nom:"  />
+                            <h:inputText value="#{adminController.user.nom}" title="#{bundle.ViewUserTitle_nom}" class="form-control"/>
+                            <h:outputLabel value="Prenom:"  />
+                            <h:inputText value="#{adminController.user.prenom}" title="#{bundle.ViewUserTitle_prenom}" class="form-control"/>
+                            <h:outputLabel value="Tel:"/>
+                            <h:inputText value="#{adminController.user.tel}" title="#{bundle.ViewUserTitle_tel}" class="form-control"/>
+
+                        </b:panelGrid>
+                        <b:commandButton value="Confirmer" actionListener="#{adminController.modifier()}" icon="ui-icon-check" class="btn btn-success btn-group-justified"></b:commandButton>
+                        <center>
+                            <p:commandLink value="Modifier mot de passe" action="/profil/EditMdp"></p:commandLink>
+                        </center>
+                    </h:panelGroup>
+
+                </b:panel>
+
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
+</html>
+

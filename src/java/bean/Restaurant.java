@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,8 +29,10 @@ public class Restaurant implements Serializable {
     private Long id;
     private String nom;
     private boolean accepted;
+    private Double lat;
+    private Double lng;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private User adminRestau;
     
     @OneToMany(mappedBy = "restaurant")
@@ -49,6 +52,23 @@ public class Restaurant implements Serializable {
         this.commandes = commandes;
     }
 
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
+    
     
     public Menu getMenu() {
         return menu;

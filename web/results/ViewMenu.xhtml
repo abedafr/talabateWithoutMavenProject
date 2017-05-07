@@ -12,14 +12,29 @@
 
         <ui:define name="content">
 
-        <f:view class="container">
-            <div class="row">
+            <nav style="background-color: rgba(0,0,0,0.5)">
+                <div class="nav-wrapper">
+                    <div class=" col-lg-offset-2 col s12">
+                        <a href="../home/Home.xhtml" class="breadcrumb-md">Home</a>
+                        <a href="../results/Results.xhtml" class="breadcrumb-md">Results</a>
+                        <a href="#!" class="breadcrumb-md">View Menu</a>
+
+                    </div>
+                </div>
+            </nav>
+
+            <br/>
+            <br/>
+            <br/>
+
+            <div class="">
+                <div class="row">
 
 
-                <div class="col-lg-6" style="width: 53%; float: left; ">
-                    <h:form id="PlateViewForm" class="form-group form-inline">
-                        <h1><h:outputText value="List"/></h1>
-                        <h:dataTable  value="#{viewMenuController.items}" var="item" class="table table-striped ta ">
+                    <!--<b:panel class="" style="background-color: rgba(255,255,255,0.4);" large-screen="half">-->
+                    <h:form id="PlateViewForm" class="form-group form-inline col-lg-5 col-lg-offset-1">
+
+                        <h:dataTable style=""  value="#{viewMenuController.items}" var="item" class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp projects-table">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Nom" class=""/>
@@ -30,7 +45,7 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Prix"/>
+                                    <h:outputText value="Prix" class=""/>
                                 </f:facet>
                                 <h4><h:outputText value="#{item.prix}"/></h4>
                             </h:column>
@@ -38,55 +53,79 @@
                                 <f:facet name="header">
                                     <h:outputText value="Action"/>
                                 </f:facet>
-                                <b:commandButton rendered="#{item.costume==true}" 
-                                                 class="btn btn-primary btn-xs glyphicon glyphicon-shopping-cart" 
-                                                 value=""  icon="" 
+                                <b:commandButton rendered="#{item.costume==true}" id="supBtn"
+                                                 class="btnm-floating btnm-large waves-effect waves-light " 
+                                                 value=""  icon="glyphicon-shopping-cart" 
                                                  actionListener="#{viewMenuController.prepareSuplement(item)}" 
-                                                 update=":CommandeItemCreateForm, :SupplementSelectForm" 
-                                                 oncomplete="PF('SupplementSelectDialog').show()"></b:commandButton>
+                                                 oncomplete="PF('SupplementSelectDialog').show()"
+                                                 update="SupplementSelectForm" 
+                                                 ></b:commandButton>
                                 <b:commandButton rendered="#{item.costume==false}" 
-                                                 class="btn btn-primary btn-xs glyphicon glyphicon-shopping-cart" 
-                                                 value="" icon="" 
+                                                 class="btnm-floating btnm-large waves-effect waves-light  " 
+                                                 value="" icon="glyphicon-shopping-cart" 
                                                  actionListener="#{viewMenuController.addCart(item)}" 
-                                                 update=":CommandeItemCreateForm"></b:commandButton>
+                                                 update=":CommandeItemCreateForm , panierNavbar">
+                                </b:commandButton>
                             </h:column>
                         </h:dataTable>
                     </h:form>
-                </div>
-                <div class="container col-lg-5  col-md-5 pull-right"  >
+                    <!--</b:panel>-->
+                    <div class="col-lg-5 pull-right" >
 
 
-                    <h:form id="CommandeItemCreateForm" class="form-group form-inline pull-right">
-                        <h1><h:outputText value="Panier"/></h1>
-                        <p:commandButton  value="Vider La Liste" actionListener="#{viewMenuController.vider()}" update="CommandeItemList" class="form-control btn btn-danger "></p:commandButton>
-                        <p:commandButton  value="Confimer commande (#{viewMenuController.calculTotal()})" action="#{viewMenuController.confirmCmd()}"  update="CommandeItemList" class="form-control btn btn-success"></p:commandButton>
-                        <p:dataTable id="CommandeItemList"  value="#{viewMenuController.commandeItems}" var="item" class="table table-striped " >
-                            <p:column>
-                                <div  class="list-inline">
-                                    <h:outputText value="#{item.platMenu.plate.nom}"/>
-                                    <div class="pull-right">
-                                        <center>
-                                            <h:outputText class="h4" value="#{item.prixTotalItem} MAD" /><br/>
-                                            <b:commandButton action="#{viewMenuController.delete(item)}" value="" icon="trash" update=":CommandeItemCreateForm" class="btn btn-xs btn-danger"/>
-                                                
-                                        </center>
-                                    </div>
-                                    <br></br>
-                                    
-                                    <div class="btn-group">
-                                        <b:commandButton action="#{viewMenuController.minus(item)}"  value="" icon="minus" update=":CommandeItemCreateForm" class="btn  btn-group-xs "></b:commandButton>
-                                        <b:commandButton disabled="true" value="#{item.qte}" class="btn btn-info btn-group-xs"/>
-                                        <b:commandButton action="#{viewMenuController.plus(item)}"  value="" icon="plus" update=":CommandeItemCreateForm" class="btn  btn-group-xs"></b:commandButton>
-                                    </div>
-                                </div>
-                            </p:column>
-                        </p:dataTable>
-                    </h:form>
+                        <h:form id="CommandeItemCreateForm" class="form-group form-inline pull-s8">
+                            <div>
+                                <h:dataTable id="CommandeItemList" style="margin-top: -10px" value="#{viewMenuController.commandeItems}" 
+                                             var="item" class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp projects-table" >
+                                    <h:column>
+                                        <f:facet name="header" >
+                                            <div class="col">
+                                                <b:commandButton  value="" actionListener="#{viewMenuController.vider()}" 
+                                                                  icon-awesome="fa-remove" update="CommandeItemList, panierNavbar" 
+                                                                  style="background-color: #ff0000; right: 80px" 
+                                                                  class=" btnm-floating btnm halfway-fab-up danger
+                                                                  waves-effect waves-light">
+                                                </b:commandButton>
+                                                <b:commandButton  value="" action="#{viewMenuController.confirmCmd()}" 
+                                                                  icon-awesome="fa-check" update="CommandeItemList,panierNavbar" 
+                                                                  class="btnm-floating btnm halfway-fab-up 
+                                                                  waves-effect waves-light
+                                                                  background-color--primary">
+                                                </b:commandButton>
+                                            </div>
+                                            <h:outputText value="Total : #{viewMenuController.calculTotal()} MAD" class="pull-left"/>
+                                        </f:facet>
+                                        <div  class="list-inline">
+                                            <h:outputText value="#{item.platMenu.plate.nom}" class="pull-left"/>
+                                            <div class="pull-right">
+                                                <center>
+                                                    <h:outputText class="h4" value="#{item.prixTotalItem} MAD" /><br/>
+                                                    <b:commandButton action="#{viewMenuController.delete(item)}" value="" icon="trash" 
+                                                                     update=":CommandeItemCreateForm, panierNavbar" class="btn btn-xs btn-danger"/>
+
+                                                </center>
+                                            </div>
+                                            <br></br>
+
+                                            <div class="btn-group btn-group-xs pull-left">
+                                                <b:commandButton action="#{viewMenuController.minus(item)}"  value="" icon="minus" update=":CommandeItemCreateForm panierNavbar" class="btn  btn-group-xs "></b:commandButton>
+                                                <b:commandButton disabled="true" value="#{item.qte}" class="btn btn-info btn-group-xs"/>
+                                                <b:commandButton action="#{viewMenuController.plus(item)}"  value="" icon="plus" update=":CommandeItemCreateForm panierNavbar" class="btn  btn-group-xs"></b:commandButton>
+                                            </div>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable></div>
+                        </h:form>
+                    </div>
                 </div>
             </div>
-        </f:view>
-        <ui:include src="SupplementSelect.xhtml"/>
 
-        </ui:define></ui:composition>
+            <!-- The Modal -->
+            
+
+            <ui:include src="SupplementSelect.xhtml"/>
+
+        </ui:define>
+    </ui:composition>
 </html>
 

@@ -6,6 +6,10 @@
 package service;
 
 import bean.Adress;
+import bean.User;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,6 +23,8 @@ public class AdressFacade extends AbstractFacade<Adress> {
 
     @PersistenceContext(unitName = "TalabatWithoutMavenPU")
     private EntityManager em;
+    @EJB
+    UserFacade userFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -28,5 +34,12 @@ public class AdressFacade extends AbstractFacade<Adress> {
     public AdressFacade() {
         super(Adress.class);
     }
-    
+
+    public List<Adress> findAdressByUser(User user) {
+        if (user != null) {
+            return em.createQuery("SELECT a FROM Adress a WHERE a.user.email ='" + user.getEmail() + "'").getResultList();
+        }
+        return null;
+    }
+
 }

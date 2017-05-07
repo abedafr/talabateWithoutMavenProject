@@ -4,46 +4,62 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
     <ui:composition>
 
         <p:dialog id="AddAdressDlg" widgetVar="AddAdressDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAdressTitle}">
             <h:form id="AddAdressForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="4">
-                        <p:outputLabel value="#{bundle.CreateAdressLabel_nom}" for="nom" />
-                        <p:inputText id="nom" value="#{confirmCommand.adress.user.nom}" title="#{bundle.CreateAdressTitle_nom}" />
-                        <p:outputLabel value="#{bundle.CreateAdressLabel_prenom}" for="prenom" />
-                        <p:inputText id="prenom" value="#{confirmCommand.adress.user.prenom}" title="#{bundle.CreateAdressTitle_prenom}" />
-                        <p:outputLabel value="#{bundle.CreateAdressLabel_tel}" for="tel" />
-                        <p:inputText id="tel" value="#{confirmCommand.adress.user.tel}" title="#{bundle.CreateAdressTitle_tel}" />
-                        <p:outputLabel value="#{bundle.CreateUserLabel_email}" for="telFix" />
-                        <p:inputText id="telFix" value="#{confirmCommand.adress.user.email}" title="#{bundle.CreateAdressTitle_telFix}" />
-<!--                        <p:outputLabel value="#{bundle.CreateAdressLabel_ville}" for="ville" />
-                        <p:selectOneMenu id="ville" value="#{confirmCommand.adress.ville}" >
+                    <p:panelGrid columns="4" >
+                        <p:outputLabel rendered="#{!templateController.UserConnected()}" value="#{bundle.CreateAdressLabel_nom}" for="nom" />
+                        <p:inputText rendered="#{!templateController.UserConnected()}"  id="nom" value="#{confirmCommand.user.nom}" title="#{bundle.CreateAdressTitle_nom}" />
+                        <p:outputLabel rendered="#{!templateController.UserConnected()}" value="#{bundle.CreateAdressLabel_prenom}" for="prenom" />
+                        <p:inputText rendered="#{!templateController.UserConnected()}"   id="prenom" value="#{confirmCommand.user.prenom}" title="#{bundle.CreateAdressTitle_prenom}" />
+                        <p:outputLabel rendered="#{!templateController.UserConnected()}" value="#{bundle.CreateAdressLabel_tel}" for="tel" />
+                        <p:inputText rendered="#{!templateController.UserConnected()}"   id="tel" value="#{confirmCommand.user.tel}" title="#{bundle.CreateAdressTitle_tel}" />
+                        <p:outputLabel rendered="#{!templateController.UserConnected()}" value="#{bundle.CreateUserLabel_email}" for="email" />
+                        <p:inputText rendered="#{!templateController.UserConnected()}" id="email"   value="#{confirmCommand.user.email}" title="#{bundle.CreateAdressTitle_telFix}" />
+                        
+                        <p:outputLabel value="#{bundle.CreateAdressLabel_ville}" for="ville" />
+                        <h:selectOneMenu id="ville" value="#{confirmCommand.ville}" 
+                                         class="form-control btn btn-group-justified btn-group-lg" >                      <!--update="quartier" process="ville"-->
+                            <f:selectItem itemValue="#{null}"  itemLabel="Select Ville.."/>
                             <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
                                            var="villeItem"
-                                           itemValue="#{villeItem}"/>
-                        </p:selectOneMenu>
+                                           itemValue="#{villeItem}" />
+                            <p:ajax  process="ville" listener="#{confirmCommand.findByVille()}" 
+                                     update="quartier"></p:ajax>
+                        </h:selectOneMenu>
+                        
                         <p:outputLabel value="#{bundle.CreateAdressLabel_quartier}" for="quartier" />
-                        <p:selectOneMenu id="quartier" value="#{confirmCommand.adress.quartier}" >
-                            <f:selectItems value="#{quartierController.itemsAvailableSelectOne}"
+                        <h:selectOneMenu id="quartier"  value="#{confirmCommand.quartier}" 
+                                         class=" form-control btn btn-group-justified btn-group-lg" >
+                            <f:selectItem itemValue="#{null}" itemLabel="Select Quartier.."/>
+                            <f:selectItems value="#{confirmCommand.quartiers}"
                                            var="quartierItem"
                                            itemValue="#{quartierItem}"/>
-                        </p:selectOneMenu>-->
+                        </h:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateAdressLabel_building}" for="building" />
-                        <p:inputText id="building" value="#{confirmCommand.adress.building}" title="#{bundle.CreateAdressTitle_building}" />
+                        <p:inputText   id="building" value="#{confirmCommand.adress.building}" title="#{bundle.CreateAdressTitle_building}" />
                         <p:outputLabel value="#{bundle.CreateAdressLabel_street}" for="street" />
-                        <p:inputText id="street" value="#{confirmCommand.adress.street}" title="#{bundle.CreateAdressTitle_street}" />
+                        <p:inputText   id="street" value="#{confirmCommand.adress.street}" title="#{bundle.CreateAdressTitle_street}" />
                         <p:outputLabel value="#{bundle.CreateAdressLabel_number}" for="number" />
-                        <p:inputText id="number" value="#{confirmCommand.adress.number}" title="#{bundle.CreateAdressTitle_number}" />
+                        <p:inputText id="number"   value="#{confirmCommand.adress.number}" title="#{bundle.CreateAdressTitle_number}" />
                         <p:outputLabel value="#{bundle.CreateAdressLabel_floor}" for="floor" />
-                        <p:inputText id="floor" value="#{confirmCommand.adress.floor}" title="#{bundle.CreateAdressTitle_floor}" />
+                        <p:inputText id="floor"   value="#{confirmCommand.adress.floor}" title="#{bundle.CreateAdressTitle_floor}" />
                     </p:panelGrid>
-                    <p:commandButton id="saveAdress" actionListener="#{confirmCommand.createAderess()}" value="#{bundle.Save}" update="display" oncomplete="handleSubmit(args,'AddAdressDialog');"/>
-                    <p:commandButton id="cancelAdress" value="#{bundle.Cancel}" onclick="AddAdressDialog.hide()"/>
+                    
+                    <b:commandButton id="saveAdress" actionListener="#{confirmCommand.createAderess()}" 
+                                     class="btnm  waves-effect waves-light " 
+                                     value="" update="display"  icon-awesome="fa-check" 
+                                     onclick="handleSubmit(args,'AddAdressDialog'); AddAdressDialog.hide();"/>
+                    <b:commandButton id="cancelAdress" class="btnm waves-button-input " 
+                                     icon-awesome="fa-remove" style="background-color: #ff0000; right: 80px" 
+                                     value="" onclick="AddAdressDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
+
             <script >
                 $("#saveAdress").click(function () {
                     $("#AddAdressDlg").hide("slow");

@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template/Mytemplate.xhtml">
+        <f:metadata>
+            <f:viewAction action="#{templateController.restAdminPrivileges()}"></f:viewAction>
+        </f:metadata>
+        <ui:define name="title">FOODelivery | Profil..</ui:define>
+
+        <ui:define name="content">
+
+            <style>body {
+                    background-image: url(../resources/imgs/bg5.jpg);
+                    background-size: cover;
+                }
+            </style>
+
+
+            <nav style="margin-top: 25px; background-color: rgba(0,0,0,0.5)">
+                <div class="nav-wrapper">
+                    <span style="font-size:30px;cursor:pointer; color: #555" class="pull-left" onclick="openNav()">&nbsp;&nbsp;&#9776;</span>
+                    <div class=" col-lg-offset-2 col s12">
+                        <a href="../home/Home.xhtml" class="breadcrumb-md">Home</a>
+                        <i class="breadcrumb-md pull-right " >Bonjour Mr. #{restauAdminController.user.nom} #{restauAdminController.user.prenom}&nbsp;&nbsp;</i>
+                        <a href="#!" class="breadcrumb-md">Restaurant Admin Profil</a>
+                    </div>
+                </div>
+            </nav>
+
+            <br/>
+
+
+            <div id="bodynav" class="sidenav" onclick="closeNav()" style="visibility: hidden" >
+                <div id="mySidenav" class="sidenav" >
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a href="../adminRestau/RestAdminHome.xhtml" ><i class="fa fa-star"  /> <h:outputText value=" My Home"/></a>
+                    <a href="../adminRestau/MyProfil.xhtml" ><i class="fa fa-user"  /> <h:outputText value=" Mon Profil"/></a>
+                    <a href="../adminRestau/EditProfil.xhtml"> <i class="fa fa-edit"/> <h:outputText  value=" Edit Profil" /></a>
+                    <a href="../adminRestau/EditMdp.xhtml"> <i class="fa fa-key"/> <h:outputText value=" Edit Password" /></a>
+                    <a href="../adminRestau/MonRestaurant.xhtml"> <i class="fa fa-cutlery"/> <h:outputText value=" Mon Restaurant" /></a>
+                </div>
+            </div>
+            <script src="../resources/js/jsInsecription.js" type="text/javascript"></script>
+            <link href="../resources/css/styleInscreption.css" rel="stylesheet" type="text/css"/>
+
+            <b:panel  col-lg="2" col-md="3" col-sm="3">
+                <h:form class="form-group">
+                    <br/>
+                    <center>
+                        <p:graphicImage value="../resources/imgs/avatar.jpg" class="img-circle" width="100"/>
+                    </center>
+                    <br/>
+                    <h:outputLabel value="Email: "  />
+                    <h:outputText value=" #{restauAdminController.user.email}" title="#{bundle.ViewUserTitle_email}"/>
+                    <br/>
+                    <h:outputLabel value="Nom: " />
+                    <h:outputText value=" #{restauAdminController.user.nom}" title="#{bundle.ViewUserTitle_nom}" />
+                    <br/>
+                    <h:outputLabel value="Prenom: " />
+                    <h:outputText value=" #{restauAdminController.user.prenom}" title="#{bundle.ViewUserTitle_prenom}"/>
+                    <br/>
+                    <h:outputLabel value="Tel: " />
+                    <h:outputText value=" #{restauAdminController.user.tel}" title="#{bundle.ViewUserTitle_tel}" />
+                </h:form>
+            </b:panel>
+
+
+            <b:panel class="col-lg-6 ">
+                <h3 class="center-align center-block">#{restauAdminController.restaurant.nom}</h3>
+                <br/>
+                <h5 class="center-align center-block">#{restauAdminController.restaurant.quartier.nom}, #{restauAdminController.restaurant.quartier.ville.nom}</h5 >
+                <h4> </h4>
+
+            </b:panel>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <b:panel class="col-lg-6 ">
+                <h5 class="center-align center-block">#{restauAdminController.menu}</h5>
+                <br/>
+                <h:form>
+                    <p:commandLink value=""  action="MonRestaurant.xhtml" class="fa fa-edit "/>
+                    <div class="col">
+                        <h:dataTable value="#{restauAdminController.platMenus}" var="item" id="menu" >
+                            <h:column>
+                                <f:facet name="header">
+                                    ID
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Name
+                                </f:facet>
+                                <h:outputText value="#{item.plate.nom}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Cuisine
+                                </f:facet>
+                                <h:outputText value="#{item.cuisine.nom}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Prix
+                                </f:facet>
+                                <h:outputText value="#{item.prix}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Costume
+                                </f:facet>
+                                <h:outputText value="#{item.costume}"/>
+                                <b:commandButton rendered="#{item.costume}" value="Supplement"  action="#{restauAdminController.prepareSup(item)}" class="btn btn-info btn-xs pull-right" update=":SupplementPlatViewForm" oncomplete="PF('SupplementPlatViewDialog').show()"/>
+                            </h:column>
+
+                        </h:dataTable>
+                    </div>
+                </h:form>
+            </b:panel>
+
+            <p:dialog id="SupplementPlatViewDlg" showEffect="clip" closeOnEscape="true" hideEffect="clip" widgetVar="SupplementPlatViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Les Supplement de #{restauAdminController.platMenu.plate.nom}">
+                <h:form id="SupplementPlatViewForm">
+                    <h:dataTable id="dataList" value="#{restauAdminController.supplementPlats}" var="item">
+                        <h:column>
+                            <f:facet name="header">
+                                ID
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column> 
+                        <h:column>
+                            <f:facet name="header">
+                                Nom
+                            </f:facet>
+                            <h:outputText value="#{item.supplement.nom}"/>
+                        </h:column> 
+                        <h:column>
+                            <f:facet name="header">
+                                Prix par Default
+                            </f:facet>
+                            <h:outputText value="#{item.supplement.defaultPrice}"/>
+                        </h:column> 
+                        <h:column>
+                            <f:facet name="header">
+                                Addition
+                            </f:facet>
+                            <h:outputText value="#{item.addition}"/>
+                        </h:column> 
+                        <h:column>
+                            <f:facet name="header">
+                                Nouveau Prix
+                            </f:facet>
+                            <h:outputText value="#{item.newPrice}"/>
+                        </h:column> 
+                    </h:dataTable>
+                </h:form>
+            </p:dialog>
+
+
+
+        </ui:define>
+    </ui:composition>
+</html>
+

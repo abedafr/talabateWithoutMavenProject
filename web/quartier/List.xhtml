@@ -7,13 +7,86 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
-
+<ui:define name="head">
+            <f:metadata>
+                <f:viewAction action="#{templateController.adminPrivileges()}"></f:viewAction>
+            </f:metadata>
+        </ui:define>
 
         <ui:define name="title">
             <h:outputText value="#{bundle.ListQuartierTitle}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
+            <style>body {
+                    background-image: url(../resources/imgs/bg5.jpg);
+                    background-size: cover;
+                }
+                i.fa-bars {
+                    margin-top: 27px;
+                    margin-left: 20px;
+                    position: relative;
+                    font-size: 2em;
+                    color: grey;
+                    cursor: pointer;
+                }
+                span.fa-circle {
+                    position: absolute;
+                    font-size: 0.6em;
+                    top: -5px;
+                    color: red;
+                    right: -8px;
+                }
+                span.num {
+                    position: absolute;
+                    font-size: 0.4em;
+                    top: -3px;
+                    color: #fff;
+                    right: -4px;
+                }
+            </style>
+
+
+            <nav style="margin-top: 25px; background-color: rgba(0,0,0,0.5)">
+                <div class="nav-wrapper">
+                    <i style="font-size:30px;cursor:pointer; color: #555" class="fa fa-bars pull-left" onclick="openNav()">
+                        <h:form rendered="#{adminController.count()!=0}">
+                            <span class="fa fa-circle"></span>
+                            <span class="num">#{adminController.count()}</span>
+                        </h:form>
+                    </i>
+                </div>
+            </nav>
+
+            <br/>
+
+
+            <div id="bodynav" class="sidenav" onclick="closeNav()" style="visibility: hidden" >
+                <div id="mySidenav" class="sidenav" >
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a href="../admin/AdminHome.xhtml" ><i class="fa fa-star"  /> <h:outputText value=" My Home"/></a>
+                    <a href="../admin/MyProfil.xhtml"><i class="fa fa-user"  /> <h:outputText value=" Mon Profil"/></a>
+                    <a href="../admin/EditProfil.xhtml"> <i class="fa fa-edit"/> <h:outputText  value=" Edit Profil" /></a>
+                    <a href="../admin/EditMdp.xhtml"> <i class="fa fa-key"/> <h:outputText value=" Edit Password" /></a>
+                    <a href="../admin/DemandeRestau.xhtml"> <i class="fa fa-cutlery"/> <h:outputText value=" Demande Restau" /><p class="badge pull-right" style="margin-top: 3px">#{adminController.count()}</p></a>
+                    <a href="../user/List.xhtml"> <i class="fa fa-user"/> <h:outputText value=" User "/></a>
+                    <a href="../adress/List.xhtml"> <i class="fa fa-map-marker"/> <h:outputText value=" Adress "/></a>
+                    <a href="../ville/List.xhtml"> <i class="fa fa-map"/> <h:outputText value=" Ville "/></a>
+                    <a href="../quartier/List.xhtml"> <i class="fa fa-map"/> <h:outputText value=" Quartier "/></a>
+                    <a href="../restaurant/List.xhtml"> <i class="fa fa-glass"/> <h:outputText value=" Restaurant "/></a>
+                    <a href="../cuisine/List.xhtml"> <i class="fa fa-coffee"/> <h:outputText value=" Cuisine "/></a>
+                    <a href="../menu/List.xhtml"> <i class="fa fa-book"/> <h:outputText value=" Menu "/></a>
+                    <a href="../plate/List.xhtml"> <i class="fa fa-cutlery"/> <h:outputText value=" Plate "/></a>
+                    <a href="../platMenu/List.xhtml"> <i class="fa fa-neuter"/> <h:outputText value=" PlatMenu "/></a>
+                    <a href="../supplement/List.xhtml"> <i class="fa fa-pied-piper"/> <h:outputText value=" Supplement "/></a>
+                    <a href="../supplementPlat/List.xhtml"> <i class="fa fa-pied-piper-alt"/> <h:outputText value=" SupplementPlat "/></a>
+                    <a href="../commande/List.xhtml"> <i class="fa fa-shopping-bag"/> <h:outputText value=" Commande "/></a>
+                    <a href="../commandeItem/List.xhtml"> <i class="fa fa-shopping-cart"/> <h:outputText value=" CommandeItem "/></a>
+                </div>
+            </div>
+            <script src="../resources/js/jsInsecription.js" type="text/javascript"></script>
+            <link href="../resources/css/styleInscreption.css" rel="stylesheet" type="text/css"/>
+            
             <h:form id="QuartierListForm">
                 <p:panel header="#{bundle.ListQuartierTitle}">
                     <p:dataTable id="datalist" value="#{quartierController.items}" var="item"

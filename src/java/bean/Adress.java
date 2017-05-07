@@ -6,11 +6,13 @@
 package bean;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -24,7 +26,9 @@ public class Adress implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
+    private Commande commande;
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
 
     @ManyToOne
@@ -112,6 +116,16 @@ public class Adress implements Serializable {
     public void setFloor(int floor) {
         this.floor = floor;
     }
+
+    public Commande getCommande() {
+        return commande;
+    }
+
+    public void setCommande(Commande commande) {
+        this.commande = commande;
+    }
+    
+    
 
     @Override
     public int hashCode() {

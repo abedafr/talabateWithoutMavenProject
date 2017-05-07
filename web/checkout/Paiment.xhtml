@@ -8,6 +8,12 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition template="/template/Mytemplate.xhtml">
 
+        <ui:define name="head">
+            <f:metadata>
+                <f:viewAction action="#{templateController.redirectCmd()}" />
+            </f:metadata>
+        </ui:define>
+        
         <ui:define name="title">FOODelivery | Connecter vous..</ui:define>
 
         <ui:define name="content">
@@ -19,49 +25,41 @@
             </style>
 
 
-            <!--<b:growl delay="3000"/>-->
+            <b:growl delay="3000"/>
             <h:form class="col-lg-4 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-8 col-xs-offset-2">
-                <b:panel title="Login" style="opacity: 52%; margin-top: 70px;" collapsible="false">
+                <b:panel  style="opacity: 32%; margin-top: 70px;" collapsible="false">
                     <br/>
-                    <div id="email" class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <span>
-                                    <i id="j_idt8_icon" class="glyphicon glyphicon-user"></i>
-                                </span>
-                            </span>
-                            <p:inputText id="login" placeholder="Email address" class="form-control bf-no-message has-success" 
-                                         value="#{connectController.connected.email}" title="#{bundle.CreateUserTitle_login}" ></p:inputText>
-                        </div>
+
+                    <div class="input-field col s6">
+                        <i class=" glyphicon glyphicon-user prefix" style="margin-bottom: 15px"></i>
+                        <p:inputText id="email" type="text" class="icon_prefix form-control bf-no-message has-success" 
+                                     value="#{connectController.connected.email}" title="#{bundle.CreateUserTitle_login}" ></p:inputText>
+                                     <label for="email" data-error="Type the email correctely" >Login</label>
                     </div>
 
-                    <div id="password" class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <span>
-                                    <i id="j_idt9_icon" aria-hidden="true" class="fa fa-key"></i>
-                                </span>
-                            </span>
-                            <p:password id="password" class="form-control bf-no-message has-success" placeholder="Password" value="#{connectController.connected.password}" title="#{bundle.CreateUserTitle_password}" ></p:password>
-                        </div>
+                    <div class="input-field col s6">
+                        <i class="fa fa-key prefix" style="margin-bottom: 15px"></i>
+                        <p:password id="password" class="icon_prefix form-control bf-no-message has-success" value="#{connectController.connected.password}" title="#{bundle.CreateUserTitle_password}" ></p:password>
+                        <label for="icon_prefix">Password</label>
                     </div>
-
 
 
                     <h:link outcome="/connexion/ForgetPassword" value="Forgot password?"/>
 
                     <br/>
-                    <b:commandButton  value="Login." action="#{connectController.SeConnecter()}" icon="glyphicon glyphicon-log-in"  class="btn btn-success btn-group-justified" />
+                    <b:commandButton  value="Login." action="#{connectController.SeConnecterCmd()}" iconAwesome="fa-sign-in"  
+                                      class="btnm btnm-large waves-effect waves-light btn-group-justified" />
 
                     Don't have an account? <h:link outcome="/connexion/CreateAnAccount" value="Create an account"/>
 
                 </b:panel>
-                
-                <b:panel title="Commander Sans Compte" collapsible="false">
+
+                <b:panel collapsible="false">
                     <h:outputText value="Order without an account "/>
-                    <b:commandButton  value="EXPRESS CHECKOUT" class="btn btn-info pull-right" action="#{confirmCommand.expressCheckout()}"></b:commandButton>
+                    <b:commandButton  value="EXPRESS CHECKOUT" class="btnm waves-effect waves-light btn-sm btn-info pull-right"
+                                      action="ConfirmCommand.xhtml?faces-redirect=true"></b:commandButton>
                 </b:panel>
-                
+
             </h:form>
 
         </ui:define>

@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -29,15 +30,17 @@ public class Commande implements Serializable {
     private Long id;
     private Double total;
     private LocalDateTime dateCmd = LocalDateTime.now();
-
+    @ManyToOne
+    private User user;
+    
     @ManyToOne
     private Restaurant restaurant;
-
+    
+    @OneToOne(mappedBy = "commande")
+    private Adress adress;
+    
     @OneToMany(mappedBy = "commande")
     private List<CommandeItem> commandeItems;
-
-    @ManyToMany(mappedBy = "commandes")
-    private List<User> users;
 
     public Double getTotal() {
         return total;
@@ -55,7 +58,6 @@ public class Commande implements Serializable {
         this.restaurant = restaurant;
     }
 
-    
     public LocalDateTime getDateCmd() {
         return dateCmd;
     }
@@ -72,14 +74,6 @@ public class Commande implements Serializable {
         this.commandeItems = commandeItems;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
     public Long getId() {
         return id;
     }
@@ -87,6 +81,23 @@ public class Commande implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Adress getAdress() {
+        return adress;
+    }
+
+    public void setAdress(Adress adress) {
+        this.adress = adress;
+    }
+    
 
     @Override
     public int hashCode() {

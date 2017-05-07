@@ -14,14 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{adressController.selected != null}">
                         <p:outputLabel value="#{bundle.EditAdressLabel_id}" for="id" />
                         <p:inputText id="id" value="#{adressController.selected.id}" title="#{bundle.EditAdressTitle_id}" />
-                        <p:outputLabel value="#{bundle.EditAdressLabel_nom}" for="nom" />
-                        <p:inputText id="nom" value="#{adressController.selected.nom}" title="#{bundle.EditAdressTitle_nom}" />
-                        <p:outputLabel value="#{bundle.EditAdressLabel_prenom}" for="prenom" />
-                        <p:inputText id="prenom" value="#{adressController.selected.prenom}" title="#{bundle.EditAdressTitle_prenom}" />
-                        <p:outputLabel value="#{bundle.EditAdressLabel_tel}" for="tel" />
-                        <p:inputText id="tel" value="#{adressController.selected.tel}" title="#{bundle.EditAdressTitle_tel}" />
-                        <p:outputLabel value="#{bundle.EditAdressLabel_telFix}" for="telFix" />
-                        <p:inputText id="telFix" value="#{adressController.selected.telFix}" title="#{bundle.EditAdressTitle_telFix}" />
                         <p:outputLabel value="#{bundle.EditAdressLabel_user}" for="user" />
                         <p:selectOneMenu id="user" value="#{adressController.selected.user}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

@@ -81,8 +81,8 @@ public class UserFacade extends AbstractFacade<User> {
 
     public void seDeConnnecter() {
 //        historiqueConnexionFacade.createDeConnexion();
-        SessionUtil.getSession().invalidate();
-        Session.clear();
+//        SessionUtil.getSession().invalidate();
+        SessionUtil.deconnectUser();
 //        SessionUtil.registerUser(null);
 
     }

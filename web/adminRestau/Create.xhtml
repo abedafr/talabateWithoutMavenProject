@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+     <ui:composition>
+
+        <p:dialog id="PlatMenuCreateDlg" widgetVar="PlatMenuCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePlatMenuTitle}">
+            <h:form id="PlatMenuCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{restauAdminController.platMenu != null}">
+                        <p:outputLabel value="#{bundle.CreatePlatMenuLabel_cuisine}" for="cuisine" />
+                        <p:selectOneMenu id="cuisine" value="#{restauAdminController.platMenu.cuisine}" >
+                            <f:selectItem itemValue="#{null}"  itemLabel="Select.."/>
+                            <f:selectItems value="#{cuisineController.itemsAvailableSelectOne}"
+                                           var="cuisineItem"
+                                           itemValue="#{cuisineItem}"/>
+                            <p:ajax rendered="#{restauAdminController.platMenu.cuisine!=null}" process="cuisine" listener="#{restauAdminController.plateByCuisine()}" update="plate"></p:ajax>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePlatMenuLabel_plate}" for="plate" />
+                        <p:selectOneMenu id="plate" value="#{restauAdminController.platMenu.plate}" >
+                            <f:selectItem itemValue="#{null}"  itemLabel="Select.."/>
+                            <f:selectItems value="#{restauAdminController.plateByCuisine()}"
+                                           var="plateItem"
+                                           itemValue="#{plateItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePlatMenuLabel_costume}" for="costume" />
+                        <p:selectOneMenu id="costume" value="#{restauAdminController.platMenu.costume}" >
+                            <f:selectItem itemValue="#{null}"  itemLabel="Select.."/>
+                            <f:selectItem itemValue="#{true}"  itemLabel="TRUE"/>
+                            <f:selectItem itemValue="#{false}"  itemLabel="FALSE"/>
+                            <!--<p:ajax process="costume"  update="PlatMenuCreateForm:display:supplementPlatsLabel, PlatMenuCreateForm:display:supplementPlats"></p:ajax>-->
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePlatMenuLabel_prix}" for="prix" />
+                        <p:inputText id="prix" value="#{restauAdminController.platMenu.prix}" title="#{bundle.CreatePlatMenuTitle_prix}" />
+                       
+                        
+                    </p:panelGrid>
+                    <b:commandButton actionListener="#{restauAdminController.create()}" value="#{bundle.Save}" update="display,:form:datalist" onclick="handleSubmit(args,'PlatMenuCreateDialog');PlatMenuCreateDialog.hide()"/>
+                    <b:commandButton value="#{bundle.Cancel}" onclick="PlatMenuCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+      
+</html>

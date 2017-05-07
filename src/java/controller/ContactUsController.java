@@ -7,6 +7,7 @@ package controller;
 
 import bean.Restaurant;
 import bean.User;
+import controller.util.JsfUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -25,19 +26,30 @@ public class ContactUsController implements Serializable {
 
     @EJB
     private UserFacade ejbFacade;
-    private User userSelected; 
+    private User userSelected;
 
     private Restaurant restSelected;
     @EJB
     private RestaurantFacade ejbRestFacade;
 
     public String create() {
-        userSelected.setBlocked(true);
-        restSelected.setAccepted(false);
-        ejbFacade.create(userSelected);
-        ejbRestFacade.create(restSelected);
-        return "/home/Home.xhtml";
-
+        User u = ejbFacade.find(userSelected.getEmail());
+        if (u == null) {
+            userSelected.setBlocked(true);
+            userSelected.setIsAdmin(1);
+            ejbFacade.create(userSelected);
+            ejbRestFacade.create(restSelected);
+            userSelected.setRestaurant(restSelected);
+            restSelected.setAccepted(false);
+            restSelected.setAdminRestau(userSelected);
+            ejbFacade.edit(userSelected);
+            ejbRestFacade.edit(restSelected);
+            
+            return "/home/Home.xhtml";
+        } else {
+            JsfUtil.addErrorMessage("Il Exist deja un compte sous cet email.. essayer un autre");
+            return null;
+        }
     }
 
     public UserFacade getEjbFacade() {

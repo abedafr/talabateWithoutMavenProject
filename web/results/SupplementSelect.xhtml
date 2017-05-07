@@ -10,10 +10,10 @@
         <p:dialog  id="SulpmSelectDlg" widgetVar="SupplementSelectDialog" modal="true" resizable="false" appendTo="@(body)" header="Select Supplement">
             <h:form id="SupplementSelectForm" >
                 <h:outputText value="select your supplement:"/>
-                <p:selectManyCheckbox id="supplementPlat" value="#{viewMenuController.selecedSupplementPlats}" converter="supplementPlatControllerConverter" >
-                    <f:selectItems value="#{viewMenuController.allSupplementPlats}" var="item" itemLabel="#{item}" itemValue="#{item}"  />
+                <p:selectManyCheckbox id="supplementPlat" value="#{viewMenuController.selectedSupplementsPlats}" converter="supplementPlatControllerConverter" >
+                    <f:selectItems value="#{viewMenuController.allSupplementsPlats}" var="item" itemLabel="#{item}" itemValue="#{item}"  />
                 </p:selectManyCheckbox>
-                <p:commandButton  actionListener="#{viewMenuController.saveSupplement()}" style=" background-color: green" class="btn btn-success btn-group-justified" value="#{bundle.Save}" update=":SupplementSelectForm, :CommandeItemCreateForm:CommandeItemList" oncomplete="handleSubmit(args, 'SupplementSelectDialog');"/>
+                <b:commandButton  actionListener="#{viewMenuController.saveSupplement()}" style="" class="btn btn-success btn-group-justified" value="#{bundle.Save}" update=":SupplementSelectForm, :CommandeItemCreateForm:CommandeItemList" onclick="handleSubmit(args, 'SupplementSelectDialog'); SupplementSelectDialog.hide();"/>
             </h:form>
         </p:dialog>
     </ui:composition>

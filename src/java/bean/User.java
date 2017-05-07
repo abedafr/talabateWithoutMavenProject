@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -41,15 +42,16 @@ public class User implements Serializable {
     private int tentativeRest;
     
     
-    @ManyToMany
-    private List<Commande> commandes;
     
     @OneToMany(mappedBy = "user")
+    private List<Commande> commandes;
+    
+    @OneToMany(mappedBy = "user",cascade = CascadeType.PERSIST)
     private List<Adress> adresss;
     @OneToMany(mappedBy = "user")
     private List<Device> devices;
     
-    @OneToOne(mappedBy = "adminRestau")
+    @OneToOne(mappedBy = "adminRestau",cascade = CascadeType.PERSIST)
     private Restaurant restaurant;
 
     public List<Device> getDevices() {

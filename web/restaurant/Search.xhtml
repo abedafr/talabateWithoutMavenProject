@@ -17,7 +17,7 @@
                 <f:facet name="heading">
                          <i class="glyphicon glyphicon-cutlery" style="padding-right:20px" />
                          <h:outputText value="Find Restaurant " />
-                       </f:facet>
+                </f:facet>
                 <h:form class="form-group">
                     <p:outputLabel value="Restaurant: " />
                     <b:inputText id="nom" value="#{restaurantController.nom}" class="form-control" 
@@ -32,12 +32,39 @@
                                 <h:outputText value="#{bundle.ListRestaurantTitle_nom}"/>
                             </f:facet>
                             <h:outputText value="#{item.nom}"/>
+                            <!--<b:commandButton value="" icon="glyphicon-map-marker" action=""/>-->
                         </b:column>
 
                     </b:dataTable>
-
+                    <b:commandButton value="Show Restau" action="ShowRestau.xhtml?faces-redirect=true"/>
                 </h:form>
             </b:panel>
+            <b:panel collapsible="false" class="col-lg-8 col-lg-offset-2">
+                <h:form>  
+                    <p:panel >
+                        <p:outputLabel for="res" value="Restaurant :" />
+                        <p:inputText id="res" value="#{restaurantController.selected.id}" class="form-control"/><br/>
+                        <p:outputLabel for="lat" value="Lat:" />
+                        <p:inputText id="lat" value="#{restaurantController.selected.lat}" class="form-control"/><br/>
+                        <p:outputLabel for="lng" value="Lng:" />
+                        <p:inputText id="lng" value="#{restaurantController.selected.lng}" class="form-control"/><br/>
+                        <p:commandButton value="Save" onclick="reverseGeocode()" />
+                    </p:panel>
+                    <br/>
+                </h:form>
+
+                
+
+                
+            </b:panel>
+            
+            <script type="text/javascript" >
+                        function reverseGeocode() {
+                                var lat = document.getElementById('lat').value,
+                                            lng = document.getElementById('lng').value;
+                                PF('revGeoMap').reverseGeocode(lat, lng);
+                        }
+                </script>
         </ui:define>
     </ui:composition>
 </html>

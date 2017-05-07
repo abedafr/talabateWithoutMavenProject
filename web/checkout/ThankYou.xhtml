@@ -6,108 +6,117 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:head>
-        <title>Facelet Title</title>
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ui:composition template="/template/Mytemplate.xhtml">
+        <ui:define name="title">FOODelivery | Thank You..</ui:define>
+        <ui:define name="content">
+            <nav style=" background-color: rgba(0,0,0,0.5)">
+                <div class="nav-wrapper">
+                    <div class=" col-lg-offset-2 col s12">
+                        <a href="../home/Home.xhtml" class="breadcrumb-md">Home</a>
+                        <a href="../results/Results.xhtml" class="breadcrumb-md">Results</a>
+                        <a href="../results/ViewMenu.xhtml" class="breadcrumb-md">View Menu</a>
+                        <a href="../checkout/ConfirmCommand.xhtml" class="breadcrumb-md">Confirm Command</a>
+                        <a href="#!" class="breadcrumb-md">Thank You</a>
 
+                    </div>
+                </div>
+            </nav>
 
-        </f:facet>
-
-        <f:facet name="middle">
-            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
-
-            <h:outputStylesheet name="css/dashboard.css" />
-
-            <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />-->
-
-            <h:outputScript name="bootstrap/js/bootstrap.js" />
-        </f:facet>
-
-        <f:facet name="last">
-            <h:outputStylesheet name="css/font-awesome.css" />
-        </f:facet>
-    </h:head>
-    <h:body onload="PF('AddAdressDialog').show()">
-        <p:growl life="3000"/>
-        <f:view>
-            <b:panel id="listeComande">
-                <h:form>
-
-                    <h:outputText value="La commande" class="H3"></h:outputText>
-                    <h:dataTable value="#{confirmCommand.commandeItems}" var="item" class="table table-striped" >
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nom" class=""/>
-                            </f:facet>
-                            <h:outputText value="#{item.platMenu.plate.nom}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Prix Unitaire" class=""/>
-                            </f:facet>
-                            <h:outputText value="#{item.platMenu.plate.prix}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Qte" class=""/>
-                            </f:facet>
-                            <h:outputText value="#{item.qte}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Prix cmd" class=""/>
-                            </f:facet>
-                            <h:outputText value="#{item.prixTotalItem}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:form>
-            </b:panel>
-            <b:panel id="Adress" title="adressDeLivraison">
-                <h:form>
-                   
-                    <p:layout>
-                        <b><h:outputText value="#{bundle.ViewAdressLabel_nom}" /></b>
-                        <h:outputText value=" #{confirmCommand.adress.user.nom}" title="#{bundle.ViewAdressTitle_nom}"/>
-                        <b><h:outputText value=" #{bundle.ViewAdressLabel_prenom}" /></b>
-                        <h:outputText value=" #{confirmCommand.adress.user.prenom}" title="#{bundle.ViewAdressTitle_prenom}"/><br/>
-                        <b><h:outputText value=" #{bundle.ViewAdressLabel_tel}" /></b>
-                        <h:outputText value=" #{confirmCommand.adress.user.tel}" title="#{bundle.ViewAdressTitle_tel}"/>
-                        <b><h:outputText value=" #{bundle.CreateUserLabel_email}"/></b>
-                        <h:outputText value=" #{confirmCommand.adress.user.email}" title="#{bundle.ViewAdressTitle_telFix}"/><br/>
-                        <b><h:outputText value=" #{bundle.ViewAdressLabel_ville}" /></b>
-                        <h:outputText value=" #{confirmCommand.adress.ville.nom}" title="#{bundle.ViewAdressTitle_ville}"/>
-                        <b><h:outputText value=" #{bundle.ViewAdressLabel_quartier}" /></b>
-                        <h:outputText value=" #{confirmCommand.adress.quartier.nom}" title="#{bundle.ViewAdressTitle_quartier}"/><br/>
-                        <b><h:outputText value=" #{bundle.ViewAdressLabel_building}" /></b>
-                        <h:outputText value=" #{confirmCommand.adress.building}" title="#{bundle.ViewAdressTitle_building}"/>
-                        <b><h:outputText value=" #{bundle.ViewAdressLabel_street}" /></b>
-                        <h:outputText value=" #{confirmCommand.adress.street}" title="#{bundle.ViewAdressTitle_street}"/>
-                        <b><h:outputText value=" #{bundle.ViewAdressLabel_number}" /></b>
-                        <h:outputText value=" #{confirmCommand.adress.number}" title="#{bundle.ViewAdressTitle_number}"/>
-                        <b><h:outputText value=" #{bundle.ViewAdressLabel_floor}" /></b>
-                        <h:outputText value=" #{confirmCommand.adress.floor}" title="#{bundle.ViewAdressTitle_floor}"/>
-                         <b><h:outputText value=" #{bundle.ViewAdressLabel_floor}" /></b>
-                        <h:outputText value=" #{confirmCommand.adress.floor}" title="#{bundle.ViewAdressTitle_floor}"/>
-                        <b><h:outputText value="transaction time" /></b>
-                        <h:outputText value=" #{confirmCommand.commande.dateCmd}" title="#{bundle.ViewCommandeTitle_dateCmd}"/>
-                    </p:layout>
-                </h:form>
-            </b:panel>
-            <h:form>
-                <b:panel id="Paiment" title="detailPaiment">
-
-                    <h:outputText value="SubTotale" class=""/>
-                    <h:outputText value="#{confirmCommand.calculTotal()}"/>
-                    <h:outputText value="Totale Amount" class=""/>
-                    <h:outputText value="#{confirmCommand.calculTotal()}"/>
-                    
-
+            <br/>
+            <br/>
+            <br/>
+            
+            <f:view>
+                <b:panel class="col-lg-8 col-lg-offset-2">
+                    <h:form>
+                        <center><p:graphicImage width="200px" value="../resources/imgs/yummy.svg"></p:graphicImage>
+                            <p class="center h2 center-align centered">
+                        Thank you For Ordering In Our Site..
+                       
+                    </p>
+                        <br/> <b:commandButton value="Home" action="#{confirmCommand.home()}" class="btnm btnm-large waves-button-input" />
+                        </center>
+                    </h:form>
                 </b:panel>
-            </h:form>
-        </f:view>
-        
-    </h:body>
+                
+                <b:panel id="listeComande" class="col-lg-8 col-lg-offset-2" >
+                    <b:panel class="col-lg-6 pull-left">
+                        <h:form>
+
+                            <h:outputText value="La commande" class="H3"></h:outputText>
+                            <h:dataTable value="#{confirmCommand.commande.commandeItems}" var="item" class="table table-striped" >
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nom" class=""/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.platMenu.plate.nom}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Prix Unitaire" class=""/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.platMenu.plate.prix}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Qte" class=""/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.qte}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Prix cmd" class=""/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.prixTotalItem}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+
+                    </b:panel>
+
+                    <b:panel id="Paiment" class="col-lg-6 pull-right h4">
+
+                        <b> <h:outputText value="Total: " class=""/></b>
+                        <h:outputText value="#{confirmCommand.commande.total} MAD"/><br/>
+                        <b> <h:outputText value="Date Commande: " class=""/></b>
+                        <h:outputText value="#{confirmCommand.commande.dateCmd}"/><br/>
+                        <b><h:outputText value="Restaurant: " class=""/></b>
+                        <h:outputText value="#{confirmCommand.commande.restaurant.nom}"/><br/>
+
+                    </b:panel>
+                </b:panel>
+                <b:panel id="Adress" title="adressDeLivraison" class="col-lg-8 col-lg-offset-2">
+                    <h:form>
+
+
+                        <b><h:outputText value="#{bundle.ViewAdressLabel_nom}" /></b>
+                        <h:outputText value=" #{confirmCommand.commande.adress.user.nom}" title="#{bundle.ViewAdressTitle_nom}"/>
+                        <b><h:outputText value=" #{bundle.ViewAdressLabel_prenom}" /></b>
+                        <h:outputText value=" #{confirmCommand.commande.adress.user.prenom}" title="#{bundle.ViewAdressTitle_prenom}"/><br/>
+                        <b><h:outputText value=" #{bundle.ViewAdressLabel_tel}" /></b>
+                        <h:outputText value=" #{confirmCommand.commande.adress.user.tel}" title="#{bundle.ViewAdressTitle_tel}"/>
+                        <b><h:outputText value=" #{bundle.CreateUserLabel_email}"/></b>
+                        <h:outputText value=" #{confirmCommand.commande.adress.user.email}" title="#{bundle.ViewAdressTitle_telFix}"/><br/>
+                        <b><h:outputText value=" #{bundle.ViewAdressLabel_ville}" /></b>
+                        <h:outputText value=" #{confirmCommand.commande.adress.ville.nom}" title="#{bundle.ViewAdressTitle_ville}"/>
+                        <b><h:outputText value=" #{bundle.ViewAdressLabel_quartier}" /></b>
+                        <h:outputText value=" #{confirmCommand.commande.adress.quartier.nom}" title="#{bundle.ViewAdressTitle_quartier}"/><br/>
+                        <b><h:outputText value=" #{bundle.ViewAdressLabel_building}" /></b>
+                        <h:outputText value=" #{confirmCommand.commande.adress.building}" title="#{bundle.ViewAdressTitle_building}"/>
+                        <b><h:outputText value=" #{bundle.ViewAdressLabel_street}" /></b>
+                        <h:outputText value=" #{confirmCommand.commande.adress.street}" title="#{bundle.ViewAdressTitle_street}"/>
+                        <b><h:outputText value=" #{bundle.ViewAdressLabel_number}" /></b>
+                        <h:outputText value=" #{confirmCommand.commande.adress.number}" title="#{bundle.ViewAdressTitle_number}"/>
+                        <b><h:outputText value=" #{bundle.ViewAdressLabel_floor}" /></b>
+                        <h:outputText value=" #{confirmCommand.commande.adress.floor}" title="#{bundle.ViewAdressTitle_floor}"/>
+                        <b><h:outputText value=" #{bundle.ViewAdressLabel_floor}" /></b>
+                        <h:outputText value=" #{confirmCommand.commande.adress.floor}" title="#{bundle.ViewAdressTitle_floor}"/>
+
+                    </h:form>
+                </b:panel>
+            </f:view>
+
+
+        </ui:define>
+    </ui:composition>
 </html>

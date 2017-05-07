@@ -718,8 +718,8 @@ if (typeof jQuery === 'undefined') {
 
   var old = $.fn.collapse
 
-  $.fn.collapse             = Plugin
-  $.fn.collapse.Constructor = Collapse
+  $.fn.collapse             = Plugin;
+  $.fn.collapse.Constructor = Collapse;
 
 
   // COLLAPSE NO CONFLICT

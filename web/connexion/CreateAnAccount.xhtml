@@ -8,57 +8,72 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition template="/template/Mytemplate.xhtml">
 
+        <ui:define name="head">
+            <f:metadata>
+                <f:viewAction action="#{templateController.redirect()}" />
+            </f:metadata>
+        </ui:define>
+
         <ui:define name="title">FOODelivery | Creer Votre Compte..</ui:define>
 
+
         <ui:define name="content">
-            <style>body {
-                    background-image: url(../resources/imgs/bg5.jpg);
+            <style>
+                body {
+                    /*background-image: url(../resources/imgs/bg5.jpg);*/
                     background-size: cover;
                 }
-                </style>
+                form{
+                    line-height: 100%;
+                }
+                input{
+                    height: 90%;
+                    line-height: 90%;
+                }
+            </style>
 
-                <h:form class="form-group">
+            <h:form class="form-group">
+                <br/>
+                <br/>
+                <br/>
+                <b:panel title="Cree nouveau Compte.." col-lg="5" offset-lg="2" col-md="4" offset-md="3" col-sm="6" offset-sm="1" col-xs="10" offset-xs="1">
+                    <!--<b:panelGrid >-->
+                    <p:outputLabel value="Email:" for="email" />
+                    <p:inputText id="email" value="#{connectController.selected.email}" title="Email" class="form-control"/>
+                    <p:outputLabel value="Nom:" for="nom" />
+                    <p:inputText id="nom" value="#{connectController.selected.nom}" title="Nom" class="form-control"/>
+                    <p:outputLabel value="Prenom:" for="prenom" />
+                    <p:inputText id="prenom" value="#{connectController.selected.prenom}" title="Prenom" class="form-control" />
+                    <p:outputLabel value="Password:" for="password" />
+                    <h:inputSecret id="password" value="#{connectController.selected.password}" class=" form-control " >
+                    </h:inputSecret> 
+                    <p:outputLabel value="Tel:" for="tel" />
+                    <p:inputText id="tel" value="#{connectController.selected.tel}" title="Tel" class="form-control"/>
+                    <p:outputLabel value="Date Naissance:"  />
+                    <input type="date" value="#{connectController.selected.tel}" class="datepicker"/>
+
+                    <p:outputLabel value="Gender:" />
+                    <h:selectOneMenu id="gender" value="#{connectController.selected.gender}" class="form-control">
+                        <f:selectItem itemLabel="Male" itemValue="M"/>
+                        <f:selectItem itemLabel="Female" itemValue="F"/>
+                    </h:selectOneMenu>
                     <br/>
                     <br/>
-                    <br/>
-                    <b:panel title="Cree nouveau Compte.." col-lg="4" offset-lg="3" col-md="4" offset-md="3" col-sm="6" offset-sm="1" col-xs="10" offset-xs="1">
-                        <b:panelGrid columns="2" >
-                            <p:outputLabel value="Email:" for="email" />
-                            <p:inputText id="email" value="#{connectController.selected.email}" title="Email" class="form-control"/>
-                            <p:outputLabel value="Nom:" for="nom" />
-                            <p:inputText id="nom" value="#{connectController.selected.nom}" title="Nom" class="form-control"/>
-                            <p:outputLabel value="Prenom:" for="prenom" />
-                            <p:inputText id="prenom" value="#{connectController.selected.prenom}" title="Prenom" class="form-control" />
-                            <p:outputLabel value="Password:" for="password" />
-                            <h:inputSecret id="password" value="#{connectController.selected.password}" class=" form-control form-control-static" >
-                            </h:inputSecret> 
+                    <!--</b:panelGrid>-->
+                    <b:commandButton id="confirme" action="#{connectController.createAccount()}" value="Create Your Account" icon="ui-icon-check" class="btn btn-success btn-group-justified" />
+                    <center>
+                        Vous avez deja un compte?<h:link outcome="/connexion/SeConnecter.xhtml" value=" Connecter Vous!" />
+                    </center>
+                </b:panel>
+            </h:form>
+            <script>
+                $('.datepicker').pickadate({
+                    selectMonths: true, // Creates a dropdown to control month
+                    selectYears: 15 // Creates a dropdown of 15 years to control year
+                });
+            </script>
 
-                           
-
-                            <p:outputLabel value="Tel:" for="tel" />
-                            <p:inputText id="tel" value="#{connectController.selected.tel}" title="Tel" class="form-control"/>
-
-                            <p:outputLabel value="Gender:" />
-                            <b:selectOneMenu id="gender" value="#{connectController.selected.gender}" class="form-control">
-                                <f:selectItem itemLabel="Male" itemValue="M"/>
-                                <f:selectItem itemLabel="Female" itemValue="F"/>
-                            </b:selectOneMenu>
-                        </b:panelGrid>
-                        <b:commandButton id="confirme" action="#{connectController.createAccount()}" value="Create Your Account" icon="ui-icon-check" class="btn btn-success btn-group-justified" />
-                        <center>
-                            Vous avez deja un compte?<h:link outcome="/connexion/SeConnecter.xhtml" value=" Connecter Vous!" />
-                        </center>
-                    </b:panel>
-                     <!--<p:outputLabel value="Confirme Password:"/>-->
-<!--                            <p:password id="password2" validator="{connectController.validateSamePassword}" class="form-control" >
-                                <f:ajax event="keyup" render="password2Error"  />
-
-                                <b:growl for="password2"  id="password2Error"  />
-                            </p:password> -->
-                </h:form>
-            
-            
-            </ui:define>
-        </ui:composition>
-    </html>
+        </ui:define>
+    </ui:composition>
+</html>
 

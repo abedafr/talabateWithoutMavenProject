@@ -6,11 +6,11 @@ import controller.util.JsfUtil.PersistAction;
 import service.RestaurantFacade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -19,6 +19,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.map.ReverseGeocodeEvent;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 @Named("restaurantController")
 @SessionScoped
@@ -30,7 +35,57 @@ public class RestaurantController implements Serializable {
     private List<Restaurant> results = null;
     private Restaurant selected;
     private String nom;
+// map attributes
+    private MapModel emptyModel;
+    private MapModel revGeoModel;
+    private Marker marker;
+    private String centerRevGeoMap = "33.53333, -7.58333";
 
+    
+    /// Map //*******///
+    
+    @PostConstruct
+    public void init() {
+        emptyModel = new DefaultMapModel();
+        revGeoModel = new DefaultMapModel();
+    }
+
+    public MapModel getEmptyModel() {
+        return emptyModel;
+    }
+
+    public void setEmptyModel(MapModel emptyModel) {
+        this.emptyModel = emptyModel;
+    }
+
+    public MapModel getRevGeoModel() {
+        if (revGeoModel == null) {
+            revGeoModel = new DefaultMapModel();
+        }
+        return revGeoModel;
+    }
+
+    public Marker getMarker() {
+        return marker;
+    }
+
+    public String getCenterRevGeoMap() {
+        return centerRevGeoMap;
+    }
+
+    public void onReverseGeocode(ReverseGeocodeEvent event) {
+        System.out.println("hada howa mochkil : " + selected);
+        ejbFacade.create(selected);
+        List<String> addresses = event.getAddresses();
+        LatLng coord = event.getLatlng();
+        if (addresses != null && !addresses.isEmpty()) {
+            centerRevGeoMap = coord.getLat() + "," + coord.getLng();
+            revGeoModel.addOverlay(new Marker(coord, addresses.get(0)));
+        }
+
+    }
+    
+    
     public RestaurantController() {
     }
 

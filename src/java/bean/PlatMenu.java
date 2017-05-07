@@ -67,6 +67,9 @@ public class PlatMenu implements Serializable {
     }
 
     public Cuisine getCuisine() {
+        if (cuisine == null) {
+            cuisine = new Cuisine();
+        }
         return cuisine;
     }
 
@@ -98,7 +101,6 @@ public class PlatMenu implements Serializable {
         this.supplementPlats = supplementPlats;
     }
 
-    
     public CommandeItem getCommandeItem() {
         return commandeItem;
     }

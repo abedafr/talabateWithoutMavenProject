@@ -9,28 +9,63 @@
 
 
     <ui:composition template="/template/Mytemplate.xhtml">
+        <ui:define name="head">
+            <f:metadata>
+                <f:viewAction action="#{templateController.redirect()}"/>
+            </f:metadata> 
+        </ui:define>
         <ui:define name="content">
-            <div class="col-lg-6 col-lg-offset-3">
-            <b:panel title="Contact Us.." collapsible="false" >
-                <h:form id="ContactCreateForm" class="form-group">
+            <b:growl delay="3000" />
+            <div class="col-lg-6 col-lg-offset-3" >
+                <!--<b:panel title="Contact Us.." style="background-color: #444" collapsible="false" >-->
 
-                    <p:inputText id="nom" class="form-control " placeholder="Nom..." value="#{contactUsController.userSelected.nom}" title="#{bundle.CreateContactUsTitle_nom}"  label="Nom"/>
-                    <br/>
-                    <p:inputText id="prenom" class="form-control " placeholder="Prénom..." value="#{contactUsController.userSelected.prenom}" title="#{bundle.CreateContactUsTitle_prenom}" />
-                    <br/>
-                    <p:inputText id="nomRestaurant" class="form-control " placeholder="Nom Du Retaurant ..." value="#{contactUsController.restSelected.nom}" title="#{bundle.CreateContactUsTitle_nomREstaurant}" />
-                    <br/>
-                    <p:inputText id="tel" class="form-control " placeholder="Numéro de Telephone..." value="#{contactUsControluserSelectedcted.tel}" title="#{bundle.CreateContactUsTitle_tel}" />
-                    <br/>
-                    <p:inputText id="email"  class="form-control " placeholder="Email..." value="#{contactUsController.userSelected.email}" title="#{bundle.CreateContactUsTitle_email}" />
-                    <br/>
+                <br/>
+                <br/>
+              
 
-                    <b:commandButton action="#{contactUsController.create}" 
-                                     class="btn btn-success btn-group-justified"
-                                     value="#{bundle.Save}" ></b:commandButton>
-                </h:form>
-            </b:panel> 
+                <main class="">
+                    <div class=" " style="background-color: rgba(123,123,123,0.5); ">
+                        <div class="mdl-card__title">
+                            <h5>Demande D'ajout de Restaurant</h5>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                        </div>
+
+                        <div class="form__article form-group">
+                            <h:form id="ContactCreateForm" class="form-group">
+                                <div class="form__article container">
+
+
+                                        <label class="" for="firstName">Prenom</label>
+                                        <h:inputText class=""  id="firstName" value="#{contactUsController.userSelected.prenom}" />
+                                        <label class="" for="secondName">Nom</label>
+                                        <h:inputText class=""  id="secondName" value="#{contactUsController.userSelected.nom}" />
+                                        <label class="" for="email">Email</label>
+                                        <h:inputText class=""  id="email" value="#{contactUsController.userSelected.email}" />
+                                        <label class="" for="restnom">Nom Du Retaurant</label>
+                                        <h:inputText class="" id="restnom" value="#{contactUsController.restSelected.nom}" />
+                                        <label class="" for="tel">Telephone</label>
+                                        <h:inputText class=""  id="tel" value="#{contactUsController.userSelected.tel}" />
+                                    
+
+                                    <b:commandButton action="#{contactUsController.create}"  icon=""
+                                                     class="btnm btnm-large waves-button-input glyphicon glyphicon-send waves-effect pull-right"
+                                                     value="#{bundle.Save}" ></b:commandButton>
+                                    
+                                </div>
+                            </h:form> 
+                            <br/>
+                           
+                        </div>
+                    </div>
+                </main>
+                <!--</b:panel>--> 
             </div>
+
+
+
         </ui:define>
     </ui:composition>
 </html>
