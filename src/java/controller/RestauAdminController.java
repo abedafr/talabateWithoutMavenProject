@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import service.CommandeFacade;
 import service.MenuFacade;
 import service.PlatMenuFacade;
 import service.RestaurantFacade;
@@ -51,6 +52,8 @@ public class RestauAdminController implements Serializable {
     private Restaurant selectRestaurant;
     @EJB
     private PlatMenuFacade platMenuFacade;
+    @EJB
+    private CommandeFacade commandeFacade;
     @EJB
     private SupplementPlatFacade supplementPlatFacade;
     private List<PlatMenu> platMenus;
@@ -130,6 +133,9 @@ public class RestauAdminController implements Serializable {
         }
     }
 
+    public Long countCmd(){
+        return commandeFacade.countCommandByRestau(getRestaurant());
+    }
     public void prepareCreate() {
         platMenu = new PlatMenu();
     }
@@ -138,6 +144,11 @@ public class RestauAdminController implements Serializable {
         platMenu = item;
     }
 
+    public void Delete(PlatMenu platMenu) {
+        platMenuFacade.remove(platMenu);
+        platMenus=null;
+    }
+    
     public void prepareSup(PlatMenu plat) {
         platMenu = plat;
         supplementPlats = supplementPlatFacade.findByPlatMenu(platMenu);
@@ -161,10 +172,6 @@ public class RestauAdminController implements Serializable {
         return platMenus;
     }
 
-    public void Delete(PlatMenu platMenu) {
-        platMenuFacade.remove(platMenu);
-        platMenus.remove(platMenus.indexOf(menu));
-    }
 
     public void setPlatMenus(List<PlatMenu> platMenus) {
         this.platMenus = platMenus;
@@ -197,7 +204,7 @@ public class RestauAdminController implements Serializable {
     }
 
     public List<Commande> getCommandes() {
-
+        commandes= commandeFacade.findCommandByRestau(getRestaurant());
         return commandes;
     }
 

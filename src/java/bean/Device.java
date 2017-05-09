@@ -6,11 +6,13 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -23,39 +25,15 @@ public class Device implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nom;
-    private String prenom;
     private String browser;
     private String operatingSystem;
     private String deviceCategorie;
-    private String adresseIP;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dateCreation;
     private String adresseMac;
     @ManyToOne
     private User user;
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getAdresseIP() {
-        return adresseIP;
-    }
-
-    public void setAdresseIP(String adresseIP) {
-        this.adresseIP = adresseIP;
-    }
 
     public String getAdresseMac() {
         return adresseMac;

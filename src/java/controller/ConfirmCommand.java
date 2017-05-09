@@ -65,6 +65,7 @@ public class ConfirmCommand implements Serializable {
     }
 
     public void home() throws IOException {
+        commandeItems=null;
         commande=null;
         Session.delete("ConfirmCommand");
         Session.delete("ResultHomeSearch");
@@ -84,7 +85,6 @@ public class ConfirmCommand implements Serializable {
         if (adress != null) {
             commande = commandeFacade.createCommande(commande, commandeItems, menu.getRestaurant(), user, adress);
             commandeItem=null;
-            commandeItems=null;
             adress=null;
             user=null;
             FacesContext.getCurrentInstance().getExternalContext().redirect("../checkout/ThankYou.xhtml");

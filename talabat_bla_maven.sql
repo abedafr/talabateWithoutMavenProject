@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2017 at 08:16 AM
+-- Generation Time: May 09, 2017 at 01:08 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `adress` (
   KEY `FK_ADRESS_QUARTIER_ID` (`QUARTIER_ID`),
   KEY `FK_ADRESS_VILLE_ID` (`VILLE_ID`),
   KEY `FK_ADRESS_COMMANDE_ID` (`COMMANDE_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `adress`
@@ -55,7 +55,10 @@ INSERT INTO `adress` (`ID`, `BUILDING`, `FLOOR`, `NUMBER`, `STREET`, `QUARTIER_I
 (6, '44', 1, 4, 'iuuif', 6, 'hghg@gyuge.com', 2, 10),
 (7, '21', 1, 2, '3123', 6, '@aabk', 2, 11),
 (8, '12', 3, 2, '32', 6, 'client', 2, 12),
-(9, '12', 2, 23, '33', 6, 'client', 2, 13);
+(9, '12', 2, 23, '33', 6, 'client', 2, 13),
+(10, '2387787', 0, 0, '874', 6, 'hhh@hh', 2, 14),
+(11, 'uiiu', 0, 0, '54', 6, 'hiui', 2, 15),
+(12, '2', 2, 45, '55', 6, 'sefsef@hjl.cm', 2, 16);
 
 -- --------------------------------------------------------
 
@@ -72,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `commande` (
   PRIMARY KEY (`ID`),
   KEY `FK_COMMANDE_RESTAURANT_ID` (`RESTAURANT_ID`),
   KEY `FK_COMMANDE_USER_EMAIL` (`USER_EMAIL`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `commande`
@@ -88,7 +91,10 @@ INSERT INTO `commande` (`ID`, `DATECMD`, `TOTAL`, `RESTAURANT_ID`, `USER_EMAIL`)
 (10, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770e05000007e1050512360c2ba16f0078, 258, 1, 'hghg@gyuge.com'),
 (11, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770e05000007e105060d16060d787c8078, 171, 1, '@aabk'),
 (12, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770e05000007e105070211091f4add4078, 134, 1, 'client'),
-(13, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770e05000007e105070322390dd40a0078, 87, 1, 'client');
+(13, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770e05000007e105070322390dd40a0078, 87, 1, 'client'),
+(14, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770e05000007e10507072a0c2a9e08c078, 241, 1, 'hhh@hh'),
+(15, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770e05000007e105070b25271e56b94078, 273.5, 1, 'hiui'),
+(16, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770e05000007e105090b1c0d2ebae40078, 142, 1, 'sefsef@hjl.cm');
 
 -- --------------------------------------------------------
 
@@ -108,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `commandeitem` (
   KEY `FK_COMMANDEITEM_PLATE_ID` (`PLATE_ID`),
   KEY `FK_COMMANDEITEM_COMMANDE_ID` (`COMMANDE_ID`),
   KEY `FK_COMMANDEITEM_PLATMENU_ID` (`PLATMENU_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=653 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=804 ;
 
 --
 -- Dumping data for table `commandeitem`
@@ -137,7 +143,14 @@ INSERT INTO `commandeitem` (`ID`, `PRIXTOTALITEM`, `QTE`, `COMMANDE_ID`, `PLATE_
 (602, 54, 2, 12, NULL, NULL, 163),
 (603, 30, 1, 12, NULL, NULL, 161),
 (651, 60, 2, 13, NULL, NULL, 161),
-(652, 27, 1, 13, NULL, NULL, 163);
+(652, 27, 1, 13, NULL, NULL, 163),
+(701, 216, 8, 14, NULL, NULL, 163),
+(702, 25, 1, 14, NULL, NULL, 164),
+(751, 150, 5, 15, NULL, NULL, 161),
+(752, 123.5, 1, 15, NULL, 3.5, 165),
+(801, 90, 3, 16, NULL, NULL, 161),
+(802, 27, 1, 16, NULL, NULL, 163),
+(803, 25, 1, 16, NULL, NULL, 164);
 
 -- --------------------------------------------------------
 
@@ -157,7 +170,8 @@ CREATE TABLE IF NOT EXISTS `commandeitem_supplementplat` (
 --
 
 INSERT INTO `commandeitem_supplementplat` (`CommandeItem_ID`, `supplementPlats_ID`) VALUES
-(401, 5);
+(401, 5),
+(752, 5);
 
 -- --------------------------------------------------------
 
@@ -339,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `platmenu` (
   KEY `FK_PLATMENU_CUISINE_ID` (`CUISINE_ID`),
   KEY `FK_PLATMENU_MENU_ID` (`MENU_ID`),
   KEY `FK_PLATMENU_PLATE_ID` (`PLATE_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=166 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=167 ;
 
 --
 -- Dumping data for table `platmenu`
@@ -409,7 +423,7 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
   PRIMARY KEY (`ID`),
   KEY `FK_RESTAURANT_QUARTIER_ID` (`QUARTIER_ID`),
   KEY `FK_RESTAURANT_ADMINRESTAU_EMAIL` (`ADMINRESTAU_EMAIL`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `restaurant`
@@ -422,10 +436,8 @@ INSERT INTO `restaurant` (`ID`, `NOM`, `QUARTIER_ID`, `ACCEPTED`, `ADMINRESTAU_E
 (4, 'Taiba', 8, 1, NULL, NULL, NULL),
 (5, 'Hani', 5, 1, NULL, NULL, NULL),
 (6, 'ma7laba', NULL, 0, 'abkjkjl@kj', NULL, NULL),
-(7, NULL, NULL, 0, 'bhbk@hbui', NULL, NULL),
-(8, NULL, NULL, 0, '@ooo', NULL, NULL),
-(9, NULL, NULL, 0, 'pmnju@cfvgbh', NULL, NULL),
-(10, 'ruibtyu', NULL, 0, 'ponyh@;nu', NULL, NULL);
+(10, 'ruibtyu', NULL, 0, 'ponyh@;nu', NULL, NULL),
+(11, 'ertyuio', NULL, 0, 'rtyuio', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -444,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `sequence` (
 --
 
 INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '700');
+('SEQ_GEN', '850');
 
 -- --------------------------------------------------------
 
@@ -545,20 +557,21 @@ INSERT INTO `user` (`EMAIL`, `ISADMIN`, `BLOCKED`, `DATENAISSANCE`, `GENDER`, `M
 ('321', 0, 0, NULL, NULL, 0, 0, '1321', NULL, '3213', '321', 0, NULL),
 ('65', 0, 0, NULL, NULL, 0, 0, '321', NULL, '654', '6549', 0, NULL),
 ('@aabk', 0, 0, NULL, NULL, 0, 0, 'client', NULL, 'clint', '21321', 0, NULL),
-('@ooo', 1, 1, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL),
 ('abed', 2, 0, NULL, 'M', 0, 0, 'abed', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'afr', '2136549', 0, NULL),
 ('abed2', 0, 0, NULL, 'M', 0, 3, 'abed', '6ebfe7cb61ea44af9b44a1c1c51e15db75349ddea16cae87cd8f05ae40c0c76b', 'afr', '123456789', 0, NULL),
 ('abed@afr', 0, 0, NULL, 'M', 0, 0, 'abed ', '16ba98cf66cf7253aea999eaa6a5fabdc0c3aa69de11a844b474da6ca83ddb2a', 'afr', '21654969879', 0, NULL),
 ('abkjkjl@kj', 1, 1, NULL, NULL, 0, 0, 'abed', '16ba98cf66cf7253aea999eaa6a5fabdc0c3aa69de11a844b474da6ca83ddb2a', 'afriad', '9/7846513', 0, NULL),
 ('admin', 2, 1, NULL, 'M', 0, 3, 'adminNom', '16ba98cf66cf7253aea999eaa6a5fabdc0c3aa69de11a844b474da6ca83ddb2a', 'adminPrenom', '123456789', 0, NULL),
-('bhbk@hbui', 1, 1, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL),
 ('client', 0, 0, NULL, NULL, 0, 0, NULL, '948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d', NULL, '02135468', 0, NULL),
 ('hghg@gyuge.com', 0, 0, NULL, NULL, 0, 0, 'ali', NULL, 'bassou', '544985', 0, NULL),
+('hhh@hh', 0, 0, NULL, NULL, 0, 0, '15', NULL, '351', '353', 0, NULL),
+('hiui', 0, 0, NULL, NULL, 0, 0, 'yug', NULL, 'utui', 'iui', 0, NULL),
 ('larbi@', 0, 0, NULL, NULL, 0, 0, 'larbi', '123', 'id', '123456789', 0, NULL),
-('pmnju@cfvgbh', 1, 1, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL),
 ('ponyh@;nu', 1, 1, NULL, NULL, 0, 0, 'cvbn', NULL, 'erty', '13546987065', 0, NULL),
 ('restAdmin', 1, 0, NULL, 'M', 0, 0, 'restAdmin', '1779d653a3310f05ffc05bee85858667aa580909acf6926592bebfe4307358b3', 'restAdmin', 'restAdmin', 0, NULL),
+('rtyuio', 1, 1, NULL, NULL, 0, 0, 'rtyui', NULL, 'rtyui', '653165', 0, NULL),
 ('SEFsef12364@gmail.com', 0, 0, NULL, 'M', 0, 0, 'Souhail', 'aee634bc2bff88a128bb080299088864883716dd70f58bb1306faa8970122acc', 'Elfahimi', '123456789', 0, NULL),
+('sefsef@hjl.cm', 0, 0, NULL, NULL, 0, 0, 'souhail', NULL, 'elfahimi', '1346547', 0, NULL),
 ('younesss.bfs@gmail.com', 0, 0, NULL, 'M', 0, 0, 'youness', '541ac1c4c88e3ea8d80b2569424a0b4edc27f44762cae16047b97244ae20f2a5', 'boufous', '04653598', 0, NULL);
 
 -- --------------------------------------------------------

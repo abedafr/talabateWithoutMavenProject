@@ -7,6 +7,8 @@
         <h:outputStylesheet name="css/jsfcrud.css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="shortcut icon" type="image/x-icon" href="#{resource['imgs/favicon.png']}"/>
+        <link href="../resources/materialize/css/materialize.css" rel="stylesheet" type="text/css"/>
+        <h:outputStylesheet name="css/font-awesome.css" />
 
     </h:head>
     <h:body>
@@ -16,8 +18,6 @@
         <h1>Hello World!</h1>
         <br />
         <h:link outcome="/home/Home" value="Show Home Page"/>
-        <br />
-        <h:link outcome="/manage/ManageRestau" value="Show Management Page"/>
         <br />
         <h:link outcome="connexion/CreateAccMD.xhtml" value="Material Design Connect"></h:link>
         <br />
@@ -51,9 +51,31 @@
         <br />
         <h:link outcome="/contactUs/ContactUs.xhtml" value="Show ContactUs Page"/>
         <br />
-        <h:link outcome="/contactUs/List.xhtml" value="Show All Demande Restau Items"/>
-        <br />
-        <h:link outcome="/adress/List" value="Show All Adress Items"/>
+        <p class="" style=" font: Roboto;">
+            <h1>Le projet FOODelivery</h1>
+            
+        Ces page là ci dessus sont tous inaccessible (adminPrivileges) sauf la page du Home
+        
+        dans le NavBar vous trouvez le lien de connexion si vous avez un compte.. ou de cree un nouveau compte sinon.
+        
+        dans le base de donnee il exist deja des compte avec different niveau d'autorisation
+            => client: 
+                        login:  client
+                        pw:     client
+                    
+            => restau Admin:
+                        login:  restAdmin (caseResponse)
+                        pw:     restadmin
+            => Admin:
+                        login:  abed
+                        pw:     123
+            
+        
+
+
+
+
+        </p>
     </h:body>
 
 

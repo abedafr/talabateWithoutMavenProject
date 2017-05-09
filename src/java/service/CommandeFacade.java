@@ -109,6 +109,7 @@ public class CommandeFacade extends AbstractFacade<Commande> {
         return tot;
     }
     
+    
     public List<Commande> findCommandByUser(User user){
         if(user!=null){
             return em.createQuery("SELECT c FROM Commande c WHERE c.user.email ='"+user.getEmail()+"'").getResultList();
@@ -116,4 +117,16 @@ public class CommandeFacade extends AbstractFacade<Commande> {
         return null;
     }
     
+    public List<Commande> findCommandByRestau(Restaurant restaurant){
+        if(restaurant!=null){
+            return em.createQuery("SELECT c FROM Commande c WHERE c.restaurant.id ='"+restaurant.getId()+"'").getResultList();
+        }
+        return null;
+    }
+    public Long countCommandByRestau(Restaurant restaurant){
+        if(restaurant!=null){
+            return (Long) em.createQuery("SELECT COUNT(c.id) FROM Commande c WHERE c.restaurant.id ='"+restaurant.getId()+"'").getSingleResult();
+        }
+        return null;
+    }
 }
